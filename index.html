@@ -4,12 +4,12 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>The Policy Playground — explorable theories of how the world works</title>
-  <meta name="description" content="Famous social-science theories — Schelling segregation, the tragedy of the commons, the evolution of cooperation, the median voter theorem, norm cascades — rebuilt as hand-drawn simulations you can play with." />
+  <meta name="description" content="Famous social-science and public-policy theories — Schelling segregation, the tragedy of the commons, the Tinbergen rule, wicked problems, corruption, civil-military relations and more — rebuilt as hand-drawn simulations you can play with." />
   <meta name="color-scheme" content="light" />
 
   <!-- Open Graph -->
   <meta property="og:title" content="The Policy Playground" />
-  <meta property="og:description" content="Watch famous policy theories misbehave. Five explorable, hand-drawn simulations with original sources attached." />
+  <meta property="og:description" content="Watch famous policy theories misbehave. Nine explorable, hand-drawn simulations with original sources attached." />
   <meta property="og:type" content="website" />
 
   <!-- Fonts -->
@@ -368,8 +368,10 @@ input[type="range"]::-moz-range-thumb {
       <p>The simulations run in your browser. Please enable JavaScript to explore them.
       In the meantime, the theories featured are: Schelling's model of segregation (1971),
       the tragedy of the commons (Hardin 1968; Ostrom 1990), the evolution of cooperation
-      (Axelrod 1984), the median voter theorem (Hotelling 1929; Downs 1957), and threshold
-      models of collective behaviour (Granovetter 1978; Kuran 1995).</p>
+      (Axelrod 1984), the median voter theorem (Hotelling 1929; Downs 1957), threshold
+      models of collective behaviour (Granovetter 1978; Kuran 1995), the four types of
+      corruption (Ang 2020), civil-military relations and democratic survival (Wilkinson 2015),
+      the Tinbergen rule (Tinbergen 1952), and wicked problems (Rittel &amp; Webber 1973).</p>
     </div>
   </noscript>
 
@@ -916,6 +918,123 @@ var rough=function(){"use strict";function t(t,e,s){if(t&&t.length){const[n,o]=e
         { cite: "Granovetter, M. (1978). \u201CThreshold Models of Collective Behavior.\u201D", detail: "American Journal of Sociology, 83(6), 1420\u20131443.", url: "https://www.journals.uchicago.edu/doi/10.1086/226707" },
         { cite: "Kuran, T. (1995). Private Truths, Public Lies.", detail: "Harvard University Press.", url: "https://www.hup.harvard.edu/books/9780674707580" },
         { cite: "Kuran, T. (1991). \u201CNow Out of Never.\u201D", detail: "World Politics, 44(1), 7\u201348.", url: "https://www.jstor.org/stable/2010422" }
+      ]
+    },
+
+    /* ---------------------------------------------------------- Corruption */
+    {
+      slug: "corruption",
+      title: "The Gilded Engine",
+      theory: "The Four Types of Corruption",
+      tag: "Public Policy",
+      accent: "gold",
+      source: "Ang, 2020",
+      tagline: "Get rich and the bribes don't stop \u2014 they just move upstairs.",
+      pitch: "Corruption isn't one thing. Yuen Yuen Ang splits it along two axes \u2014 who takes (a street-level official or a political elite) and whether the payer gets something back \u2014 into four distinct types. As a country develops, corruption doesn't vanish; it migrates from petty bribes toward elite \u201Caccess money.\u201D",
+      sim: "corruption",
+      intro: [
+        "<p class='lead'>We like to imagine corruption as a single moral failing \u2014 something clean countries have squeezed out and poor ones still suffer. The political economist <strong>Yuen Yuen Ang</strong> says that's the wrong picture. Corruption comes in four flavours, and the interesting question isn't <em>how much</em> a country has, but <em>which kind</em>.</p>",
+        "<p>Sort it on two axes. Is the taker a <strong>low-level official</strong> or a <strong>political elite</strong>? And does the payer <strong>get something</strong> in return, or are they simply robbed? That gives you <em>petty theft</em>, <em>speed money</em>, <em>grand theft</em> \u2014 and the one Ang cares most about, <strong>access money</strong>: elites paid for contracts, licences and policy favours.</p>",
+        "<p>Her unsettling claim: development doesn't kill corruption, it <strong>relocates</strong> it. Poor economies run on speed money and petty theft. Rich ones run on access money \u2014 which Ang likens to <strong>anabolic steroids</strong>. It can power furious growth as elites and capitalists cut big deals together \u2014 but the side effects (inequality, financial fragility, environmental damage) quietly accumulate until, one day, they don't stay quiet. Run the economy below and watch the graft move upstairs.</p>"
+      ],
+      howto: "Press <b>Develop the economy</b> and watch the four quadrants fill as corruption migrates from street-level bribes toward elite access money. Then change <b>where you crack down</b> and trade growth against fragility.",
+      examples: [
+        { title: "China's access-money boom", text: "Ang argues China's two-decade infrastructure miracle ran partly on access money \u2014 elites paid for favours, aligning their incentives with actually building things, even as fragility piled up underneath.", color: "gold" },
+        { title: "India's speed-money trap", text: "Pervasive small bribes for licences, permits and registrations: less spectacular than grand theft, but regressive and corrosive to the state's legitimacy.", color: "blue" },
+        { title: "Where lobbying shades in", text: "Ang's 'access money' blurs into legal campaign finance and lobbying \u2014 which is exactly why rich democracies insist their own version isn't corruption at all.", color: "coral" }
+      ],
+      takeaway: "Don't ask only how corrupt a country is \u2014 ask which type it runs on. As incomes rise, the danger is migration to access money: a growth steroid whose bill arrives later, and all at once.",
+      sources: [
+        { cite: "Ang, Y. Y. (2020). China's Gilded Age: The Paradox of Economic Growth and Vast Corruption.", detail: "Cambridge University Press.", url: "" },
+        { cite: "Kotasthane, P. \u201CUnderstanding Corruption.\u201D", detail: "Frameworks for Public Policy \u2014 adapts Ang's typology to the Indian context.", url: "https://frameworks.pranaykotas.com/public-policy/understanding-corruption.html" }
+      ]
+    },
+
+    /* ----------------------------------------------- Civil-military relations */
+    {
+      slug: "civil-military",
+      title: "The Coup Clock",
+      theory: "Civil-Military Relations & Why Democracies Survive",
+      tag: "Foreign Policy & Geopolitics",
+      accent: "coral",
+      source: "Wilkinson, 2015",
+      tagline: "Two states, the same fearful birth \u2014 only one keeps its generals in barracks.",
+      pitch: "Why did Israel stay democratic while Pakistan kept lurching into military rule, despite near-identical origins? Steven Wilkinson's answer: the decisive variable is civil-military relations in a state's formative years \u2014 and those first-decade choices are brutally hard to reverse.",
+      sim: "civil-military",
+      intro: [
+        "<p class='lead'>Israel and Pakistan were both founded as homelands for a persecuted minority, both ringed by enemies, both with powerful armies at their core. Gen Zia even called Pakistan \u201Clike Israel, an ideological state.\u201D Yet one has held elections without interruption while the other has been ruled by its generals again and again. Why?</p>",
+        "<p>Drawing on <strong>Steven Wilkinson's</strong> <em>Army and Nation</em>, the framework points to three things settled in the <strong>formative years</strong>: the army's <strong>ethnic balance</strong> (Partition wrecked Pakistan's and improved India's), the <strong>institutionalisation of political parties</strong> (the Congress had deep roots; the Muslim League did not), and deliberate <strong>coup-proofing</strong> \u2014 managing promotions, tenures, and who sits at the top of the military.</p>",
+        "<p>The sobering part is the <strong>path dependence</strong>. Get the levers right early and civilian control consolidates and locks in. Get them wrong and the military keeps getting invited back, decade after decade. Try raising the levers <em>after</em> the first ten years and you'll feel how little they move things \u2014 the trajectory is largely set. (The theory overstates this: Taiwan and South Korea democratised late. But the pull of the formative decade is real.)</p>"
+      ],
+      howto: "Pick a starting point \u2014 <b>Pakistan '47</b> or <b>India / Israel '47</b> \u2014 and press <b>Run 70 years</b>. Then move Wilkinson's three levers, especially <em>after</em> the formative decade, and see how stubbornly the path resists.",
+      examples: [
+        { title: "Pakistan's recurring coups", text: "1958, 1977, 1999: a weakly institutionalised party system and an ethnically lopsided army left wide openings for the military to step in \u2014 and step back in.", color: "coral" },
+        { title: "India and Israel's civilian control", text: "Both managed army balance, built strong civilian parties, and coup-proofed early. The generals stayed in the barracks.", color: "blue" },
+        { title: "Where the path bends", text: "Bangladesh inherited much the same military DNA yet built a more durable (if flawed) democracy \u2014 a reminder that formative years shape, but don't wholly determine, the future.", color: "green" }
+      ],
+      takeaway: "Whether a new state stays democratic is decided less by its leaders today than by how it handled its army and its parties in the first decade. Institutional design has a long, stubborn memory.",
+      sources: [
+        { cite: "Wilkinson, S. (2015). Army and Nation: The Military and Indian Democracy Since Independence.", detail: "Harvard University Press.", url: "" },
+        { cite: "Devji, F. (2013). Muslim Zion: Pakistan as a Political Idea.", detail: "Harvard University Press.", url: "" },
+        { cite: "Kotasthane, P. \u201CDictatorship and Democracy in Israel and Pakistan.\u201D", detail: "Anticipating the Unintended (2017).", url: "https://publicpolicy.substack.com/i/58802368/matsyanyaaya-dictatorship-and-democracy-in-israel-and-pakistan" }
+      ]
+    },
+
+    /* ----------------------------------------------------- The Tinbergen Rule */
+    {
+      slug: "tinbergen",
+      title: "One Lever, One Goal",
+      theory: "The Tinbergen Rule (One Instrument, One Target)",
+      tag: "Public Finance",
+      accent: "blue",
+      source: "Tinbergen, 1952",
+      tagline: "Two goals, one lever, and a gauge that always slips into the red.",
+      pitch: "Jan Tinbergen's rule is deceptively simple: to hit N independent policy targets you need at least N independent policy instruments. Stack several goals onto a single lever \u2014 as governments love to do \u2014 and you are mathematically guaranteed to miss some of them.",
+      sim: "tinbergen",
+      intro: [
+        "<p class='lead'>Picture a control desk for the economy. One gauge reads inflation, another reads unemployment, and your job is to nudge both into their green zones. You have a single lever: the interest rate. Push it down to fight unemployment and inflation flares up; pull it up to tame inflation and unemployment climbs. You can satisfy one gauge \u2014 never both.</p>",
+        "<p>That frustration is a theorem. The Dutch economist <strong>Jan Tinbergen</strong> \u2014 who won the very first Nobel in economics \u2014 showed in 1952 that you need <strong>at least as many independent instruments as you have independent targets</strong>. One lever can pin down one goal. Two genuinely different levers can pin down two. Ask one tool to do two jobs and it does neither well.</p>",
+        "<p>It sounds obvious, yet policy violates it constantly: a single exchange-rate peg asked to deliver both stable prices and full employment; one farm subsidy expected to raise incomes <em>and</em> protect the environment <em>and</em> keep food cheap. Switch on a second independent lever below, hit auto-solve, and feel both gauges settle into the green at last \u2014 then add a third goal and watch the trouble come right back.</p>"
+      ],
+      howto: "Start with only the <b>interest rate</b> on and try to green both gauges \u2014 you can't. Switch on <b>fiscal spending</b> (a second, independent lever) and press <b>Auto-solve</b>. Then add the <b>growth</b> goal to break it again.",
+      examples: [
+        { title: "Monetary policy's dual mandate", text: "Central banks asked to hit both an inflation target and full employment with essentially one instrument \u2014 the policy rate \u2014 are walking straight into Tinbergen's wall.", color: "blue" },
+        { title: "Exchange-rate pegs", text: "A fixed exchange rate that's also meant to control inflation and support growth is one lever doing three jobs \u2014 which is a big part of why pegs so often break.", color: "coral" },
+        { title: "The multi-objective subsidy", text: "A single scheme told to raise farmer incomes, cut emissions, and keep prices low usually under-delivers on all three. One target per instrument.", color: "green" }
+      ],
+      takeaway: "Count your goals, then count your genuinely independent tools. If the tools are fewer, no amount of cleverness lets you hit every target \u2014 you're only choosing which ones to miss.",
+      sources: [
+        { cite: "Tinbergen, J. (1952). On the Theory of Economic Policy.", detail: "North-Holland, Amsterdam. (Tinbergen shared the first Nobel Memorial Prize in Economics, 1969.)", url: "https://books.google.com/books/about/On_the_Theory_of_Economic_Policy.html?id=2fQOAQAAMAAJ" },
+        { cite: "Tinbergen, J. (1956). Economic Policy: Principles and Design.", detail: "North-Holland, Amsterdam.", url: "" },
+        { cite: "\u201CMacroeconomic policy instruments.\u201D", detail: "Overview of the targets-and-instruments framework.", url: "https://en.wikipedia.org/wiki/Macroeconomic_policy_instruments" }
+      ]
+    },
+
+    /* ------------------------------------------------------- Wicked problems */
+    {
+      slug: "wicked-problems",
+      title: "The Hydra",
+      theory: "Wicked Problems (Tame vs Wicked)",
+      tag: "Public Policy",
+      accent: "violet",
+      source: "Rittel & Webber, 1973",
+      tagline: "Cut off one head and two grow back \u2014 and there is no last head.",
+      pitch: "Some problems are tame: well-defined, solvable, with a clear finish line. Others \u2014 poverty, climate, crime \u2014 are wicked: every solution reshapes the problem, fixes are one-shot with no undo, and there is no point at which you can declare them solved.",
+      sim: "wicked-problems",
+      intro: [
+        "<p class='lead'>A chess puzzle is a <strong>tame</strong> problem. You can state it exactly, there's a right answer, you know when you're done, and you can try as many times as you like. Most of what governments face is nothing like this.</p>",
+        "<p>In 1973 the planners <strong>Horst Rittel</strong> and <strong>Melvin Webber</strong> named the other kind <strong>wicked problems</strong>. They can't be definitively defined; they have <em>no stopping rule</em> (nothing tells you they're solved); their solutions aren't true or false, only better or worse; every wicked problem is a symptom of another; and \u2014 worst of all \u2014 every attempt is a <strong>one-shot operation</strong>. You can't run a country twice to compare. As they put it, the planner has \u201Cno right to be wrong.\u201D</p>",
+        "<p>Below is a web of interlinked civic problems. In <strong>tame</strong> mode the pieces are independent: fix each one and the board goes green. Flip to <strong>wicked</strong> and the same clicks behave differently \u2014 every fix shoves trouble onto its neighbours, spent fixes can't be retried, and the meter never quite reaches the finish. Chase the worst node and watch the definition of \u201Cthe real problem\u201D keep moving.</p>"
+      ],
+      howto: "Toggle between <b>Tame</b> and <b>Wicked</b>, then <b>click a node</b> to throw a policy fix at it. In tame mode you can clear the board; in wicked mode, watch each fix push the problem somewhere else \u2014 with no undo and no finish line.",
+      examples: [
+        { title: "Climate change", text: "No agreed definition of 'solved', solutions that spawn new problems (biofuels vs food prices), and a single planetary experiment you can't re-run \u2014 wicked by every criterion.", color: "violet" },
+        { title: "Urban poverty", text: "Housing, jobs, schools, crime and health are so entangled that fixing one in isolation tends to displace the problem rather than remove it.", color: "coral" },
+        { title: "A tame contrast", text: "Vaccinating against a known pathogen, or building a bridge to spec, are comparatively tame: clear targets, a stopping rule, and room to test and retry.", color: "green" }
+      ],
+      takeaway: "Before reaching for a clean solution, ask whether the problem is even the kind that <em>has</em> one. Treating a wicked problem as tame \u2014 expecting to define it, solve it, and move on \u2014 is itself a classic way to make things worse.",
+      sources: [
+        { cite: "Rittel, H. W. J., & Webber, M. M. (1973). \u201CDilemmas in a General Theory of Planning.\u201D", detail: "Policy Sciences, 4(2), 155\u2013169.", url: "https://link.springer.com/article/10.1007/BF01405730" }
       ]
     }
   ];
@@ -2170,6 +2289,946 @@ var rough=function(){"use strict";function t(t,e,s){if(t&&t.length){const[n,o]=e
 })(window);
 
 </script>
+  <!-- js/sims/corruption.js -->
+<script>
+/* =========================================================================
+   sims/corruption.js — "The Gilded Engine"
+   Yuen Yuen Ang, China's Gilded Age (2020): corruption unbundled into four
+   types on two axes (who engages x does the giver get something back), the
+   claim that corruption MIGRATES with development rather than vanishing, and
+   the "access money = anabolic steroids" growth-vs-fragility tradeoff.
+   ========================================================================= */
+(function (global) {
+  "use strict";
+  var PP = global.PP, ui = PP.ui, C = PP.COLORS;
+
+  // quadrant metadata, laid out to match Ang's 2x2
+  //   rows: elite (top) / bureaucrat (bottom)
+  //   cols: gets-nothing (left) / gets-something (right)
+  var QUAD = [
+    { key: "grand",  name: "Grand theft",  who: "Political elite",   ret: "no",  col: C.coralInk, r: 0, c: 0 },
+    { key: "access", name: "Access money", who: "Political elite",   ret: "yes", col: C.gold,     r: 0, c: 1 },
+    { key: "petty",  name: "Petty theft",  who: "Low-level official",ret: "no",  col: C.inkSoft,  r: 1, c: 0 },
+    { key: "speed",  name: "Speed money",  who: "Low-level official",ret: "yes", col: C.blue,     r: 1, c: 1 }
+  ];
+
+  function mount(ctx) {
+    var st = new PP.Stage(ctx.stageCanvas);
+    var side = ctx.sideEl, store = ctx.store;
+
+    var maxD = 12;
+    var state = {
+      crackdown: store.get("crackdown", "none"),   // none | street | elite
+      transp: store.get("transp", 0),              // 0..100 transparency
+      decade: 0,
+      gdp: 100, gdpHist: [100], fragHist: [0],
+      fragility: 0, growth: 0, crisis: false, crisisAt: -9,
+      intens: {}, shares: {}
+    };
+
+    function devLevel() { return PP.clamp(state.decade / maxD, 0, 1); }
+
+    // absolute corruption intensities at the current development level + levers
+    function computeIntensities() {
+      var D = devLevel(), tr = state.transp / 100;
+      var speed = (1 - D) * 1.0;
+      var petty = (1 - D) * 0.6;
+      var grand = (1 - D) * 0.4 + 0.12;
+      var access = D * 1.2 + 0.05;
+      if (state.crackdown === "street") { speed *= 0.35; petty *= 0.35; }
+      if (state.crackdown === "elite")  { access *= 0.35; grand *= 0.45; }
+      // transparency bites hardest on pure embezzlement (the "gets nothing" types)
+      petty  *= (1 - 0.60 * tr);
+      grand  *= (1 - 0.60 * tr);
+      speed  *= (1 - 0.25 * tr);
+      access *= (1 - 0.30 * tr);
+      var I = { speed: speed, petty: petty, grand: grand, access: access };
+      state.intens = I;
+      var total = speed + petty + grand + access || 1;
+      state.shares = {
+        speed: speed / total, petty: petty / total,
+        grand: grand / total, access: access / total
+      };
+      return I;
+    }
+
+    function step() {
+      if (state.decade >= maxD) { if (loop.isPlaying()) { loop.pause(); sync(); } return; }
+      state.decade++;
+      var I = computeIntensities();
+      // access money is the steroid: it boosts growth now...
+      var growth = 0.025 + 0.075 * I.access - 0.020 * (I.speed + I.petty);
+      // ...but its side effects accumulate as fragility (inequality, financial risk)
+      var tr = state.transp / 100;
+      state.fragility = PP.clamp(state.fragility + 0.16 * I.access * (1 - 0.5 * tr) - 0.02, 0, 1.4);
+      state.crisis = false;
+      if (state.fragility > 1.0 && state.decade - state.crisisAt > 2) {
+        state.crisis = true; state.crisisAt = state.decade;
+        growth -= 0.16; state.fragility *= 0.45;          // the side effects come due
+      }
+      growth -= 0.10 * Math.max(0, state.fragility - 0.7); // drag near the edge
+      state.growth = growth;
+      state.gdp *= (1 + growth);
+      state.gdpHist.push(state.gdp); if (state.gdpHist.length > 60) state.gdpHist.shift();
+      state.fragHist.push(state.fragility / 1.4); if (state.fragHist.length > 60) state.fragHist.shift();
+    }
+
+    var loop = PP.makeLoop(step, function () { draw(); }, { stepMs: 620 });
+
+    function reset() {
+      state.decade = 0; state.gdp = 100; state.gdpHist = [100]; state.fragHist = [0];
+      state.fragility = 0; state.growth = 0; state.crisis = false; state.crisisAt = -9;
+      computeIntensities();
+    }
+
+    /* ---------- drawing ---------- */
+    var geom = {};
+    function layout() {
+      st.fit();
+      geom.qTop = 30; geom.qBot = st.h * 0.60;
+      geom.chartY = st.h * 0.66;
+    }
+
+    function dominant() {
+      var best = "speed", bv = -1;
+      for (var k in state.shares) if (state.shares[k] > bv) { bv = state.shares[k]; best = k; }
+      var nm = { speed: "Speed money", petty: "Petty theft", grand: "Grand theft", access: "Access money" };
+      return nm[best];
+    }
+    function era() {
+      var D = devLevel();
+      return D < 0.34 ? "Low-income" : D < 0.7 ? "Middle-income" : "High-income";
+    }
+
+    function draw() {
+      computeIntensities();
+      var W = st.w, c = st.ctx;
+      st.clear();
+
+      // ---- 2x2 quadrant of figures ----
+      var x0 = 14, x1 = W - 14, y0 = geom.qTop, y1 = geom.qBot;
+      var midX = (x0 + x1) / 2, midY = (y0 + y1) / 2;
+      // axis labels
+      PP.text(c, "giver gets nothing", (x0 + midX) / 2, y0 - 12, { size: 10, align: "center", color: C.inkSoft, font: "mono" });
+      PP.text(c, "giver gets something", (midX + x1) / 2, y0 - 12, { size: 10, align: "center", color: C.inkSoft, font: "mono" });
+
+      var T = 20; // tokens distributed across quadrants by share
+      // largest-remainder allocation
+      var alloc = {}, floors = 0, rema = [];
+      QUAD.forEach(function (q) { var raw = state.shares[q.key] * T; var f = Math.floor(raw); alloc[q.key] = f; floors += f; rema.push({ k: q.key, frac: raw - f }); });
+      rema.sort(function (a, b) { return b.frac - a.frac; });
+      var left = T - floors; for (var i = 0; i < left; i++) alloc[rema[i % rema.length].k]++;
+
+      QUAD.forEach(function (q) {
+        var qx = q.c === 0 ? x0 : midX, qy = q.r === 0 ? y0 : midY;
+        var qw = midX - x0, qh = midY - y0;
+        var isAccess = q.key === "access";
+        PP.panel(st.rc, qx + 3, qy + 3, qw - 6, qh - 6, {
+          fill: isAccess ? "#FBEFCF" : C.paper, stroke: isAccess ? C.gold : C.line,
+          strokeWidth: isAccess ? 2.2 : 1.2, seed: q.r * 2 + q.c + 5
+        });
+        PP.text(c, q.name, qx + 12, qy + 20, { size: 12, font: "display", weight: "700", color: q.col });
+        PP.text(c, q.who, qx + 12, qy + 34, { size: 9.5, font: "mono", color: C.inkSoft });
+
+        // tokens in a mini grid inside the quadrant
+        var n = alloc[q.key], cols = 5, gx = qx + 12, gy = qy + 42;
+        var cell = Math.min((qw - 26) / cols, (qh - 52) / Math.max(1, Math.ceil(n / cols)));
+        cell = Math.max(12, Math.min(cell, 26));
+        for (var t = 0; t < n; t++) {
+          var rr = Math.floor(t / cols), cc = t % cols;
+          PP.token(st.rc, c, gx + cc * cell, gy + rr * cell, cell * 0.92,
+            { color: q.col, mood: isAccess ? "happy" : (q.key === "speed" ? "neutral" : "sad"), seed: q.r * 31 + q.c * 7 + t });
+        }
+      });
+
+      // ---- chart strip: GDP (green) vs Fragility (coral) ----
+      var cx = 14, cy = geom.chartY, cw = W - 28, ch = st.h - geom.chartY - 12;
+      st.rc.rectangle(cx, cy, cw, ch, { fill: C.paper, fillStyle: "solid", stroke: C.line, strokeWidth: 1.2, roughness: 0.6, seed: 9 });
+      var gmax = 100; for (var g = 0; g < state.gdpHist.length; g++) gmax = Math.max(gmax, state.gdpHist[g]);
+      var gdpNorm = state.gdpHist.map(function (v) { return v / gmax; });
+      PP.lineChart(st.rc, c, cx + 8, cy + 10, cw - 16, ch - 22,
+        [{ color: C.green, points: gdpNorm }, { color: C.coral, points: state.fragHist }],
+        { yMax: 1, yMin: 0 });
+      PP.text(c, "GDP", cx + 10, cy + 14, { size: 10, color: C.greenInk, font: "mono", weight: "700" });
+      PP.text(c, "fragility", cx + 46, cy + 14, { size: 10, color: C.coralInk, font: "mono", weight: "700" });
+      if (state.crisis) PP.text(c, "\u26A0 CRISIS", cx + cw - 10, cy + 16, { size: 12, align: "right", color: C.coralInk, font: "display", weight: "800" });
+
+      update({
+        gdp: { text: Math.round(state.gdp).toString() },
+        growth: { text: (state.growth * 100 >= 0 ? "+" : "") + (state.growth * 100).toFixed(1) + "%" },
+        frag: { text: Math.round(state.fragility / 1.4 * 100) + "%", pct: state.fragility / 1.4 * 100 },
+        dominant: { text: dominant() },
+        era: { text: era() + " (decade " + state.decade + ")" }
+      });
+    }
+
+    var update;
+    function buildPanel() {
+      side.innerHTML = "";
+      update = ui.readout(side, [
+        { key: "gdp", label: "GDP index" },
+        { key: "growth", label: "Growth this decade" },
+        { key: "frag", label: "Side-effects / fragility", bar: true, color: C.coral },
+        { key: "dominant", label: "Dominant graft" },
+        { key: "era", label: "Stage" }
+      ]);
+
+      ui.h(side, "Where you crack down");
+      ui.segmented(side, {
+        value: state.crackdown,
+        options: [
+          { value: "none", label: "Nowhere" },
+          { value: "street", label: "Street-level" },
+          { value: "elite", label: "Elite access" }
+        ],
+        onChange: function (v) { state.crackdown = v; store.set("crackdown", v); draw(); }
+      });
+      side.appendChild(ui.el("p", "hint", "Chasing <b>street-level</b> bribes barely touches the migration to <b>access money</b>. Only an <b>elite</b> crackdown cools the steroid \u2014 at the cost of growth."));
+
+      ui.h(side, "Conditions");
+      ui.slider(side, { label: "Transparency", min: 0, max: 100, step: 5, value: state.transp, fmt: function (v) { return v + "%"; },
+        onInput: function (v) { state.transp = v; store.set("transp", v); draw(); } });
+
+      var row = ui.btnRow(side);
+      playBtn = ui.button(row, { label: "\u25B6 Develop the economy", variant: "blue", onClick: function () {
+        if (loop.isPlaying()) loop.pause(); else { if (state.decade >= maxD) reset(); loop.play(); } sync(); } });
+      ui.button(row, { label: "Step a decade", variant: "ghost", onClick: function () { loop.pause(); sync(); step(); draw(); } });
+      ui.button(row, { label: "Reset", variant: "ghost", onClick: function () { loop.pause(); sync(); reset(); draw(); } });
+      sync();
+
+      side.appendChild(ui.el("p", "hint", "Run it with <b>no crackdown</b>: growth races ahead on access money \u2014 then fragility tips into a crisis. Now try the <b>elite</b> crackdown: steadier, duller, safer."));
+    }
+    var playBtn;
+    function sync() { if (playBtn) playBtn.textContent = loop.isPlaying() ? "\u275A\u275A Pause" : (state.decade >= maxD ? "\u21BB Replay" : "\u25B6 Develop the economy"); }
+
+    reset(); layout(); buildPanel(); draw();
+    var unsub = PP.onResize(function () { layout(); draw(); });
+    return { destroy: function () { loop.pause(); unsub(); } };
+  }
+
+  /* ---------- thumb + comic ---------- */
+  function grid2x2(st, sharesArr, glow) {
+    // sharesArr order: grand, access, petty, speed
+    var W = st.w, H = st.h, c = st.ctx;
+    st.clear();
+    var x0 = 8, y0 = 8, midX = W / 2, midY = H / 2;
+    var cells = [[0, 0, C.coralInk], [1, 0, C.gold], [0, 1, C.inkSoft], [1, 1, C.blue]];
+    for (var i = 0; i < 4; i++) {
+      var cc = cells[i][0], rr = cells[i][1], col = cells[i][2];
+      var qx = cc === 0 ? x0 : midX, qy = rr === 0 ? y0 : midY;
+      var qw = midX - x0, qh = midY - y0;
+      var isAccess = (cc === 1 && rr === 0);
+      st.rc.rectangle(qx + 2, qy + 2, qw - 4, qh - 4,
+        { fill: (glow && isAccess) ? "#FBEFCF" : C.paper, fillStyle: "solid",
+          stroke: (glow && isAccess) ? C.gold : C.line, strokeWidth: (glow && isAccess) ? 2 : 1, roughness: 0.8, seed: i + 2 });
+      var n = Math.round(sharesArr[i] * 9);
+      for (var t = 0; t < n; t++) {
+        var gcell = Math.min((qw - 12) / 3, (qh - 12) / 3);
+        PP.token(st.rc, c, qx + 6 + (t % 3) * gcell, qy + 8 + Math.floor(t / 3) * gcell, gcell * 0.9,
+          { color: col, mood: isAccess ? "happy" : "neutral", seed: i * 13 + t });
+      }
+    }
+  }
+  function thumb(st) { grid2x2(st, [0.12, 0.5, 0.12, 0.26], true); }
+
+  var comicCaps = [
+    "Poor economy: a thousand small bribes just to get anything done.",
+    "Richer now \u2014 the graft moves upstairs into deals and access.",
+    "Growth on steroids \u2026 until the side effects come due."
+  ];
+  function comic(st, i) {
+    if (i === 0) return grid2x2(st, [0.10, 0.10, 0.30, 0.50], false); // speed/petty heavy
+    if (i === 1) return grid2x2(st, [0.10, 0.55, 0.10, 0.25], true);  // access rising
+    // panel 3: crisis
+    var W = st.w, H = st.h, c = st.ctx;
+    grid2x2(st, [0.12, 0.62, 0.08, 0.18], true);
+    PP.text(c, "\u26A0", W / 2, H / 2 + 6, { size: Math.min(W, H) * 0.4, align: "center", baseline: "middle", color: C.coralInk, weight: "800", font: "display" });
+  }
+
+  PP.sims["corruption"] = { mount: mount, thumb: thumb, comic: comic, comicCaps: comicCaps };
+})(window);
+
+</script>
+  <!-- js/sims/civil-military.js -->
+<script>
+/* =========================================================================
+   sims/civil-military.js — "The Coup Clock"
+   Steven Wilkinson, Army and Nation (2015), via Kotasthane's Israel/Pakistan
+   framing: whether a new state stays democratic turns on civil-military
+   relations in the FORMATIVE years. Three levers — army ethnic balance,
+   party institutionalisation, coup-proofing — and decisions in decade one
+   are extremely hard to reverse later (path dependence).
+   ========================================================================= */
+(function (global) {
+  "use strict";
+  var PP = global.PP, ui = PP.ui, C = PP.COLORS;
+
+  var MAXY = 70;
+
+  function mount(ctx) {
+    var st = new PP.Stage(ctx.stageCanvas);
+    var side = ctx.sideEl, store = ctx.store;
+
+    var state = {
+      bal: store.get("bal", 35),     // army ethnic balance / inheritance (0..100)
+      party: store.get("party", 30), // political-party institutionalisation
+      proof: store.get("proof", 20), // coup-proofing measures
+      preset: store.get("preset", "pakistan"),
+      year: 0, cc: 0.4, regime: "dem", streak: 0, coups: 0,
+      risk: 0, timeline: [], lastEvent: ""
+    };
+
+    function plasticity(y) { return y <= 10 ? 1.0 : Math.max(0.15, 1.0 - (y - 10) * 0.025); }
+    function levers() { return { b: state.bal / 100, p: state.party / 100, r: state.proof / 100 }; }
+
+    function reset() {
+      var L = levers();
+      state.year = 0; state.streak = 0; state.coups = 0; state.regime = "dem";
+      state.cc = 0.30 + 0.45 * (0.45 * L.p + 0.30 * L.b + 0.25 * L.r); // initial civilian control
+      state.timeline = []; state.lastEvent = ""; state.risk = 0;
+    }
+
+    function step() {
+      if (state.year >= MAXY) { if (loop.isPlaying()) { loop.pause(); sync(); } return; }
+      state.year++;
+      var L = levers(), plast = plasticity(state.year);
+      var target = 0.15 + 0.72 * (0.45 * L.p + 0.30 * L.b + 0.25 * L.r);
+      // civilian control drifts toward what the levers support — strongly while
+      // the state is young, weakly once institutions have set (path dependence)
+      state.cc += (target - state.cc) * (0.18 * plast + 0.02);
+
+      if (state.regime === "dem") {
+        // surviving as a democracy slowly consolidates control (increasing returns)
+        state.cc = PP.clamp(state.cc + 0.012 * plast, 0, 1);
+        var risk = PP.clamp((0.58 - state.cc) * (1 - 0.45 * L.r), 0, 0.92);
+        state.risk = risk;
+        if (Math.random() < risk) {
+          state.regime = "mil"; state.coups++; state.streak = 0;
+          state.cc = PP.clamp(state.cc - 0.26, 0, 1); state.lastEvent = "Coup d'\u00E9tat";
+        } else { state.streak++; state.lastEvent = ""; }
+      } else {
+        // under military rule civilian institutions decay; return is possible but hard
+        state.cc = PP.clamp(state.cc - 0.015 * plast, 0, 1);
+        var demChance = PP.clamp((state.cc - 0.45), 0, 1) * 0.12 * (0.5 + 0.5 * plast);
+        state.risk = demChance;
+        if (Math.random() < demChance) {
+          state.regime = "dem"; state.streak = 0; state.lastEvent = "Return to elections";
+          state.cc = PP.clamp(state.cc + 0.06, 0, 1);
+        } else state.lastEvent = "";
+      }
+      state.timeline.push(state.regime);
+    }
+
+    var loop = PP.makeLoop(step, function () { draw(); }, { stepMs: 230 });
+
+    /* ---------- drawing ---------- */
+    var geom = {};
+    function layout() {
+      st.fit();
+      geom.beamY = st.h * 0.40;
+      geom.tlY = st.h - 56;
+    }
+
+    function draw() {
+      var W = st.w, H = st.h, c = st.ctx;
+      st.clear();
+
+      // ---- tug of war: civilians (left) vs generals (right) ----
+      var bx0 = 40, bx1 = W - 40, by = geom.beamY;
+      st.rc.line(bx0, by, bx1, by, { stroke: C.line, strokeWidth: 2, roughness: 0.8, seed: 4 });
+      PP.text(c, "CIVILIANS", bx0, by - 54, { size: 11, font: "display", weight: "800", color: C.blueInk });
+      PP.text(c, "MILITARY", bx1, by - 54, { size: 11, font: "display", weight: "800", align: "right", color: C.coralInk });
+
+      // civilian cluster
+      var civH = Math.min(64, H * 0.22);
+      PP.figure(st.rc, c, bx0 + 22, by - civH * 0.2, civH, { color: C.blue, mood: state.regime === "dem" ? "happy" : "sad", seed: 3 });
+      PP.figure(st.rc, c, bx0 + 50, by - civH * 0.1, civH * 0.85, { color: C.blue, mood: state.regime === "dem" ? "happy" : "neutral", seed: 8 });
+      // general cluster (angry when risk high)
+      var genMood = state.regime === "mil" ? "happy" : (state.risk > 0.3 ? "angry" : "neutral");
+      PP.figure(st.rc, c, bx1 - 22, by - civH * 0.2, civH, { color: C.coral, mood: genMood, seed: 5 });
+      PP.figure(st.rc, c, bx1 - 50, by - civH * 0.1, civH * 0.85, { color: C.coral, mood: genMood, seed: 9 });
+      // stars over generals to read as military
+      PP.text(c, "\u2605\u2605", bx1 - 22, by - civH - 2, { size: 13, align: "center", color: C.gold });
+
+      // the knot — position reflects civilian control (high cc -> pulled left)
+      var knotX = PP.lerp(bx1 - 70, bx0 + 70, state.cc);
+      st.rc.line((bx0 + 70 + bx1 - 70) / 2 - 0, by, knotX, by, { stroke: C.ink, strokeWidth: 3, roughness: 1, seed: 12 });
+      st.rc.circle(knotX, by, 16, { fill: C.gold, fillStyle: "solid", stroke: C.ink, strokeWidth: 2, roughness: 1, seed: 13 });
+      PP.text(c, "civilian control " + Math.round(state.cc * 100) + "%", (bx0 + bx1) / 2, by + 28, { size: 12, align: "center", font: "mono", color: C.inkSoft });
+
+      // formative-decade flag
+      var formative = state.year <= 10;
+      PP.text(c, formative ? "\u23F1 FORMATIVE DECADE \u2014 choices set hard now" : "institutions largely locked in",
+        (bx0 + bx1) / 2, 22, { size: 12, align: "center", font: "display", weight: "700", color: formative ? C.greenInk : C.inkSoft });
+
+      // ---- regime timeline ----
+      var tx = 24, tw = W - 48, ty = geom.tlY, th = 22;
+      var cell = tw / MAXY;
+      for (var y = 0; y < MAXY; y++) {
+        var done = y < state.timeline.length;
+        var col = !done ? "#ECE7DA" : (state.timeline[y] === "dem" ? C.green : C.coral);
+        st.ctx.fillStyle = col;
+        st.ctx.fillRect(tx + y * cell + 0.5, ty, Math.max(1, cell - 0.8), th);
+        if (y === 10) { st.ctx.strokeStyle = C.ink; st.ctx.lineWidth = 1.4; st.ctx.beginPath(); st.ctx.moveTo(tx + y * cell, ty - 4); st.ctx.lineTo(tx + y * cell, ty + th + 4); st.ctx.stroke(); }
+      }
+      st.rc.rectangle(tx, ty, tw, th, { stroke: C.ink, strokeWidth: 1.4, roughness: 0.6, seed: 21 });
+      PP.text(c, "year 0", tx, ty + th + 14, { size: 9.5, font: "mono", color: C.inkSoft });
+      PP.text(c, "decade 1", tx + 10 * cell, ty - 8, { size: 9, align: "center", font: "mono", color: C.inkSoft });
+      PP.text(c, "year " + MAXY, tx + tw, ty + th + 14, { size: 9.5, align: "right", font: "mono", color: C.inkSoft });
+      if (state.lastEvent) PP.text(c, state.lastEvent + " \u2192 yr " + state.year, tx + tw, ty - 8, { size: 11, align: "right", font: "display", weight: "700", color: state.regime === "mil" ? C.coralInk : C.greenInk });
+
+      var reg = state.regime === "dem" ? "Democracy" : "Military rule";
+      update({
+        regime: { text: reg },
+        streak: { text: state.streak + " yrs" },
+        coups: { text: state.coups.toString() },
+        risk: { text: Math.round(state.risk * 100) + "%", pct: state.risk * 100 },
+        year: { text: state.year + " / " + MAXY }
+      });
+      var rEl = side.querySelector("#cm-regime"); if (rEl) rEl.style.color = state.regime === "dem" ? C.greenInk : C.coralInk;
+    }
+
+    function applyPreset(p) {
+      if (p === "pakistan") { state.bal = 30; state.party = 25; state.proof = 12; }
+      else if (p === "india") { state.bal = 62; state.party = 78; state.proof = 80; }
+      state.preset = p; store.set("preset", p); store.set("bal", state.bal); store.set("party", state.party); store.set("proof", state.proof);
+    }
+
+    var update, sB, sP, sR;
+    function buildPanel() {
+      side.innerHTML = "";
+      update = ui.readout(side, [
+        { key: "regime", label: "Regime now" },
+        { key: "streak", label: "Current spell" },
+        { key: "coups", label: "Coups so far" },
+        { key: "risk", label: "Coup / shift risk", bar: true, color: C.coral },
+        { key: "year", label: "Year" }
+      ]);
+      var rrow = ui.el("div", "readout");
+      rrow.innerHTML = '<div class="readout__row"><span class="readout__k">Status</span><span class="readout__v" id="cm-regime" style="font-family:var(--display)"></span></div>';
+      side.appendChild(rrow);
+
+      ui.h(side, "Starting point");
+      ui.segmented(side, {
+        value: state.preset,
+        options: [
+          { value: "pakistan", label: "Pakistan '47" },
+          { value: "india", label: "India / Israel '47" },
+          { value: "custom", label: "Custom" }
+        ],
+        onChange: function (v) {
+          if (v !== "custom") applyPreset(v); else state.preset = v;
+          loop.pause(); sync(); reset(); rebuildSliders(); draw();
+        }
+      });
+
+      ui.h(side, "Wilkinson's three levers");
+      sB = ui.slider(side, { label: "Army ethnic balance", min: 0, max: 100, step: 1, value: state.bal, fmt: pc,
+        onInput: function (v) { state.bal = v; store.set("bal", v); markCustom(); draw(); } });
+      sP = ui.slider(side, { label: "Party institutionalisation", min: 0, max: 100, step: 1, value: state.party, fmt: pc,
+        onInput: function (v) { state.party = v; store.set("party", v); markCustom(); draw(); } });
+      sR = ui.slider(side, { label: "Coup-proofing measures", min: 0, max: 100, step: 1, value: state.proof, fmt: pc,
+        onInput: function (v) { state.proof = v; store.set("proof", v); markCustom(); draw(); } });
+      side.appendChild(ui.el("p", "hint", "These levers bite hardest in the <b>first decade</b>. Raise them only after year 10 and watch how little they move the outcome \u2014 the path is already set."));
+
+      var row = ui.btnRow(side);
+      playBtn = ui.button(row, { label: "\u25B6 Run 70 years", variant: "blue", onClick: function () {
+        if (loop.isPlaying()) loop.pause(); else { if (state.year >= MAXY) reset(); loop.play(); } sync(); } });
+      ui.button(row, { label: "Step a year", variant: "ghost", onClick: function () { loop.pause(); sync(); step(); draw(); } });
+      ui.button(row, { label: "Reset", variant: "ghost", onClick: function () { loop.pause(); sync(); reset(); draw(); } });
+      sync();
+      side.appendChild(ui.el("p", "hint", "Run <b>Pakistan '47</b> a few times: a fragile, coup-prone path. Then <b>India / Israel '47</b>: civilian control consolidates and locks in. Same origins, different formative decade."));
+    }
+    function pc(v) { return v + "%"; }
+    function markCustom() { state.preset = "custom"; store.set("preset", "custom"); }
+    function rebuildSliders() { if (sB) sB.set(state.bal); if (sP) sP.set(state.party); if (sR) sR.set(state.proof); }
+    var playBtn;
+    function sync() { if (playBtn) playBtn.textContent = loop.isPlaying() ? "\u275A\u275A Pause" : (state.year >= MAXY ? "\u21BB Replay" : "\u25B6 Run 70 years"); }
+
+    if (state.preset !== "custom") applyPreset(state.preset);
+    reset(); layout(); buildPanel(); draw();
+    var unsub = PP.onResize(function () { layout(); draw(); });
+    return { destroy: function () { loop.pause(); unsub(); } };
+  }
+
+  /* ---------- thumb + comic ---------- */
+  function thumb(st) {
+    var W = st.w, H = st.h, c = st.ctx;
+    st.clear();
+    var by = H * 0.42;
+    PP.figure(st.rc, c, W * 0.24, by, H * 0.4, { color: C.blue, mood: "happy", seed: 3 });
+    PP.figure(st.rc, c, W * 0.76, by, H * 0.4, { color: C.coral, mood: "angry", seed: 5 });
+    PP.text(c, "\u2605", W * 0.76, by - H * 0.32, { size: H * 0.14, align: "center", color: C.gold });
+    // timeline
+    var tx = W * 0.1, tw = W * 0.8, ty = H * 0.78, n = 14;
+    for (var i = 0; i < n; i++) {
+      c.fillStyle = i < 9 ? C.green : C.coral;
+      c.fillRect(tx + i * (tw / n), ty, tw / n - 1.5, H * 0.1);
+    }
+  }
+
+  var comicCaps = [
+    "Two states, same fearful origin, the same powerful army.",
+    "The formative decade decides who holds the leash.",
+    "One locks in civilian rule; the other keeps calling the soldiers back."
+  ];
+  function comic(st, i) {
+    var W = st.w, H = st.h, c = st.ctx;
+    st.clear();
+    var by = H * 0.45;
+    if (i === 0) {
+      PP.figure(st.rc, c, W * 0.3, by, H * 0.38, { color: C.blue, mood: "neutral", seed: 3 });
+      PP.figure(st.rc, c, W * 0.7, by, H * 0.38, { color: C.coral, mood: "neutral", seed: 5 });
+      PP.text(c, "?", W / 2, by, { size: H * 0.3, align: "center", baseline: "middle", color: C.inkSoft, font: "display", weight: "800" });
+    } else if (i === 1) {
+      st.rc.line(W * 0.2, by, W * 0.8, by, { stroke: C.line, strokeWidth: 2, roughness: 0.8, seed: 4 });
+      st.rc.circle(W * 0.5, by, 18, { fill: C.gold, fillStyle: "solid", stroke: C.ink, strokeWidth: 2, roughness: 1, seed: 7 });
+      PP.text(c, "\u23F1 decade one", W / 2, H * 0.78, { size: 13, align: "center", font: "display", weight: "700", color: C.greenInk });
+    } else {
+      var tx = W * 0.08, tw = W * 0.4, ty = H * 0.42, hh = H * 0.16, n = 10;
+      for (var k = 0; k < n; k++) { c.fillStyle = C.green; c.fillRect(tx + k * (tw / n), ty, tw / n - 2, hh); }
+      PP.text(c, "democracy", tx, ty + hh + 16, { size: 11, font: "display", weight: "700", color: C.greenInk });
+      var tx2 = W * 0.52;
+      for (var m = 0; m < n; m++) { c.fillStyle = m % 3 === 0 ? C.green : C.coral; c.fillRect(tx2 + m * (tw / n), ty, tw / n - 2, hh); }
+      PP.text(c, "coups", tx2, ty + hh + 16, { size: 11, font: "display", weight: "700", color: C.coralInk });
+    }
+  }
+
+  PP.sims["civil-military"] = { mount: mount, thumb: thumb, comic: comic, comicCaps: comicCaps };
+})(window);
+
+</script>
+  <!-- js/sims/tinbergen.js -->
+<script>
+/* =========================================================================
+   sims/tinbergen.js — "One Lever, One Goal"
+   The Tinbergen Rule (Jan Tinbergen, On the Theory of Economic Policy, 1952):
+   to hit N independent policy targets you need at least N independent policy
+   instruments. Pile many goals onto one lever and you cannot land them all.
+   A control puzzle: gauges you try to push into the green.
+   ========================================================================= */
+(function (global) {
+  "use strict";
+  var PP = global.PP, ui = PP.ui, C = PP.COLORS;
+
+  // linear policy model. instruments r,g,s in [-1,1]; off => contributes 0.
+  var BASE   = { pi: 4.0, u: 6.0, y: 1.0 };
+  var CENTER = { pi: 2.0, u: 4.0, y: 3.0 };
+  var BAND   = { pi: [1, 3], u: [3, 5], y: [2, 4] };
+  var RANGE  = { pi: [0, 8], u: [0, 10], y: [0, 6] };
+  var COEF   = {
+    pi: { r: -4.0, g: 1.5,  s: -1.0 },
+    u:  { r: 1.5,  g: -4.0, s: -1.5 },
+    y:  { r: -0.8, g: 1.2,  s: 3.5  }
+  };
+  var GLABEL = { pi: "Inflation", u: "Unemployment", y: "Growth" };
+  var ILABEL = { r: "Interest rate", g: "Fiscal spending", s: "Structural reform" };
+
+  function mount(ctx) {
+    var st = new PP.Stage(ctx.stageCanvas);
+    var side = ctx.sideEl, store = ctx.store;
+
+    var state = {
+      on:  { r: store.get("on_r", true), g: store.get("on_g", false), s: store.get("on_s", false) },
+      val: { r: store.get("v_r", 0), g: store.get("v_g", 0), s: store.get("v_s", 0) },
+      growth: store.get("growth", false),
+      flash: 0
+    };
+
+    function instList() { return ["r", "g", "s"].filter(function (k) { return state.on[k]; }); }
+    function goalList() { return state.growth ? ["pi", "u", "y"] : ["pi", "u"]; }
+    function valueOf(goal) {
+      var v = BASE[goal];
+      instList().forEach(function (k) { v += COEF[goal][k] * state.val[k]; });
+      return v;
+    }
+    function inBand(goal) { var v = valueOf(goal), b = BAND[goal]; return v >= b[0] && v <= b[1]; }
+    function countInBand() { return goalList().filter(inBand).length; }
+
+    function autoSolve() {
+      var inst = instList(), goals = goalList();
+      if (!inst.length) return;
+      for (var it = 0; it < 800; it++) {
+        var grad = {}; inst.forEach(function (k) { grad[k] = 0; });
+        goals.forEach(function (goal) {
+          var diff = valueOf(goal) - CENTER[goal];
+          inst.forEach(function (k) { grad[k] += 2 * diff * COEF[goal][k]; });
+        });
+        inst.forEach(function (k) { state.val[k] = PP.clamp(state.val[k] - 0.012 * grad[k], -1, 1); });
+      }
+      inst.forEach(function (k) { store.set("v_" + k, state.val[k]); });
+    }
+
+    /* ---------- drawing ---------- */
+    var geom = {};
+    function layout() { st.fit(); geom.gaugeY = st.h * 0.34; geom.barY = st.h * 0.72; }
+
+    function gauge(gx, gy, R, goal) {
+      var c = st.ctx, v = valueOf(goal), rg = RANGE[goal], bd = BAND[goal], ok = inBand(goal);
+      function ang(val) { return Math.PI + Math.PI * (PP.clamp(val, rg[0], rg[1]) - rg[0]) / (rg[1] - rg[0]); }
+      // dial background
+      c.save();
+      c.lineWidth = 9; c.lineCap = "round";
+      c.strokeStyle = "#E7E2D6";
+      c.beginPath(); c.arc(gx, gy, R, Math.PI, 2 * Math.PI); c.stroke();
+      // green band
+      c.strokeStyle = C.green; c.globalAlpha = 0.55;
+      c.beginPath(); c.arc(gx, gy, R, ang(bd[0]), ang(bd[1])); c.stroke();
+      c.globalAlpha = 1;
+      c.restore();
+      // needle
+      var a = ang(v);
+      PP.arrow(st.rc, gx, gy, gx + (R - 2) * Math.cos(a), gy + (R - 2) * Math.sin(a),
+        { color: ok ? C.greenInk : C.coralInk, strokeWidth: 2.4, head: 8, seed: 7 });
+      st.rc.circle(gx, gy, 9, { fill: C.ink, fillStyle: "solid", stroke: C.ink, strokeWidth: 1, roughness: 0.8, seed: 8 });
+      // little reactor figure
+      PP.figure(st.rc, c, gx, gy - R - 22, 30, { color: ok ? C.green : C.coral, mood: ok ? "happy" : "sad", seed: goal === "pi" ? 2 : goal === "u" ? 5 : 9 });
+      // labels
+      PP.text(c, GLABEL[goal], gx, gy + 20, { size: 12.5, align: "center", font: "display", weight: "700", color: C.ink });
+      PP.text(c, v.toFixed(1) + (goal === "y" ? "% gr" : "%"), gx, gy + 36, { size: 12, align: "center", font: "mono", color: ok ? C.greenInk : C.coralInk });
+      PP.text(c, "aim " + bd[0] + "\u2013" + bd[1], gx, gy + 50, { size: 9.5, align: "center", font: "mono", color: C.inkSoft });
+    }
+
+    function draw() {
+      var W = st.w, c = st.ctx;
+      st.clear();
+      var goals = goalList(), n = goals.length;
+      var R = Math.min(64, (W / n) * 0.30, geom.gaugeY * 0.7);
+      for (var i = 0; i < n; i++) gauge(W * (i + 0.5) / n, geom.gaugeY + 10, R, goals[i]);
+
+      // verdict block
+      var inst = instList(), hit = countInBand();
+      var enough = inst.length >= n;
+      var by = geom.barY;
+      PP.text(c, "Levers: " + inst.length + "    \u00B7    Goals: " + n, W / 2, by, { size: 14, align: "center", font: "display", weight: "800", color: C.ink });
+      var verdict = enough
+        ? "Tinbergen satisfied \u2014 enough independent levers to hit them all"
+        : "Under-determined \u2014 too few levers to hit every goal";
+      PP.text(c, (enough ? "\u2713 " : "\u2717 ") + verdict, W / 2, by + 22, { size: 11.5, align: "center", font: "body", weight: "600", color: enough ? C.greenInk : C.coralInk });
+      PP.text(c, "in the green: " + hit + " / " + n, W / 2, by + 42, { size: 12, align: "center", font: "mono", color: hit === n ? C.greenInk : C.inkSoft });
+
+      // lever readout chips
+      var lx = W / 2 - (inst.length * 86) / 2 + 43, ly = by + 64;
+      inst.forEach(function (k, idx) {
+        var x = W / 2 - (inst.length - 1) * 50 + idx * 100;
+        PP.text(c, ILABEL[k].split(" ")[0], x, ly, { size: 10, align: "center", font: "mono", color: C.inkSoft });
+        // mini horizontal lever
+        st.rc.line(x - 26, ly + 12, x + 26, ly + 12, { stroke: C.line, strokeWidth: 3, roughness: 0.6, seed: 30 + idx });
+        var px = x + 26 * state.val[k];
+        st.rc.circle(px, ly + 12, 11, { fill: C.blue, fillStyle: "solid", stroke: C.ink, strokeWidth: 1.6, roughness: 0.8, seed: 40 + idx });
+      });
+
+      update({
+        hit: { text: hit + " / " + n },
+        levers: { text: inst.length.toString() },
+        goals: { text: n.toString() },
+        tin: { text: enough ? "Satisfied" : "Under-determined" }
+      });
+      var tEl = side.querySelector("#tb-verdict"); if (tEl) tEl.style.color = enough ? C.greenInk : C.coralInk;
+    }
+
+    /* ---------- side ---------- */
+    var update;
+    function buildPanel() {
+      side.innerHTML = "";
+      update = ui.readout(side, [
+        { key: "hit", label: "Goals in the green" },
+        { key: "levers", label: "Independent levers" },
+        { key: "goals", label: "Goals to hit" }
+      ]);
+      var trow = ui.el("div", "readout");
+      trow.innerHTML = '<div class="readout__row"><span class="readout__k">Tinbergen rule</span><span class="readout__v" id="tb-verdict" style="font-family:var(--display)"></span></div>';
+      side.appendChild(trow);
+
+      ui.h(side, "Instruments (levers)");
+      ["r", "g", "s"].forEach(function (k) {
+        ui.toggle(side, { label: ILABEL[k], value: state.on[k], offLabel: "Off", onLabel: "On",
+          onChange: function (b) { state.on[k] = b; store.set("on_" + k, b); if (!b) { state.val[k] = 0; store.set("v_" + k, 0); } buildPanel(); draw(); } });
+      });
+
+      var actives = instList();
+      if (actives.length) ui.h(side, "Set the active levers");
+      actives.forEach(function (k) {
+        ui.slider(side, { label: ILABEL[k], min: -100, max: 100, step: 5, value: Math.round(state.val[k] * 100),
+          fmt: function (v) { return (v > 0 ? "+" : "") + v + "%"; },
+          onInput: function (v) { state.val[k] = v / 100; store.set("v_" + k, state.val[k]); draw(); } });
+      });
+
+      ui.h(side, "Goals");
+      ui.toggle(side, { label: "Add a third goal: growth", value: state.growth, offLabel: "Off", onLabel: "On",
+        onChange: function (b) { state.growth = b; store.set("growth", b); draw(); } });
+
+      var row = ui.btnRow(side);
+      ui.button(row, { label: "\u2728 Auto-solve", variant: "blue", onClick: function () { autoSolve(); buildPanel(); draw(); } });
+      ui.button(row, { label: "Reset levers", variant: "ghost", onClick: function () {
+        state.val = { r: 0, g: 0, s: 0 }; ["r", "g", "s"].forEach(function (k) { store.set("v_" + k, 0); }); buildPanel(); draw(); } });
+
+      side.appendChild(ui.el("p", "hint", "Start with only the <b>interest rate</b> on. Slide it: you can green inflation <em>or</em> unemployment, never both. Switch on <b>fiscal spending</b> and hit <b>Auto-solve</b> \u2014 now both sit in the green. Then add the <b>growth</b> goal and watch two levers fall short again."));
+    }
+
+    layout(); buildPanel(); draw();
+    var unsub = PP.onResize(function () { layout(); draw(); });
+    return { destroy: function () { unsub(); } };
+  }
+
+  /* ---------- thumb + comic ---------- */
+  function miniGauge(st, gx, gy, R, frac, ok) {
+    var c = st.ctx;
+    c.save(); c.lineWidth = 6; c.lineCap = "round";
+    c.strokeStyle = "#E7E2D6"; c.beginPath(); c.arc(gx, gy, R, Math.PI, 2 * Math.PI); c.stroke();
+    c.strokeStyle = C.green; c.globalAlpha = 0.5; c.beginPath(); c.arc(gx, gy, R, Math.PI * 1.35, Math.PI * 1.65); c.stroke();
+    c.globalAlpha = 1; c.restore();
+    var a = Math.PI + Math.PI * frac;
+    PP.arrow(st.rc, gx, gy, gx + R * Math.cos(a), gy + R * Math.sin(a), { color: ok ? C.greenInk : C.coralInk, strokeWidth: 2, head: 6, seed: 3 });
+  }
+  function thumb(st) {
+    var W = st.w, H = st.h;
+    st.clear();
+    miniGauge(st, W * 0.32, H * 0.5, Math.min(W, H) * 0.2, 0.5, true);
+    miniGauge(st, W * 0.68, H * 0.5, Math.min(W, H) * 0.2, 0.85, false);
+    PP.text(st.ctx, "1 lever, 2 goals", W / 2, H * 0.86, { size: H * 0.1, align: "center", font: "mono", color: C.inkSoft });
+  }
+
+  var comicCaps = [
+    "One lever, two goals: push it and one gauge goes red.",
+    "A second independent lever \u2014 now both can sit in the green.",
+    "Add a third goal and two levers fall short again."
+  ];
+  function comic(st, i) {
+    var W = st.w, H = st.h, c = st.ctx, R = Math.min(W, H) * 0.16;
+    st.clear();
+    if (i === 0) { miniGauge(st, W * 0.33, H * 0.45, R, 0.5, true); miniGauge(st, W * 0.67, H * 0.45, R, 0.88, false);
+      st.rc.line(W * 0.4, H * 0.8, W * 0.6, H * 0.8, { stroke: C.line, strokeWidth: 3, roughness: 0.6, seed: 2 });
+      st.rc.circle(W * 0.46, H * 0.8, 10, { fill: C.blue, fillStyle: "solid", stroke: C.ink, strokeWidth: 1.5, roughness: 0.8, seed: 3 }); }
+    else if (i === 1) { miniGauge(st, W * 0.33, H * 0.45, R, 0.5, true); miniGauge(st, W * 0.67, H * 0.45, R, 0.5, true);
+      for (var k = 0; k < 2; k++) { var lx = W * (0.36 + k * 0.28); st.rc.line(lx - 18, H * 0.8, lx + 18, H * 0.8, { stroke: C.line, strokeWidth: 3, roughness: 0.6, seed: 4 + k }); st.rc.circle(lx, H * 0.8, 9, { fill: C.blue, fillStyle: "solid", stroke: C.ink, strokeWidth: 1.5, roughness: 0.8, seed: 6 + k }); } }
+    else { miniGauge(st, W * 0.25, H * 0.45, R * 0.9, 0.5, true); miniGauge(st, W * 0.5, H * 0.45, R * 0.9, 0.5, true); miniGauge(st, W * 0.75, H * 0.45, R * 0.9, 0.85, false);
+      PP.text(c, "3 goals, 2 levers", W / 2, H * 0.85, { size: H * 0.09, align: "center", font: "mono", color: C.coralInk }); }
+  }
+
+  PP.sims["tinbergen"] = { mount: mount, thumb: thumb, comic: comic, comicCaps: comicCaps };
+})(window);
+
+</script>
+  <!-- js/sims/wicked-problems.js -->
+<script>
+/* =========================================================================
+   sims/wicked-problems.js — "The Hydra"
+   Rittel & Webber, "Dilemmas in a General Theory of Planning" (Policy Sciences,
+   1973). TAME problems decompose and stay fixed; WICKED ones are an
+   interlinked web where every fix shoves a problem elsewhere (each is a
+   "symptom of another problem"), fixes are one-shot (no undo), and there is
+   no stopping rule. Toggle between the two and feel the difference.
+   ========================================================================= */
+(function (global) {
+  "use strict";
+  var PP = global.PP, ui = PP.ui, C = PP.COLORS;
+
+  var NAMES = ["Housing", "Jobs", "Crime", "Schools", "Health", "Transport", "Trust"];
+  var EDGES = [[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,0],[0,3],[1,4],[2,5],[3,6]];
+
+  function hex2(h) { return [parseInt(h.slice(1,3),16), parseInt(h.slice(3,5),16), parseInt(h.slice(5,7),16)]; }
+  function lerpHex(a, b, t) {
+    var A = hex2(a), B = hex2(b);
+    return "rgb(" + Math.round(PP.lerp(A[0],B[0],t)) + "," + Math.round(PP.lerp(A[1],B[1],t)) + "," + Math.round(PP.lerp(A[2],B[2],t)) + ")";
+  }
+
+  function mount(ctx) {
+    var st = new PP.Stage(ctx.stageCanvas);
+    var side = ctx.sideEl, store = ctx.store;
+    var canvas = ctx.stageCanvas;
+
+    var state = {
+      mode: store.get("mode", "wicked"),   // wicked | tame
+      ripple: store.get("ripple", 55),     // 0..100
+      nodes: [], fixes: 0, solved: false, notice: null, driftT: 0
+    };
+
+    function reset() {
+      var rnd = PP.rng(99);
+      state.nodes = NAMES.map(function (nm, i) { return { name: nm, sev: 0.45 + 0.4 * rnd(), fixed: false, flash: 0, x: 0, y: 0 }; });
+      state.fixes = 0; state.solved = false; state.notice = null; state.driftT = 0;
+      layout();
+    }
+
+    function wellbeing() { var s = 0; state.nodes.forEach(function (n) { s += (1 - n.sev); }); return s / state.nodes.length; }
+    function worst() { var wi = 0; for (var i = 1; i < state.nodes.length; i++) if (state.nodes[i].sev > state.nodes[wi].sev) wi = i; return wi; }
+    function neighbors(i) { var r = []; EDGES.forEach(function (e) { if (e[0] === i) r.push(e[1]); else if (e[1] === i) r.push(e[0]); }); return r; }
+
+    function fix(i) {
+      var n = state.nodes[i];
+      if (state.mode === "wicked" && n.fixed) {
+        state.notice = { text: "already spent \u2014 no second try", x: n.x, y: n.y - 30, t: 1 };
+        return;
+      }
+      n.sev = PP.clamp(n.sev - 0.55, 0, 1); n.flash = 1;
+      state.fixes++;
+      if (state.mode === "wicked") {
+        n.fixed = true;
+        var rip = (state.ripple / 100) * 0.42;
+        neighbors(i).forEach(function (j) { state.nodes[j].sev = PP.clamp(state.nodes[j].sev + rip, 0, 1); state.nodes[j].flash = Math.max(state.nodes[j].flash, 0.8); });
+        // a fix can surface a brand-new symptom elsewhere
+        if (Math.random() < 0.5) { var k = (Math.random() * state.nodes.length) | 0; state.nodes[k].sev = PP.clamp(state.nodes[k].sev + 0.18, 0, 1); }
+      } else {
+        // tame: independent. check stopping rule.
+        var all = state.nodes.every(function (q) { return q.sev < 0.06; });
+        if (all) state.solved = true;
+      }
+      draw();
+    }
+
+    function onClick(ev) {
+      var rect = canvas.getBoundingClientRect();
+      var mx = ev.clientX - rect.left, my = ev.clientY - rect.top;
+      for (var i = 0; i < state.nodes.length; i++) {
+        var n = state.nodes[i], dx = mx - n.x, dy = my - n.y;
+        if (dx * dx + dy * dy <= state.nodeR * state.nodeR * 1.2) { fix(i); return; }
+      }
+    }
+    canvas.addEventListener("click", onClick);
+    canvas.style.cursor = "pointer";
+
+    // gentle loop: decay flashes; in wicked, the problem keeps drifting (no rest)
+    var loop = PP.makeLoop(function () {
+      state.nodes.forEach(function (n) { if (n.flash > 0) n.flash = Math.max(0, n.flash - 0.12); });
+      if (state.notice) { state.notice.t -= 0.04; if (state.notice.t <= 0) state.notice = null; }
+      if (state.mode === "wicked") {
+        state.driftT++;
+        if (state.driftT % 26 === 0) { var k = (Math.random() * state.nodes.length) | 0; state.nodes[k].sev = PP.clamp(state.nodes[k].sev + 0.05, 0, 1); }
+      }
+    }, function () { draw(); }, { stepMs: 70 });
+
+    /* ---------- drawing ---------- */
+    var geom = {};
+    function layout() {
+      st.fit();
+      var W = st.w, H = st.h, cx = W / 2, cy = H * 0.46;
+      var LR = Math.min(W, H) * 0.34;
+      state.nodeR = PP.clamp(Math.min(W, H) * 0.085, 16, 30);
+      var nN = state.nodes.length;
+      for (var i = 0; i < nN; i++) {
+        var a = -Math.PI / 2 + i * 2 * Math.PI / nN;
+        state.nodes[i].x = cx + LR * Math.cos(a);
+        state.nodes[i].y = cy + LR * Math.sin(a);
+      }
+      geom.barY = H - 30;
+    }
+
+    function draw() {
+      var W = st.w, H = st.h, c = st.ctx, R = state.nodeR;
+      st.clear();
+      // edges
+      EDGES.forEach(function (e, idx) {
+        var a = state.nodes[e[0]], b = state.nodes[e[1]];
+        st.rc.line(a.x, a.y, b.x, b.y, { stroke: state.mode === "wicked" ? C.line : "#ECE7DA", strokeWidth: state.mode === "wicked" ? 1.6 : 1, roughness: 1.1, seed: 50 + idx });
+      });
+      // nodes
+      var wi = worst();
+      state.nodes.forEach(function (n, i) {
+        var col = lerpHex("#3FA34D", "#F0506E", n.sev); // green -> coral by severity
+        if (n.flash > 0) { c.save(); c.globalAlpha = 0.25 * n.flash; c.fillStyle = C.gold; c.beginPath(); c.arc(n.x, n.y, R + 8, 0, 2 * Math.PI); c.fill(); c.restore(); }
+        st.rc.circle(n.x, n.y, R * 2, { fill: col, fillStyle: "solid", stroke: n.fixed ? C.inkSoft : C.ink, strokeWidth: n.fixed ? 1.4 : 2, roughness: 1.0, seed: i + 1 });
+        var mood = n.sev < 0.33 ? "happy" : n.sev < 0.6 ? "neutral" : "sad";
+        PP.drawFace(c, n.x, n.y, R * 0.62, mood, C.ink);
+        PP.text(c, n.name, n.x, n.y + R + 13, { size: 11, align: "center", font: "display", weight: "700", color: C.ink });
+        if (n.fixed) PP.text(c, "spent", n.x, n.y + R + 25, { size: 8.5, align: "center", font: "mono", color: C.inkSoft });
+      });
+      // "the real problem?" pointer (definition shifts) — wicked only
+      if (state.mode === "wicked") {
+        var wn = state.nodes[wi];
+        PP.text(c, "\u2190 now framed as THE problem", wn.x + R + 6, wn.y, { size: 10.5, font: "hand", color: C.coralInk });
+      }
+      if (state.notice) PP.text(c, state.notice.text, state.notice.x, state.notice.y, { size: 11, align: "center", font: "hand", color: C.coralInk });
+
+      var wb = wellbeing();
+      update({
+        wellbeing: { text: Math.round(wb * 100) + "%", pct: wb * 100 },
+        fixes: { text: state.fixes.toString() },
+        stop: { text: state.mode === "tame" ? "Yes \u2014 all green" : "None" },
+        verdict: { text: state.mode === "tame" ? (state.solved ? "Solved \u2713" : "Tame \u2014 fixable") : "Wicked \u2014 never 'done'" }
+      });
+      var vEl = side.querySelector("#wp-verdict");
+      if (vEl) vEl.style.color = state.mode === "tame" ? (state.solved ? C.greenInk : C.ink) : C.coralInk;
+    }
+
+    /* ---------- side ---------- */
+    var update;
+    function buildPanel() {
+      side.innerHTML = "";
+      update = ui.readout(side, [
+        { key: "wellbeing", label: "Overall wellbeing", bar: true, color: C.green },
+        { key: "fixes", label: "Policy fixes used" },
+        { key: "stop", label: "Stopping rule?" }
+      ]);
+      var vrow = ui.el("div", "readout");
+      vrow.innerHTML = '<div class="readout__row"><span class="readout__k">Status</span><span class="readout__v" id="wp-verdict" style="font-family:var(--display)"></span></div>';
+      side.appendChild(vrow);
+
+      ui.h(side, "Kind of problem");
+      ui.segmented(side, {
+        value: state.mode,
+        options: [{ value: "tame", label: "Tame" }, { value: "wicked", label: "Wicked" }],
+        onChange: function (v) { state.mode = v; store.set("mode", v); reset(); draw(); modeNote(); }
+      });
+      var noteEl = ui.el("p", "hint", ""); side.appendChild(noteEl);
+      function modeNote() {
+        noteEl.innerHTML = state.mode === "tame"
+          ? "<b>Tame:</b> the parts are independent. Fix each once and it stays fixed \u2014 there's a clear finish line."
+          : "<b>Wicked:</b> one interlinked web. Every fix is one-shot and pushes a problem onto its neighbours. There is no finish line.";
+      }
+      modeNote();
+
+      ui.h(side, "Interdependence");
+      ui.slider(side, { label: "Ripple strength", min: 0, max: 100, step: 5, value: state.ripple, fmt: function (v) { return v + "%"; },
+        onInput: function (v) { state.ripple = v; store.set("ripple", v); } });
+      side.appendChild(ui.el("p", "hint", "How hard a fix in one place worsens the things it's connected to. Only matters in the wicked web."));
+
+      var row = ui.btnRow(side);
+      ui.button(row, { label: "\u21BA Fresh problem", variant: "blue", onClick: function () { reset(); draw(); } });
+
+      side.appendChild(ui.el("p", "hint", "<b>Click a node</b> to throw a policy fix at it. In <b>tame</b> mode you can clear the board. In <b>wicked</b> mode, chase the worst node and watch the trouble simply move next door \u2014 and never settle."));
+    }
+
+    reset(); buildPanel(); draw();
+    if (!(global.matchMedia && global.matchMedia("(prefers-reduced-motion: reduce)").matches)) loop.play();
+    var unsub = PP.onResize(function () { layout(); draw(); });
+    return { destroy: function () { loop.pause(); canvas.removeEventListener("click", onClick); canvas.style.cursor = ""; unsub(); } };
+  }
+
+  /* ---------- thumb + comic ---------- */
+  function netThumb(st, wicked) {
+    var W = st.w, H = st.h, c = st.ctx, cx = W / 2, cy = H * 0.5, LR = Math.min(W, H) * 0.32, R = Math.min(W, H) * 0.1;
+    st.clear();
+    var pts = [];
+    for (var i = 0; i < 6; i++) { var a = -Math.PI / 2 + i * Math.PI / 3; pts.push([cx + LR * Math.cos(a), cy + LR * Math.sin(a)]); }
+    var E = wicked ? [[0,1],[1,2],[2,3],[3,4],[4,5],[5,0],[0,3],[1,4]] : [];
+    E.forEach(function (e, k) { st.rc.line(pts[e[0]][0], pts[e[0]][1], pts[e[1]][0], pts[e[1]][1], { stroke: C.line, strokeWidth: 1.4, roughness: 1.1, seed: 30 + k }); });
+    var sev = wicked ? [0.8, 0.2, 0.7, 0.3, 0.75, 0.25] : [0.1, 0.15, 0.1, 0.2, 0.1, 0.15];
+    pts.forEach(function (p, i) {
+      var col = lerpHex("#3FA34D", "#F0506E", sev[i]);
+      st.rc.circle(p[0], p[1], R * 2, { fill: col, fillStyle: "solid", stroke: C.ink, strokeWidth: 1.6, roughness: 1, seed: i + 1 });
+      PP.drawFace(c, p[0], p[1], R * 0.6, sev[i] < 0.4 ? "happy" : "sad", C.ink);
+    });
+  }
+  function thumb(st) { netThumb(st, true); }
+
+  var comicCaps = [
+    "A tame problem: fix the parts and they stay fixed.",
+    "A wicked one is a web \u2014 every fix pushes trouble next door.",
+    "No stopping rule, no undo: only better and worse, never solved."
+  ];
+  function comic(st, i) {
+    if (i === 0) return netThumb(st, false);
+    if (i === 1) return netThumb(st, true);
+    var W = st.w, H = st.h, c = st.ctx;
+    netThumb(st, true);
+    PP.text(c, "wellbeing 61%", W / 2, H * 0.93, { size: H * 0.09, align: "center", font: "mono", color: C.coralInk });
+  }
+
+  PP.sims["wicked-problems"] = { mount: mount, thumb: thumb, comic: comic, comicCaps: comicCaps };
+})(window);
+
+</script>
   <!-- js/app.js -->
 <script>
 /* =========================================================================
@@ -2237,7 +3296,7 @@ var rough=function(){"use strict";function t(t,e,s){if(t&&t.length){const[n,o]=e
             '<a class="btn" href="#/f/segregation">Open an experiment</a>' +
             '<a class="btn btn--ghost" href="#about">How this works</a>' +
           '</div>' +
-          '<div class="hero__note">five theories &middot; one rule: tinker freely \u2197</div>' +
+          '<div class="hero__note">nine theories &middot; one rule: tinker freely \u2197</div>' +
         '</div>' +
         '<div class="hero__stage" aria-hidden="true"><canvas id="heroCanvas"></canvas>' +
           '<div class="hero__cap">nobody asked for a divided town. they got one anyway.</div>' +
@@ -2282,7 +3341,7 @@ var rough=function(){"use strict";function t(t,e,s){if(t&&t.length){const[n,o]=e
     about.innerHTML =
       '<div class="wrap"><div class="callout callout--gold">' +
         '<div class="callout__h">What am I looking at?</div>' +
-        '<p>Social scientists often explain the world with <strong>agent-based models</strong>: give a crowd of simple imaginary people a few rules, let them interact, and watch what emerges. The results are frequently surprising \u2014 reasonable individuals producing outcomes none of them wanted. This site stages five of the most famous such ideas as live, tweakable comics.</p>' +
+        '<p>Social scientists often explain the world with <strong>agent-based models</strong>: give a crowd of simple imaginary people a few rules, let them interact, and watch what emerges. The results are frequently surprising \u2014 reasonable individuals producing outcomes none of them wanted. This site stages nine of the most famous such ideas as live, tweakable comics.</p>' +
         '<p style="margin-bottom:0">Every experiment links to its <strong>original paper or book</strong>. The simulations are faithful illustrations of the published models, not data about any specific real place \u2014 use them to build intuition, then go read the source.</p>' +
       '</div></div>';
     wrap.appendChild(about);

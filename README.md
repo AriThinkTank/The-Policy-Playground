@@ -11,7 +11,7 @@ It is a static website — no build step, no backend — designed to drop onto G
 
 ---
 
-## The five experiments
+## The nine experiments
 
 | Experiment | Theory | Original source |
 |---|---|---|
@@ -20,6 +20,10 @@ It is a static website — no build step, no backend — designed to drop onto G
 | **The Trust Tournament** | The Evolution of Cooperation (iterated Prisoner's Dilemma) | Axelrod, R. (1984), *The Evolution of Cooperation*; Axelrod & Hamilton (1981), *Science* 211: 1390–1396 |
 | **The Race to the Middle** | The Median Voter Theorem | Hotelling, H. (1929), *Economic Journal* 39: 41–57; Black (1948); Downs, A. (1957), *An Economic Theory of Democracy* |
 | **When the Dam Breaks** | Threshold models & how norms flip | Granovetter, M. (1978), *American Journal of Sociology* 83(6): 1420–1443; Kuran, T. (1995), *Private Truths, Public Lies* |
+| **The Gilded Engine** | The four types of corruption & its migration with development | Ang, Y. Y. (2020), *China's Gilded Age*, Cambridge University Press |
+| **The Coup Clock** | Civil-military relations & why democracies survive (path dependence) | Wilkinson, S. (2015), *Army and Nation*, Harvard University Press; Devji, F. (2013), *Muslim Zion* |
+| **One Lever, One Goal** | The Tinbergen Rule (one instrument per target) | Tinbergen, J. (1952), *On the Theory of Economic Policy*, North-Holland |
+| **The Hydra** | Wicked problems vs tame problems | Rittel, H. W. J. & Webber, M. M. (1973), *Policy Sciences* 4(2): 155–169 |
 
 Full citations with links live in each experiment's "Sources" section and in `js/data.js`.
 
