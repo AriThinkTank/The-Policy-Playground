@@ -17,7 +17,326 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Caveat:wght@500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="css/style.css" />
+  <style>
+/* =========================================================================
+   THE POLICY PLAYGROUND — a field notebook of explorable policy theories
+   Design system: "lab notebook come alive"
+   ========================================================================= */
+
+:root {
+  /* Palette — riso/marker on warm notebook paper */
+  --paper:      #FBFAF4;
+  --paper-2:    #F3EFE3;   /* recessed panels */
+  --ink:        #211E1B;   /* fountain-pen near-black */
+  --ink-soft:   #5A554C;   /* secondary text */
+  --grid:       #E7E2D6;   /* faint notebook ruling */
+  --line:       #D8D2C4;   /* hairline dividers */
+
+  --coral:      #F0506E;   /* group A / defect / heat */
+  --blue:       #2E6FB7;   /* group B / cooperate / cool */
+  --gold:       #F2B134;   /* resource / highlight / sun */
+  --green:      #3FA34D;   /* grass / growth */
+  --violet:     #7B5EA7;   /* accent */
+
+  --coral-ink:  #B7233F;
+  --blue-ink:   #1B4A82;
+  --green-ink:  #277636;
+
+  /* Type */
+  --display: "Bricolage Grotesque", "Arial Black", system-ui, sans-serif;
+  --hand:    "Caveat", "Comic Sans MS", cursive;
+  --body:    "Hanken Grotesk", system-ui, -apple-system, sans-serif;
+  --mono:    "Space Mono", ui-monospace, "Courier New", monospace;
+
+  --maxw: 1120px;
+  --radius: 14px;
+  --shadow: 4px 5px 0 rgba(33,30,27,0.12);
+  --shadow-lift: 7px 8px 0 rgba(33,30,27,0.16);
+}
+
+/* ----------------------------------------------------------------- reset */
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+}
+body {
+  margin: 0;
+  font-family: var(--body);
+  color: var(--ink);
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 26px 26px;
+  background-position: -1px -1px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4 { font-family: var(--display); line-height: 1.04; font-weight: 800; letter-spacing: -0.01em; margin: 0 0 0.4em; }
+a { color: var(--blue-ink); text-underline-offset: 3px; }
+img { max-width: 100%; }
+
+/* keyboard focus */
+:focus-visible { outline: 3px solid var(--violet); outline-offset: 2px; border-radius: 4px; }
+
+/* ----------------------------------------------------------- skip + wrap */
+.skip-link {
+  position: absolute; left: 12px; top: -60px; z-index: 100;
+  background: var(--ink); color: var(--paper); padding: 10px 16px;
+  border-radius: 8px; transition: top 0.18s; font-family: var(--mono); font-size: 13px;
+}
+.skip-link:focus { top: 12px; }
+
+.wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 22px; }
+
+/* ----------------------------------------------------------------- nav */
+.nav {
+  position: sticky; top: 0; z-index: 40;
+  backdrop-filter: blur(6px);
+  background: rgba(251,250,244,0.86);
+  border-bottom: 2px solid var(--ink);
+}
+.nav__in { display: flex; align-items: center; gap: 18px; height: 62px; }
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); }
+.brand__mark { width: 30px; height: 30px; flex: none; }
+.brand__name { font-family: var(--display); font-weight: 800; font-size: 18px; letter-spacing: -0.02em; }
+.brand__name b { color: var(--coral-ink); }
+.nav__spacer { flex: 1; }
+.nav__link {
+  font-family: var(--mono); font-size: 13px; text-decoration: none; color: var(--ink-soft);
+  padding: 7px 10px; border-radius: 8px;
+}
+.nav__link:hover { color: var(--ink); background: var(--paper-2); }
+.nav__cta {
+  font-family: var(--mono); font-size: 13px; text-decoration: none; color: var(--paper);
+  background: var(--ink); padding: 8px 14px; border-radius: 9px; border: 2px solid var(--ink);
+}
+.nav__cta:hover { background: var(--coral-ink); border-color: var(--coral-ink); }
+
+/* ----------------------------------------------------------------- hero */
+.hero { padding: 54px 0 30px; position: relative; }
+.hero__grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 36px; align-items: center; }
+.hero__eyebrow {
+  font-family: var(--mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--coral-ink); margin-bottom: 14px;
+}
+.hero__title { font-size: clamp(40px, 6.4vw, 74px); margin-bottom: 16px; }
+.hero__title .scribble { color: var(--coral-ink); position: relative; white-space: nowrap; }
+.hero__lede { font-size: 19px; color: var(--ink-soft); max-width: 30em; margin-bottom: 26px; }
+.hero__note {
+  font-family: var(--hand); font-size: 23px; color: var(--violet);
+  transform: rotate(-2.4deg); display: inline-block; margin-top: 6px;
+}
+.hero__stage {
+  background: var(--paper); border: 2.5px solid var(--ink); border-radius: var(--radius);
+  box-shadow: var(--shadow-lift); aspect-ratio: 1 / 0.92; overflow: hidden; position: relative;
+}
+.hero__stage canvas { display: block; width: 100%; height: 100%; }
+.hero__cap {
+  position: absolute; bottom: 8px; left: 12px; right: 12px;
+  font-family: var(--hand); font-size: 18px; color: var(--ink-soft); transform: rotate(-1deg);
+}
+
+/* generic buttons */
+.btn {
+  font-family: var(--mono); font-size: 14px; cursor: pointer; text-decoration: none;
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--gold); color: var(--ink); border: 2.5px solid var(--ink);
+  padding: 11px 18px; border-radius: 11px; box-shadow: var(--shadow);
+  transition: transform 0.08s, box-shadow 0.08s;
+}
+.btn:hover { transform: translate(-1px,-1px); box-shadow: var(--shadow-lift); }
+.btn:active { transform: translate(2px,2px); box-shadow: 1px 1px 0 rgba(33,30,27,0.18); }
+.btn--ghost { background: var(--paper); }
+.btn--blue { background: var(--blue); color: #fff; }
+.hero__btns { display: flex; gap: 14px; flex-wrap: wrap; }
+
+/* ------------------------------------------------------- section header */
+.sec { padding: 40px 0; }
+.sec__head { margin-bottom: 26px; max-width: 46em; }
+.sec__kicker {
+  font-family: var(--mono); font-size: 12.5px; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--ink-soft); margin-bottom: 8px;
+}
+.sec__title { font-size: clamp(28px, 4vw, 40px); }
+.sec__sub { color: var(--ink-soft); font-size: 17px; }
+
+/* -------------------------------------------------------------- gallery */
+.grid-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 24px; }
+.card {
+  background: var(--paper); border: 2.5px solid var(--ink); border-radius: var(--radius);
+  box-shadow: var(--shadow); overflow: hidden; text-decoration: none; color: var(--ink);
+  display: flex; flex-direction: column; transition: transform 0.1s, box-shadow 0.1s;
+}
+.card:hover { transform: translate(-2px,-3px); box-shadow: var(--shadow-lift); }
+.card:focus-visible { outline-offset: 4px; }
+.card__art { aspect-ratio: 16 / 9; border-bottom: 2.5px solid var(--ink); position: relative; }
+.card__art canvas { display: block; width: 100%; height: 100%; }
+.card__tag {
+  position: absolute; top: 10px; left: 10px; font-family: var(--mono); font-size: 11px;
+  background: var(--ink); color: var(--paper); padding: 3px 8px; border-radius: 6px;
+}
+.card__body { padding: 16px 18px 18px; display: flex; flex-direction: column; flex: 1; }
+.card__title { font-size: 22px; margin-bottom: 6px; }
+.card__src { font-family: var(--mono); font-size: 11.5px; color: var(--coral-ink); margin-bottom: 9px; }
+.card__desc { color: var(--ink-soft); font-size: 15px; flex: 1; }
+.card__go { font-family: var(--mono); font-size: 13px; margin-top: 14px; color: var(--ink); }
+.card__go::after { content: " →"; }
+
+/* --------------------------------------------------------- explorable page */
+.exp { padding: 30px 0 10px; }
+.exp__back { font-family: var(--mono); font-size: 13px; text-decoration: none; color: var(--ink-soft); }
+.exp__back::before { content: "← "; }
+.exp__head { margin: 18px 0 8px; }
+.exp__tag { font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--coral-ink); }
+.exp__title { font-size: clamp(34px, 5.6vw, 58px); margin: 6px 0 10px; }
+.exp__pitch { font-size: 20px; color: var(--ink-soft); max-width: 34em; }
+
+.exp__layout { display: grid; grid-template-columns: 1fr; gap: 22px; }
+.prose { max-width: 42em; }
+.prose p { margin: 0 0 1.05em; font-size: 17.5px; }
+.prose h3 { font-size: 26px; margin-top: 1.5em; }
+.prose strong { font-weight: 700; }
+.prose .lead { font-size: 19px; }
+
+/* margin note — handwritten aside */
+.note {
+  font-family: var(--hand); font-size: 21px; color: var(--violet);
+  border-left: 3px dashed var(--violet); padding: 4px 0 4px 14px; margin: 18px 0;
+  transform: rotate(-0.5deg);
+}
+.note--coral { color: var(--coral-ink); border-color: var(--coral-ink); }
+
+/* comic strip */
+.comic { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 8px 0 24px; }
+.comic__panel {
+  background: var(--paper); border: 2.5px solid var(--ink); border-radius: 10px;
+  box-shadow: var(--shadow); overflow: hidden;
+}
+.comic__panel canvas { display: block; width: 100%; height: auto; }
+.comic__cap {
+  font-family: var(--hand); font-size: 18px; padding: 6px 12px 10px; color: var(--ink);
+  border-top: 2px dashed var(--line);
+}
+
+/* ------------------------------------------------------ simulation panel */
+.lab {
+  background: var(--paper); border: 2.5px solid var(--ink); border-radius: var(--radius);
+  box-shadow: var(--shadow-lift); overflow: hidden; margin: 8px 0 30px;
+}
+.lab__bar {
+  display: flex; align-items: center; gap: 10px; padding: 10px 16px;
+  background: var(--ink); color: var(--paper); font-family: var(--mono); font-size: 13px;
+}
+.lab__dot { width: 11px; height: 11px; border-radius: 50%; background: var(--coral); }
+.lab__dot + .lab__dot { background: var(--gold); }
+.lab__dot + .lab__dot + .lab__dot { background: var(--green); }
+.lab__name { margin-left: 8px; letter-spacing: 0.04em; }
+.lab__body { display: grid; grid-template-columns: 1.35fr 1fr; gap: 0; }
+.lab__stage { border-right: 2.5px solid var(--ink); position: relative; min-height: 360px; }
+.lab__stage canvas { display: block; width: 100%; height: 100%; }
+.lab__side { padding: 18px 18px 22px; background: var(--paper-2); }
+
+/* live readout */
+.readout { font-family: var(--mono); font-size: 13px; display: grid; gap: 8px; margin-bottom: 18px; }
+.readout__row { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+.readout__k { color: var(--ink-soft); }
+.readout__v { font-weight: 700; }
+.readout__bar { height: 10px; border: 2px solid var(--ink); border-radius: 6px; overflow: hidden; background: var(--paper); }
+.readout__fill { height: 100%; transition: width 0.25s; }
+
+/* controls */
+.ctrl { margin-bottom: 16px; }
+.ctrl__label { font-family: var(--mono); font-size: 12.5px; color: var(--ink-soft); display: flex; justify-content: space-between; margin-bottom: 7px; }
+.ctrl__label b { color: var(--ink); font-weight: 700; }
+input[type="range"] {
+  -webkit-appearance: none; appearance: none; width: 100%; height: 8px;
+  background: var(--paper); border: 2px solid var(--ink); border-radius: 6px; cursor: pointer;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 20px; height: 20px; border-radius: 50%;
+  background: var(--gold); border: 2.5px solid var(--ink); cursor: pointer; margin-top: -1px;
+}
+input[type="range"]::-moz-range-thumb {
+  width: 18px; height: 18px; border-radius: 50%; background: var(--gold);
+  border: 2.5px solid var(--ink); cursor: pointer;
+}
+
+/* segmented toggle */
+.seg { display: flex; flex-wrap: wrap; gap: 6px; }
+.seg__btn {
+  font-family: var(--mono); font-size: 12.5px; cursor: pointer; flex: 1; min-width: 64px;
+  background: var(--paper); color: var(--ink-soft); border: 2px solid var(--ink);
+  padding: 8px 6px; border-radius: 8px; text-align: center;
+}
+.seg__btn[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+
+.btn-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 6px; }
+.btn-row .btn { flex: 1; justify-content: center; min-width: 90px; padding: 10px 12px; }
+
+.hint { font-family: var(--hand); font-size: 19px; color: var(--ink-soft); margin-top: 14px; line-height: 1.35; }
+
+/* example chips */
+.examples { display: grid; gap: 12px; margin: 6px 0 8px; }
+.example {
+  border: 2px solid var(--ink); border-left-width: 7px; border-radius: 10px;
+  padding: 12px 15px; background: var(--paper);
+}
+.example__h { font-family: var(--display); font-weight: 800; font-size: 18px; margin-bottom: 3px; }
+.example__p { font-size: 15.5px; color: var(--ink-soft); }
+
+/* sources */
+.sources { list-style: none; padding: 0; margin: 6px 0; display: grid; gap: 10px; }
+.sources li { font-size: 15px; padding-left: 22px; position: relative; }
+.sources li::before { content: "§"; position: absolute; left: 0; color: var(--coral-ink); font-family: var(--mono); }
+.sources cite { font-style: normal; font-weight: 700; }
+
+/* callout */
+.callout {
+  border: 2.5px solid var(--ink); border-radius: var(--radius); padding: 20px 22px;
+  background: var(--paper); box-shadow: var(--shadow); margin: 18px 0;
+}
+.callout--gold { background: #FDF4DC; }
+.callout__h { font-family: var(--display); font-weight: 800; font-size: 20px; margin-bottom: 8px; }
+
+/* ----------------------------------------------------------- pill row / toc */
+.pillrow { display: flex; gap: 10px; flex-wrap: wrap; margin: 16px 0 0; }
+.pill {
+  font-family: var(--mono); font-size: 12.5px; text-decoration: none; color: var(--ink);
+  border: 2px solid var(--ink); border-radius: 999px; padding: 6px 13px; background: var(--paper);
+}
+.pill:hover { background: var(--gold); }
+
+/* ----------------------------------------------------------------- footer */
+.foot { border-top: 2px solid var(--ink); margin-top: 30px; padding: 30px 0 50px; }
+.foot__in { display: flex; justify-content: space-between; gap: 18px; flex-wrap: wrap; align-items: center; }
+.foot__note { font-family: var(--mono); font-size: 12.5px; color: var(--ink-soft); max-width: 40em; }
+.foot__hand { font-family: var(--hand); font-size: 22px; color: var(--violet); }
+
+/* --------------------------------------------------------------- helpers */
+.center { text-align: center; }
+.mt-0 { margin-top: 0; }
+.tag-dot { display: inline-block; width: 11px; height: 11px; border-radius: 50%; vertical-align: middle; margin-right: 5px; border: 1.5px solid var(--ink); }
+
+/* ----------------------------------------------------------- responsive */
+@media (max-width: 880px) {
+  .hero__grid { grid-template-columns: 1fr; }
+  .hero__stage { max-width: 460px; }
+  .lab__body { grid-template-columns: 1fr; }
+  .lab__stage { border-right: none; border-bottom: 2.5px solid var(--ink); }
+  .comic { grid-template-columns: 1fr; }
+}
+@media (max-width: 560px) {
+  .nav__link { display: none; }
+  .hero { padding: 32px 0 18px; }
+  .foot__in { flex-direction: column; align-items: flex-start; }
+}
+
+</style>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%23F2B134' stroke='%23211E1B' stroke-width='2'/%3E%3Ccircle cx='12' cy='14' r='2' fill='%23211E1B'/%3E%3Ccircle cx='20' cy='14' r='2' fill='%23211E1B'/%3E%3Cpath d='M11 20 q5 5 10 0' stroke='%23211E1B' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E" />
 </head>
 <body>
@@ -68,15 +387,2169 @@
   </footer>
 
   <!-- load order: lib -> shared -> data -> sims -> app (router last) -->
-  <script src="vendor/rough.js"></script>
-  <script src="js/draw.js"></script>
-  <script src="js/ui.js"></script>
-  <script src="js/data.js"></script>
-  <script src="js/sims/segregation.js"></script>
-  <script src="js/sims/commons.js"></script>
-  <script src="js/sims/cooperation.js"></script>
-  <script src="js/sims/median-voter.js"></script>
-  <script src="js/sims/norm-cascade.js"></script>
-  <script src="js/app.js"></script>
+  <!-- vendor/rough.js -->
+<script>
+var rough=function(){"use strict";function t(t,e,s){if(t&&t.length){const[n,o]=e,a=Math.PI/180*s,h=Math.cos(a),r=Math.sin(a);for(const e of t){const[t,s]=e;e[0]=(t-n)*h-(s-o)*r+n,e[1]=(t-n)*r+(s-o)*h+o}}}function e(t,e){return t[0]===e[0]&&t[1]===e[1]}function s(s,n,o,a=1){const h=o,r=Math.max(n,.1),i=s[0]&&s[0][0]&&"number"==typeof s[0][0]?[s]:s,c=[0,0];if(h)for(const e of i)t(e,c,h);const l=function(t,s,n){const o=[];for(const s of t){const t=[...s];e(t[0],t[t.length-1])||t.push([t[0][0],t[0][1]]),t.length>2&&o.push(t)}const a=[];s=Math.max(s,.1);const h=[];for(const t of o)for(let e=0;e<t.length-1;e++){const s=t[e],n=t[e+1];if(s[1]!==n[1]){const t=Math.min(s[1],n[1]);h.push({ymin:t,ymax:Math.max(s[1],n[1]),x:t===s[1]?s[0]:n[0],islope:(n[0]-s[0])/(n[1]-s[1])})}}if(h.sort(((t,e)=>t.ymin<e.ymin?-1:t.ymin>e.ymin?1:t.x<e.x?-1:t.x>e.x?1:t.ymax===e.ymax?0:(t.ymax-e.ymax)/Math.abs(t.ymax-e.ymax))),!h.length)return a;let r=[],i=h[0].ymin,c=0;for(;r.length||h.length;){if(h.length){let t=-1;for(let e=0;e<h.length&&!(h[e].ymin>i);e++)t=e;h.splice(0,t+1).forEach((t=>{r.push({s:i,edge:t})}))}if(r=r.filter((t=>!(t.edge.ymax<=i))),r.sort(((t,e)=>t.edge.x===e.edge.x?0:(t.edge.x-e.edge.x)/Math.abs(t.edge.x-e.edge.x))),(1!==n||c%s==0)&&r.length>1)for(let t=0;t<r.length;t+=2){const e=t+1;if(e>=r.length)break;const s=r[t].edge,n=r[e].edge;a.push([[Math.round(s.x),i],[Math.round(n.x),i]])}i+=n,r.forEach((t=>{t.edge.x=t.edge.x+n*t.edge.islope})),c++}return a}(i,r,a);if(h){for(const e of i)t(e,c,-h);!function(e,s,n){const o=[];e.forEach((t=>o.push(...t))),t(o,s,n)}(l,c,-h)}return l}function n(t,e){var n;const o=e.hachureAngle+90;let a=e.hachureGap;a<0&&(a=4*e.strokeWidth),a=Math.round(Math.max(a,.1));let h=1;return e.roughness>=1&&((null===(n=e.randomizer)||void 0===n?void 0:n.next())||Math.random())>.7&&(h=a),s(t,a,o,h||1)}class o{constructor(t){this.helper=t}fillPolygons(t,e){return this._fillPolygons(t,e)}_fillPolygons(t,e){const s=n(t,e);return{type:"fillSketch",ops:this.renderLines(s,e)}}renderLines(t,e){const s=[];for(const n of t)s.push(...this.helper.doubleLineOps(n[0][0],n[0][1],n[1][0],n[1][1],e));return s}}function a(t){const e=t[0],s=t[1];return Math.sqrt(Math.pow(e[0]-s[0],2)+Math.pow(e[1]-s[1],2))}class h extends o{fillPolygons(t,e){let s=e.hachureGap;s<0&&(s=4*e.strokeWidth),s=Math.max(s,.1);const o=n(t,Object.assign({},e,{hachureGap:s})),h=Math.PI/180*e.hachureAngle,r=[],i=.5*s*Math.cos(h),c=.5*s*Math.sin(h);for(const[t,e]of o)a([t,e])&&r.push([[t[0]-i,t[1]+c],[...e]],[[t[0]+i,t[1]-c],[...e]]);return{type:"fillSketch",ops:this.renderLines(r,e)}}}class r extends o{fillPolygons(t,e){const s=this._fillPolygons(t,e),n=Object.assign({},e,{hachureAngle:e.hachureAngle+90}),o=this._fillPolygons(t,n);return s.ops=s.ops.concat(o.ops),s}}class i{constructor(t){this.helper=t}fillPolygons(t,e){const s=n(t,e=Object.assign({},e,{hachureAngle:0}));return this.dotsOnLines(s,e)}dotsOnLines(t,e){const s=[];let n=e.hachureGap;n<0&&(n=4*e.strokeWidth),n=Math.max(n,.1);let o=e.fillWeight;o<0&&(o=e.strokeWidth/2);const h=n/4;for(const r of t){const t=a(r),i=t/n,c=Math.ceil(i)-1,l=t-c*n,u=(r[0][0]+r[1][0])/2-n/4,p=Math.min(r[0][1],r[1][1]);for(let t=0;t<c;t++){const a=p+l+t*n,r=u-h+2*Math.random()*h,i=a-h+2*Math.random()*h,c=this.helper.ellipse(r,i,o,o,e);s.push(...c.ops)}}return{type:"fillSketch",ops:s}}}class c{constructor(t){this.helper=t}fillPolygons(t,e){const s=n(t,e);return{type:"fillSketch",ops:this.dashedLine(s,e)}}dashedLine(t,e){const s=e.dashOffset<0?e.hachureGap<0?4*e.strokeWidth:e.hachureGap:e.dashOffset,n=e.dashGap<0?e.hachureGap<0?4*e.strokeWidth:e.hachureGap:e.dashGap,o=[];return t.forEach((t=>{const h=a(t),r=Math.floor(h/(s+n)),i=(h+n-r*(s+n))/2;let c=t[0],l=t[1];c[0]>l[0]&&(c=t[1],l=t[0]);const u=Math.atan((l[1]-c[1])/(l[0]-c[0]));for(let t=0;t<r;t++){const a=t*(s+n),h=a+s,r=[c[0]+a*Math.cos(u)+i*Math.cos(u),c[1]+a*Math.sin(u)+i*Math.sin(u)],l=[c[0]+h*Math.cos(u)+i*Math.cos(u),c[1]+h*Math.sin(u)+i*Math.sin(u)];o.push(...this.helper.doubleLineOps(r[0],r[1],l[0],l[1],e))}})),o}}class l{constructor(t){this.helper=t}fillPolygons(t,e){const s=e.hachureGap<0?4*e.strokeWidth:e.hachureGap,o=e.zigzagOffset<0?s:e.zigzagOffset,a=n(t,e=Object.assign({},e,{hachureGap:s+o}));return{type:"fillSketch",ops:this.zigzagLines(a,o,e)}}zigzagLines(t,e,s){const n=[];return t.forEach((t=>{const o=a(t),h=Math.round(o/(2*e));let r=t[0],i=t[1];r[0]>i[0]&&(r=t[1],i=t[0]);const c=Math.atan((i[1]-r[1])/(i[0]-r[0]));for(let t=0;t<h;t++){const o=2*t*e,a=2*(t+1)*e,h=Math.sqrt(2*Math.pow(e,2)),i=[r[0]+o*Math.cos(c),r[1]+o*Math.sin(c)],l=[r[0]+a*Math.cos(c),r[1]+a*Math.sin(c)],u=[i[0]+h*Math.cos(c+Math.PI/4),i[1]+h*Math.sin(c+Math.PI/4)];n.push(...this.helper.doubleLineOps(i[0],i[1],u[0],u[1],s),...this.helper.doubleLineOps(u[0],u[1],l[0],l[1],s))}})),n}}const u={};class p{constructor(t){this.seed=t}next(){return this.seed?(2**31-1&(this.seed=Math.imul(48271,this.seed)))/2**31:Math.random()}}const f=0,d=1,g=2,M={A:7,a:7,C:6,c:6,H:1,h:1,L:2,l:2,M:2,m:2,Q:4,q:4,S:4,s:4,T:2,t:2,V:1,v:1,Z:0,z:0};function k(t,e){return t.type===e}function b(t){const e=[],s=function(t){const e=new Array;for(;""!==t;)if(t.match(/^([ \t\r\n,]+)/))t=t.substr(RegExp.$1.length);else if(t.match(/^([aAcChHlLmMqQsStTvVzZ])/))e[e.length]={type:f,text:RegExp.$1},t=t.substr(RegExp.$1.length);else{if(!t.match(/^(([-+]?[0-9]+(\.[0-9]*)?|[-+]?\.[0-9]+)([eE][-+]?[0-9]+)?)/))return[];e[e.length]={type:d,text:`${parseFloat(RegExp.$1)}`},t=t.substr(RegExp.$1.length)}return e[e.length]={type:g,text:""},e}(t);let n="BOD",o=0,a=s[o];for(;!k(a,g);){let h=0;const r=[];if("BOD"===n){if("M"!==a.text&&"m"!==a.text)return b("M0,0"+t);o++,h=M[a.text],n=a.text}else k(a,d)?h=M[n]:(o++,h=M[a.text],n=a.text);if(!(o+h<s.length))throw new Error("Path data ended short");for(let t=o;t<o+h;t++){const e=s[t];if(!k(e,d))throw new Error("Param not a number: "+n+","+e.text);r[r.length]=+e.text}if("number"!=typeof M[n])throw new Error("Bad segment: "+n);{const t={key:n,data:r};e.push(t),o+=h,a=s[o],"M"===n&&(n="L"),"m"===n&&(n="l")}}return e}function y(t){let e=0,s=0,n=0,o=0;const a=[];for(const{key:h,data:r}of t)switch(h){case"M":a.push({key:"M",data:[...r]}),[e,s]=r,[n,o]=r;break;case"m":e+=r[0],s+=r[1],a.push({key:"M",data:[e,s]}),n=e,o=s;break;case"L":a.push({key:"L",data:[...r]}),[e,s]=r;break;case"l":e+=r[0],s+=r[1],a.push({key:"L",data:[e,s]});break;case"C":a.push({key:"C",data:[...r]}),e=r[4],s=r[5];break;case"c":{const t=r.map(((t,n)=>n%2?t+s:t+e));a.push({key:"C",data:t}),e=t[4],s=t[5];break}case"Q":a.push({key:"Q",data:[...r]}),e=r[2],s=r[3];break;case"q":{const t=r.map(((t,n)=>n%2?t+s:t+e));a.push({key:"Q",data:t}),e=t[2],s=t[3];break}case"A":a.push({key:"A",data:[...r]}),e=r[5],s=r[6];break;case"a":e+=r[5],s+=r[6],a.push({key:"A",data:[r[0],r[1],r[2],r[3],r[4],e,s]});break;case"H":a.push({key:"H",data:[...r]}),e=r[0];break;case"h":e+=r[0],a.push({key:"H",data:[e]});break;case"V":a.push({key:"V",data:[...r]}),s=r[0];break;case"v":s+=r[0],a.push({key:"V",data:[s]});break;case"S":a.push({key:"S",data:[...r]}),e=r[2],s=r[3];break;case"s":{const t=r.map(((t,n)=>n%2?t+s:t+e));a.push({key:"S",data:t}),e=t[2],s=t[3];break}case"T":a.push({key:"T",data:[...r]}),e=r[0],s=r[1];break;case"t":e+=r[0],s+=r[1],a.push({key:"T",data:[e,s]});break;case"Z":case"z":a.push({key:"Z",data:[]}),e=n,s=o}return a}function m(t){const e=[];let s="",n=0,o=0,a=0,h=0,r=0,i=0;for(const{key:c,data:l}of t){switch(c){case"M":e.push({key:"M",data:[...l]}),[n,o]=l,[a,h]=l;break;case"C":e.push({key:"C",data:[...l]}),n=l[4],o=l[5],r=l[2],i=l[3];break;case"L":e.push({key:"L",data:[...l]}),[n,o]=l;break;case"H":n=l[0],e.push({key:"L",data:[n,o]});break;case"V":o=l[0],e.push({key:"L",data:[n,o]});break;case"S":{let t=0,a=0;"C"===s||"S"===s?(t=n+(n-r),a=o+(o-i)):(t=n,a=o),e.push({key:"C",data:[t,a,...l]}),r=l[0],i=l[1],n=l[2],o=l[3];break}case"T":{const[t,a]=l;let h=0,c=0;"Q"===s||"T"===s?(h=n+(n-r),c=o+(o-i)):(h=n,c=o);const u=n+2*(h-n)/3,p=o+2*(c-o)/3,f=t+2*(h-t)/3,d=a+2*(c-a)/3;e.push({key:"C",data:[u,p,f,d,t,a]}),r=h,i=c,n=t,o=a;break}case"Q":{const[t,s,a,h]=l,c=n+2*(t-n)/3,u=o+2*(s-o)/3,p=a+2*(t-a)/3,f=h+2*(s-h)/3;e.push({key:"C",data:[c,u,p,f,a,h]}),r=t,i=s,n=a,o=h;break}case"A":{const t=Math.abs(l[0]),s=Math.abs(l[1]),a=l[2],h=l[3],r=l[4],i=l[5],c=l[6];if(0===t||0===s)e.push({key:"C",data:[n,o,i,c,i,c]}),n=i,o=c;else if(n!==i||o!==c){x(n,o,i,c,t,s,a,h,r).forEach((function(t){e.push({key:"C",data:t})})),n=i,o=c}break}case"Z":e.push({key:"Z",data:[]}),n=a,o=h}s=c}return e}function w(t,e,s){return[t*Math.cos(s)-e*Math.sin(s),t*Math.sin(s)+e*Math.cos(s)]}function x(t,e,s,n,o,a,h,r,i,c){const l=(u=h,Math.PI*u/180);var u;let p=[],f=0,d=0,g=0,M=0;if(c)[f,d,g,M]=c;else{[t,e]=w(t,e,-l),[s,n]=w(s,n,-l);const h=(t-s)/2,c=(e-n)/2;let u=h*h/(o*o)+c*c/(a*a);u>1&&(u=Math.sqrt(u),o*=u,a*=u);const p=o*o,k=a*a,b=p*k-p*c*c-k*h*h,y=p*c*c+k*h*h,m=(r===i?-1:1)*Math.sqrt(Math.abs(b/y));g=m*o*c/a+(t+s)/2,M=m*-a*h/o+(e+n)/2,f=Math.asin(parseFloat(((e-M)/a).toFixed(9))),d=Math.asin(parseFloat(((n-M)/a).toFixed(9))),t<g&&(f=Math.PI-f),s<g&&(d=Math.PI-d),f<0&&(f=2*Math.PI+f),d<0&&(d=2*Math.PI+d),i&&f>d&&(f-=2*Math.PI),!i&&d>f&&(d-=2*Math.PI)}let k=d-f;if(Math.abs(k)>120*Math.PI/180){const t=d,e=s,r=n;d=i&&d>f?f+120*Math.PI/180*1:f+120*Math.PI/180*-1,p=x(s=g+o*Math.cos(d),n=M+a*Math.sin(d),e,r,o,a,h,0,i,[d,t,g,M])}k=d-f;const b=Math.cos(f),y=Math.sin(f),m=Math.cos(d),P=Math.sin(d),v=Math.tan(k/4),S=4/3*o*v,O=4/3*a*v,L=[t,e],T=[t+S*y,e-O*b],D=[s+S*P,n-O*m],A=[s,n];if(T[0]=2*L[0]-T[0],T[1]=2*L[1]-T[1],c)return[T,D,A].concat(p);{p=[T,D,A].concat(p);const t=[];for(let e=0;e<p.length;e+=3){const s=w(p[e][0],p[e][1],l),n=w(p[e+1][0],p[e+1][1],l),o=w(p[e+2][0],p[e+2][1],l);t.push([s[0],s[1],n[0],n[1],o[0],o[1]])}return t}}const P={randOffset:function(t,e){return G(t,e)},randOffsetWithRange:function(t,e,s){return E(t,e,s)},ellipse:function(t,e,s,n,o){const a=T(s,n,o);return D(t,e,o,a).opset},doubleLineOps:function(t,e,s,n,o){return $(t,e,s,n,o,!0)}};function v(t,e,s,n,o){return{type:"path",ops:$(t,e,s,n,o)}}function S(t,e,s){const n=(t||[]).length;if(n>2){const o=[];for(let e=0;e<n-1;e++)o.push(...$(t[e][0],t[e][1],t[e+1][0],t[e+1][1],s));return e&&o.push(...$(t[n-1][0],t[n-1][1],t[0][0],t[0][1],s)),{type:"path",ops:o}}return 2===n?v(t[0][0],t[0][1],t[1][0],t[1][1],s):{type:"path",ops:[]}}function O(t,e,s,n,o){return function(t,e){return S(t,!0,e)}([[t,e],[t+s,e],[t+s,e+n],[t,e+n]],o)}function L(t,e){if(t.length){const s="number"==typeof t[0][0]?[t]:t,n=j(s[0],1*(1+.2*e.roughness),e),o=e.disableMultiStroke?[]:j(s[0],1.5*(1+.22*e.roughness),z(e));for(let t=1;t<s.length;t++){const a=s[t];if(a.length){const t=j(a,1*(1+.2*e.roughness),e),s=e.disableMultiStroke?[]:j(a,1.5*(1+.22*e.roughness),z(e));for(const e of t)"move"!==e.op&&n.push(e);for(const t of s)"move"!==t.op&&o.push(t)}}return{type:"path",ops:n.concat(o)}}return{type:"path",ops:[]}}function T(t,e,s){const n=Math.sqrt(2*Math.PI*Math.sqrt((Math.pow(t/2,2)+Math.pow(e/2,2))/2)),o=Math.ceil(Math.max(s.curveStepCount,s.curveStepCount/Math.sqrt(200)*n)),a=2*Math.PI/o;let h=Math.abs(t/2),r=Math.abs(e/2);const i=1-s.curveFitting;return h+=G(h*i,s),r+=G(r*i,s),{increment:a,rx:h,ry:r}}function D(t,e,s,n){const[o,a]=F(n.increment,t,e,n.rx,n.ry,1,n.increment*E(.1,E(.4,1,s),s),s);let h=q(o,null,s);if(!s.disableMultiStroke&&0!==s.roughness){const[o]=F(n.increment,t,e,n.rx,n.ry,1.5,0,s),a=q(o,null,s);h=h.concat(a)}return{estimatedPoints:a,opset:{type:"path",ops:h}}}function A(t,e,s,n,o,a,h,r,i){const c=t,l=e;let u=Math.abs(s/2),p=Math.abs(n/2);u+=G(.01*u,i),p+=G(.01*p,i);let f=o,d=a;for(;f<0;)f+=2*Math.PI,d+=2*Math.PI;d-f>2*Math.PI&&(f=0,d=2*Math.PI);const g=2*Math.PI/i.curveStepCount,M=Math.min(g/2,(d-f)/2),k=V(M,c,l,u,p,f,d,1,i);if(!i.disableMultiStroke){const t=V(M,c,l,u,p,f,d,1.5,i);k.push(...t)}return h&&(r?k.push(...$(c,l,c+u*Math.cos(f),l+p*Math.sin(f),i),...$(c,l,c+u*Math.cos(d),l+p*Math.sin(d),i)):k.push({op:"lineTo",data:[c,l]},{op:"lineTo",data:[c+u*Math.cos(f),l+p*Math.sin(f)]})),{type:"path",ops:k}}function _(t,e){const s=m(y(b(t))),n=[];let o=[0,0],a=[0,0];for(const{key:t,data:h}of s)switch(t){case"M":a=[h[0],h[1]],o=[h[0],h[1]];break;case"L":n.push(...$(a[0],a[1],h[0],h[1],e)),a=[h[0],h[1]];break;case"C":{const[t,s,o,r,i,c]=h;n.push(...Z(t,s,o,r,i,c,a,e)),a=[i,c];break}case"Z":n.push(...$(a[0],a[1],o[0],o[1],e)),a=[o[0],o[1]]}return{type:"path",ops:n}}function I(t,e){const s=[];for(const n of t)if(n.length){const t=e.maxRandomnessOffset||0,o=n.length;if(o>2){s.push({op:"move",data:[n[0][0]+G(t,e),n[0][1]+G(t,e)]});for(let a=1;a<o;a++)s.push({op:"lineTo",data:[n[a][0]+G(t,e),n[a][1]+G(t,e)]})}}return{type:"fillPath",ops:s}}function C(t,e){return function(t,e){let s=t.fillStyle||"hachure";if(!u[s])switch(s){case"zigzag":u[s]||(u[s]=new h(e));break;case"cross-hatch":u[s]||(u[s]=new r(e));break;case"dots":u[s]||(u[s]=new i(e));break;case"dashed":u[s]||(u[s]=new c(e));break;case"zigzag-line":u[s]||(u[s]=new l(e));break;default:s="hachure",u[s]||(u[s]=new o(e))}return u[s]}(e,P).fillPolygons(t,e)}function z(t){const e=Object.assign({},t);return e.randomizer=void 0,t.seed&&(e.seed=t.seed+1),e}function W(t){return t.randomizer||(t.randomizer=new p(t.seed||0)),t.randomizer.next()}function E(t,e,s,n=1){return s.roughness*n*(W(s)*(e-t)+t)}function G(t,e,s=1){return E(-t,t,e,s)}function $(t,e,s,n,o,a=!1){const h=a?o.disableMultiStrokeFill:o.disableMultiStroke,r=R(t,e,s,n,o,!0,!1);if(h)return r;const i=R(t,e,s,n,o,!0,!0);return r.concat(i)}function R(t,e,s,n,o,a,h){const r=Math.pow(t-s,2)+Math.pow(e-n,2),i=Math.sqrt(r);let c=1;c=i<200?1:i>500?.4:-.0016668*i+1.233334;let l=o.maxRandomnessOffset||0;l*l*100>r&&(l=i/10);const u=l/2,p=.2+.2*W(o);let f=o.bowing*o.maxRandomnessOffset*(n-e)/200,d=o.bowing*o.maxRandomnessOffset*(t-s)/200;f=G(f,o,c),d=G(d,o,c);const g=[],M=()=>G(u,o,c),k=()=>G(l,o,c),b=o.preserveVertices;return a&&(h?g.push({op:"move",data:[t+(b?0:M()),e+(b?0:M())]}):g.push({op:"move",data:[t+(b?0:G(l,o,c)),e+(b?0:G(l,o,c))]})),h?g.push({op:"bcurveTo",data:[f+t+(s-t)*p+M(),d+e+(n-e)*p+M(),f+t+2*(s-t)*p+M(),d+e+2*(n-e)*p+M(),s+(b?0:M()),n+(b?0:M())]}):g.push({op:"bcurveTo",data:[f+t+(s-t)*p+k(),d+e+(n-e)*p+k(),f+t+2*(s-t)*p+k(),d+e+2*(n-e)*p+k(),s+(b?0:k()),n+(b?0:k())]}),g}function j(t,e,s){if(!t.length)return[];const n=[];n.push([t[0][0]+G(e,s),t[0][1]+G(e,s)]),n.push([t[0][0]+G(e,s),t[0][1]+G(e,s)]);for(let o=1;o<t.length;o++)n.push([t[o][0]+G(e,s),t[o][1]+G(e,s)]),o===t.length-1&&n.push([t[o][0]+G(e,s),t[o][1]+G(e,s)]);return q(n,null,s)}function q(t,e,s){const n=t.length,o=[];if(n>3){const a=[],h=1-s.curveTightness;o.push({op:"move",data:[t[1][0],t[1][1]]});for(let e=1;e+2<n;e++){const s=t[e];a[0]=[s[0],s[1]],a[1]=[s[0]+(h*t[e+1][0]-h*t[e-1][0])/6,s[1]+(h*t[e+1][1]-h*t[e-1][1])/6],a[2]=[t[e+1][0]+(h*t[e][0]-h*t[e+2][0])/6,t[e+1][1]+(h*t[e][1]-h*t[e+2][1])/6],a[3]=[t[e+1][0],t[e+1][1]],o.push({op:"bcurveTo",data:[a[1][0],a[1][1],a[2][0],a[2][1],a[3][0],a[3][1]]})}if(e&&2===e.length){const t=s.maxRandomnessOffset;o.push({op:"lineTo",data:[e[0]+G(t,s),e[1]+G(t,s)]})}}else 3===n?(o.push({op:"move",data:[t[1][0],t[1][1]]}),o.push({op:"bcurveTo",data:[t[1][0],t[1][1],t[2][0],t[2][1],t[2][0],t[2][1]]})):2===n&&o.push(...R(t[0][0],t[0][1],t[1][0],t[1][1],s,!0,!0));return o}function F(t,e,s,n,o,a,h,r){const i=[],c=[];if(0===r.roughness){t/=4,c.push([e+n*Math.cos(-t),s+o*Math.sin(-t)]);for(let a=0;a<=2*Math.PI;a+=t){const t=[e+n*Math.cos(a),s+o*Math.sin(a)];i.push(t),c.push(t)}c.push([e+n*Math.cos(0),s+o*Math.sin(0)]),c.push([e+n*Math.cos(t),s+o*Math.sin(t)])}else{const l=G(.5,r)-Math.PI/2;c.push([G(a,r)+e+.9*n*Math.cos(l-t),G(a,r)+s+.9*o*Math.sin(l-t)]);const u=2*Math.PI+l-.01;for(let h=l;h<u;h+=t){const t=[G(a,r)+e+n*Math.cos(h),G(a,r)+s+o*Math.sin(h)];i.push(t),c.push(t)}c.push([G(a,r)+e+n*Math.cos(l+2*Math.PI+.5*h),G(a,r)+s+o*Math.sin(l+2*Math.PI+.5*h)]),c.push([G(a,r)+e+.98*n*Math.cos(l+h),G(a,r)+s+.98*o*Math.sin(l+h)]),c.push([G(a,r)+e+.9*n*Math.cos(l+.5*h),G(a,r)+s+.9*o*Math.sin(l+.5*h)])}return[c,i]}function V(t,e,s,n,o,a,h,r,i){const c=a+G(.1,i),l=[];l.push([G(r,i)+e+.9*n*Math.cos(c-t),G(r,i)+s+.9*o*Math.sin(c-t)]);for(let a=c;a<=h;a+=t)l.push([G(r,i)+e+n*Math.cos(a),G(r,i)+s+o*Math.sin(a)]);return l.push([e+n*Math.cos(h),s+o*Math.sin(h)]),l.push([e+n*Math.cos(h),s+o*Math.sin(h)]),q(l,null,i)}function Z(t,e,s,n,o,a,h,r){const i=[],c=[r.maxRandomnessOffset||1,(r.maxRandomnessOffset||1)+.3];let l=[0,0];const u=r.disableMultiStroke?1:2,p=r.preserveVertices;for(let f=0;f<u;f++)0===f?i.push({op:"move",data:[h[0],h[1]]}):i.push({op:"move",data:[h[0]+(p?0:G(c[0],r)),h[1]+(p?0:G(c[0],r))]}),l=p?[o,a]:[o+G(c[f],r),a+G(c[f],r)],i.push({op:"bcurveTo",data:[t+G(c[f],r),e+G(c[f],r),s+G(c[f],r),n+G(c[f],r),l[0],l[1]]});return i}function Q(t){return[...t]}function H(t,e=0){const s=t.length;if(s<3)throw new Error("A curve must have at least three points.");const n=[];if(3===s)n.push(Q(t[0]),Q(t[1]),Q(t[2]),Q(t[2]));else{const s=[];s.push(t[0],t[0]);for(let e=1;e<t.length;e++)s.push(t[e]),e===t.length-1&&s.push(t[e]);const o=[],a=1-e;n.push(Q(s[0]));for(let t=1;t+2<s.length;t++){const e=s[t];o[0]=[e[0],e[1]],o[1]=[e[0]+(a*s[t+1][0]-a*s[t-1][0])/6,e[1]+(a*s[t+1][1]-a*s[t-1][1])/6],o[2]=[s[t+1][0]+(a*s[t][0]-a*s[t+2][0])/6,s[t+1][1]+(a*s[t][1]-a*s[t+2][1])/6],o[3]=[s[t+1][0],s[t+1][1]],n.push(o[1],o[2],o[3])}}return n}function N(t,e){return Math.pow(t[0]-e[0],2)+Math.pow(t[1]-e[1],2)}function B(t,e,s){const n=N(e,s);if(0===n)return N(t,e);let o=((t[0]-e[0])*(s[0]-e[0])+(t[1]-e[1])*(s[1]-e[1]))/n;return o=Math.max(0,Math.min(1,o)),N(t,J(e,s,o))}function J(t,e,s){return[t[0]+(e[0]-t[0])*s,t[1]+(e[1]-t[1])*s]}function K(t,e,s,n){const o=n||[];if(function(t,e){const s=t[e+0],n=t[e+1],o=t[e+2],a=t[e+3];let h=3*n[0]-2*s[0]-a[0];h*=h;let r=3*n[1]-2*s[1]-a[1];r*=r;let i=3*o[0]-2*a[0]-s[0];i*=i;let c=3*o[1]-2*a[1]-s[1];return c*=c,h<i&&(h=i),r<c&&(r=c),h+r}(t,e)<s){const s=t[e+0];if(o.length){(a=o[o.length-1],h=s,Math.sqrt(N(a,h)))>1&&o.push(s)}else o.push(s);o.push(t[e+3])}else{const n=.5,a=t[e+0],h=t[e+1],r=t[e+2],i=t[e+3],c=J(a,h,n),l=J(h,r,n),u=J(r,i,n),p=J(c,l,n),f=J(l,u,n),d=J(p,f,n);K([a,c,p,d],0,s,o),K([d,f,u,i],0,s,o)}var a,h;return o}function U(t,e){return X(t,0,t.length,e)}function X(t,e,s,n,o){const a=o||[],h=t[e],r=t[s-1];let i=0,c=1;for(let n=e+1;n<s-1;++n){const e=B(t[n],h,r);e>i&&(i=e,c=n)}return Math.sqrt(i)>n?(X(t,e,c+1,n,a),X(t,c,s,n,a)):(a.length||a.push(h),a.push(r)),a}function Y(t,e=.15,s){const n=[],o=(t.length-1)/3;for(let s=0;s<o;s++){K(t,3*s,e,n)}return s&&s>0?X(n,0,n.length,s):n}const tt="none";class et{constructor(t){this.defaultOptions={maxRandomnessOffset:2,roughness:1,bowing:1,stroke:"#000",strokeWidth:1,curveTightness:0,curveFitting:.95,curveStepCount:9,fillStyle:"hachure",fillWeight:-1,hachureAngle:-41,hachureGap:-1,dashOffset:-1,dashGap:-1,zigzagOffset:-1,seed:0,disableMultiStroke:!1,disableMultiStrokeFill:!1,preserveVertices:!1,fillShapeRoughnessGain:.8},this.config=t||{},this.config.options&&(this.defaultOptions=this._o(this.config.options))}static newSeed(){return Math.floor(Math.random()*2**31)}_o(t){return t?Object.assign({},this.defaultOptions,t):this.defaultOptions}_d(t,e,s){return{shape:t,sets:e||[],options:s||this.defaultOptions}}line(t,e,s,n,o){const a=this._o(o);return this._d("line",[v(t,e,s,n,a)],a)}rectangle(t,e,s,n,o){const a=this._o(o),h=[],r=O(t,e,s,n,a);if(a.fill){const o=[[t,e],[t+s,e],[t+s,e+n],[t,e+n]];"solid"===a.fillStyle?h.push(I([o],a)):h.push(C([o],a))}return a.stroke!==tt&&h.push(r),this._d("rectangle",h,a)}ellipse(t,e,s,n,o){const a=this._o(o),h=[],r=T(s,n,a),i=D(t,e,a,r);if(a.fill)if("solid"===a.fillStyle){const s=D(t,e,a,r).opset;s.type="fillPath",h.push(s)}else h.push(C([i.estimatedPoints],a));return a.stroke!==tt&&h.push(i.opset),this._d("ellipse",h,a)}circle(t,e,s,n){const o=this.ellipse(t,e,s,s,n);return o.shape="circle",o}linearPath(t,e){const s=this._o(e);return this._d("linearPath",[S(t,!1,s)],s)}arc(t,e,s,n,o,a,h=!1,r){const i=this._o(r),c=[],l=A(t,e,s,n,o,a,h,!0,i);if(h&&i.fill)if("solid"===i.fillStyle){const h=Object.assign({},i);h.disableMultiStroke=!0;const r=A(t,e,s,n,o,a,!0,!1,h);r.type="fillPath",c.push(r)}else c.push(function(t,e,s,n,o,a,h){const r=t,i=e;let c=Math.abs(s/2),l=Math.abs(n/2);c+=G(.01*c,h),l+=G(.01*l,h);let u=o,p=a;for(;u<0;)u+=2*Math.PI,p+=2*Math.PI;p-u>2*Math.PI&&(u=0,p=2*Math.PI);const f=(p-u)/h.curveStepCount,d=[];for(let t=u;t<=p;t+=f)d.push([r+c*Math.cos(t),i+l*Math.sin(t)]);return d.push([r+c*Math.cos(p),i+l*Math.sin(p)]),d.push([r,i]),C([d],h)}(t,e,s,n,o,a,i));return i.stroke!==tt&&c.push(l),this._d("arc",c,i)}curve(t,e){const s=this._o(e),n=[],o=L(t,s);if(s.fill&&s.fill!==tt)if("solid"===s.fillStyle){const e=L(t,Object.assign(Object.assign({},s),{disableMultiStroke:!0,roughness:s.roughness?s.roughness+s.fillShapeRoughnessGain:0}));n.push({type:"fillPath",ops:this._mergedShape(e.ops)})}else{const e=[],o=t;if(o.length){const t="number"==typeof o[0][0]?[o]:o;for(const n of t)n.length<3?e.push(...n):3===n.length?e.push(...Y(H([n[0],n[0],n[1],n[2]]),10,(1+s.roughness)/2)):e.push(...Y(H(n),10,(1+s.roughness)/2))}e.length&&n.push(C([e],s))}return s.stroke!==tt&&n.push(o),this._d("curve",n,s)}polygon(t,e){const s=this._o(e),n=[],o=S(t,!0,s);return s.fill&&("solid"===s.fillStyle?n.push(I([t],s)):n.push(C([t],s))),s.stroke!==tt&&n.push(o),this._d("polygon",n,s)}path(t,e){const s=this._o(e),n=[];if(!t)return this._d("path",n,s);t=(t||"").replace(/\n/g," ").replace(/(-\s)/g,"-").replace("/(ss)/g"," ");const o=s.fill&&"transparent"!==s.fill&&s.fill!==tt,a=s.stroke!==tt,h=!!(s.simplification&&s.simplification<1),r=function(t,e,s){const n=m(y(b(t))),o=[];let a=[],h=[0,0],r=[];const i=()=>{r.length>=4&&a.push(...Y(r,e)),r=[]},c=()=>{i(),a.length&&(o.push(a),a=[])};for(const{key:t,data:e}of n)switch(t){case"M":c(),h=[e[0],e[1]],a.push(h);break;case"L":i(),a.push([e[0],e[1]]);break;case"C":if(!r.length){const t=a.length?a[a.length-1]:h;r.push([t[0],t[1]])}r.push([e[0],e[1]]),r.push([e[2],e[3]]),r.push([e[4],e[5]]);break;case"Z":i(),a.push([h[0],h[1]])}if(c(),!s)return o;const l=[];for(const t of o){const e=U(t,s);e.length&&l.push(e)}return l}(t,1,h?4-4*(s.simplification||1):(1+s.roughness)/2),i=_(t,s);if(o)if("solid"===s.fillStyle)if(1===r.length){const e=_(t,Object.assign(Object.assign({},s),{disableMultiStroke:!0,roughness:s.roughness?s.roughness+s.fillShapeRoughnessGain:0}));n.push({type:"fillPath",ops:this._mergedShape(e.ops)})}else n.push(I(r,s));else n.push(C(r,s));return a&&(h?r.forEach((t=>{n.push(S(t,!1,s))})):n.push(i)),this._d("path",n,s)}opsToPath(t,e){let s="";for(const n of t.ops){const t="number"==typeof e&&e>=0?n.data.map((t=>+t.toFixed(e))):n.data;switch(n.op){case"move":s+=`M${t[0]} ${t[1]} `;break;case"bcurveTo":s+=`C${t[0]} ${t[1]}, ${t[2]} ${t[3]}, ${t[4]} ${t[5]} `;break;case"lineTo":s+=`L${t[0]} ${t[1]} `}}return s.trim()}toPaths(t){const e=t.sets||[],s=t.options||this.defaultOptions,n=[];for(const t of e){let e=null;switch(t.type){case"path":e={d:this.opsToPath(t),stroke:s.stroke,strokeWidth:s.strokeWidth,fill:tt};break;case"fillPath":e={d:this.opsToPath(t),stroke:tt,strokeWidth:0,fill:s.fill||tt};break;case"fillSketch":e=this.fillSketch(t,s)}e&&n.push(e)}return n}fillSketch(t,e){let s=e.fillWeight;return s<0&&(s=e.strokeWidth/2),{d:this.opsToPath(t),stroke:e.fill||tt,strokeWidth:s,fill:tt}}_mergedShape(t){return t.filter(((t,e)=>0===e||"move"!==t.op))}}class st{constructor(t,e){this.canvas=t,this.ctx=this.canvas.getContext("2d"),this.gen=new et(e)}draw(t){const e=t.sets||[],s=t.options||this.getDefaultOptions(),n=this.ctx,o=t.options.fixedDecimalPlaceDigits;for(const a of e)switch(a.type){case"path":n.save(),n.strokeStyle="none"===s.stroke?"transparent":s.stroke,n.lineWidth=s.strokeWidth,s.strokeLineDash&&n.setLineDash(s.strokeLineDash),s.strokeLineDashOffset&&(n.lineDashOffset=s.strokeLineDashOffset),this._drawToContext(n,a,o),n.restore();break;case"fillPath":{n.save(),n.fillStyle=s.fill||"";const e="curve"===t.shape||"polygon"===t.shape||"path"===t.shape?"evenodd":"nonzero";this._drawToContext(n,a,o,e),n.restore();break}case"fillSketch":this.fillSketch(n,a,s)}}fillSketch(t,e,s){let n=s.fillWeight;n<0&&(n=s.strokeWidth/2),t.save(),s.fillLineDash&&t.setLineDash(s.fillLineDash),s.fillLineDashOffset&&(t.lineDashOffset=s.fillLineDashOffset),t.strokeStyle=s.fill||"",t.lineWidth=n,this._drawToContext(t,e,s.fixedDecimalPlaceDigits),t.restore()}_drawToContext(t,e,s,n="nonzero"){t.beginPath();for(const n of e.ops){const e="number"==typeof s&&s>=0?n.data.map((t=>+t.toFixed(s))):n.data;switch(n.op){case"move":t.moveTo(e[0],e[1]);break;case"bcurveTo":t.bezierCurveTo(e[0],e[1],e[2],e[3],e[4],e[5]);break;case"lineTo":t.lineTo(e[0],e[1])}}"fillPath"===e.type?t.fill(n):t.stroke()}get generator(){return this.gen}getDefaultOptions(){return this.gen.defaultOptions}line(t,e,s,n,o){const a=this.gen.line(t,e,s,n,o);return this.draw(a),a}rectangle(t,e,s,n,o){const a=this.gen.rectangle(t,e,s,n,o);return this.draw(a),a}ellipse(t,e,s,n,o){const a=this.gen.ellipse(t,e,s,n,o);return this.draw(a),a}circle(t,e,s,n){const o=this.gen.circle(t,e,s,n);return this.draw(o),o}linearPath(t,e){const s=this.gen.linearPath(t,e);return this.draw(s),s}polygon(t,e){const s=this.gen.polygon(t,e);return this.draw(s),s}arc(t,e,s,n,o,a,h=!1,r){const i=this.gen.arc(t,e,s,n,o,a,h,r);return this.draw(i),i}curve(t,e){const s=this.gen.curve(t,e);return this.draw(s),s}path(t,e){const s=this.gen.path(t,e);return this.draw(s),s}}const nt="http://www.w3.org/2000/svg";class ot{constructor(t,e){this.svg=t,this.gen=new et(e)}draw(t){const e=t.sets||[],s=t.options||this.getDefaultOptions(),n=this.svg.ownerDocument||window.document,o=n.createElementNS(nt,"g"),a=t.options.fixedDecimalPlaceDigits;for(const h of e){let e=null;switch(h.type){case"path":e=n.createElementNS(nt,"path"),e.setAttribute("d",this.opsToPath(h,a)),e.setAttribute("stroke",s.stroke),e.setAttribute("stroke-width",s.strokeWidth+""),e.setAttribute("fill","none"),s.strokeLineDash&&e.setAttribute("stroke-dasharray",s.strokeLineDash.join(" ").trim()),s.strokeLineDashOffset&&e.setAttribute("stroke-dashoffset",`${s.strokeLineDashOffset}`);break;case"fillPath":e=n.createElementNS(nt,"path"),e.setAttribute("d",this.opsToPath(h,a)),e.setAttribute("stroke","none"),e.setAttribute("stroke-width","0"),e.setAttribute("fill",s.fill||""),"curve"!==t.shape&&"polygon"!==t.shape||e.setAttribute("fill-rule","evenodd");break;case"fillSketch":e=this.fillSketch(n,h,s)}e&&o.appendChild(e)}return o}fillSketch(t,e,s){let n=s.fillWeight;n<0&&(n=s.strokeWidth/2);const o=t.createElementNS(nt,"path");return o.setAttribute("d",this.opsToPath(e,s.fixedDecimalPlaceDigits)),o.setAttribute("stroke",s.fill||""),o.setAttribute("stroke-width",n+""),o.setAttribute("fill","none"),s.fillLineDash&&o.setAttribute("stroke-dasharray",s.fillLineDash.join(" ").trim()),s.fillLineDashOffset&&o.setAttribute("stroke-dashoffset",`${s.fillLineDashOffset}`),o}get generator(){return this.gen}getDefaultOptions(){return this.gen.defaultOptions}opsToPath(t,e){return this.gen.opsToPath(t,e)}line(t,e,s,n,o){const a=this.gen.line(t,e,s,n,o);return this.draw(a)}rectangle(t,e,s,n,o){const a=this.gen.rectangle(t,e,s,n,o);return this.draw(a)}ellipse(t,e,s,n,o){const a=this.gen.ellipse(t,e,s,n,o);return this.draw(a)}circle(t,e,s,n){const o=this.gen.circle(t,e,s,n);return this.draw(o)}linearPath(t,e){const s=this.gen.linearPath(t,e);return this.draw(s)}polygon(t,e){const s=this.gen.polygon(t,e);return this.draw(s)}arc(t,e,s,n,o,a,h=!1,r){const i=this.gen.arc(t,e,s,n,o,a,h,r);return this.draw(i)}curve(t,e){const s=this.gen.curve(t,e);return this.draw(s)}path(t,e){const s=this.gen.path(t,e);return this.draw(s)}}return{canvas:(t,e)=>new st(t,e),svg:(t,e)=>new ot(t,e),generator:t=>new et(t),newSeed:()=>et.newSeed()}}();
+
+</script>
+  <!-- js/draw.js -->
+<script>
+/* =========================================================================
+   draw.js — shared hand-drawn drawing layer (built on rough.js)
+   Everything attaches to the global PP namespace.
+   ========================================================================= */
+(function (global) {
+  "use strict";
+
+  var PP = global.PP || (global.PP = {});
+  // Sim registry — created here because sim scripts load before app.js and
+  // register themselves into PP.sims as they execute.
+  PP.sims = PP.sims || {};
+
+  // Palette mirrored from CSS tokens so canvas + DOM stay in sync.
+  var COLORS = PP.COLORS = {
+    paper:  "#FBFAF4",
+    paper2: "#F3EFE3",
+    ink:    "#211E1B",
+    inkSoft:"#5A554C",
+    grid:   "#E7E2D6",
+    line:   "#D8D2C4",
+    coral:  "#F0506E",
+    blue:   "#2E6FB7",
+    gold:   "#F2B134",
+    green:  "#3FA34D",
+    violet: "#7B5EA7",
+    coralInk:"#B7233F",
+    blueInk: "#1B4A82",
+    greenInk:"#277636"
+  };
+
+  /* ---------------------------------------------------------------- Stage
+     Wraps a <canvas>, handles HiDPI + resize, exposes rough canvas + ctx. */
+  function Stage(canvas) {
+    this.canvas = canvas;
+    this.ctx = canvas.getContext("2d");
+    this.rc = rough.canvas(canvas);
+    this.w = 0; this.h = 0; this.dpr = 1;
+    this.fit();
+  }
+  Stage.prototype.fit = function () {
+    var rect = this.canvas.getBoundingClientRect();
+    var w = Math.max(1, Math.round(rect.width));
+    var h = Math.max(1, Math.round(rect.height));
+    var dpr = Math.min(2, global.devicePixelRatio || 1);
+    this.canvas.width = w * dpr;
+    this.canvas.height = h * dpr;
+    this.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    this.w = w; this.h = h; this.dpr = dpr;
+    return this;
+  };
+  Stage.prototype.clear = function (bg) {
+    this.ctx.clearRect(0, 0, this.w, this.h);
+    if (bg) { this.ctx.fillStyle = bg; this.ctx.fillRect(0, 0, this.w, this.h); }
+  };
+  PP.Stage = Stage;
+
+  /* ------------------------------------------------------------- text helper */
+  PP.text = function (ctx, str, x, y, opts) {
+    opts = opts || {};
+    ctx.save();
+    ctx.fillStyle = opts.color || COLORS.ink;
+    var size = opts.size || 14;
+    var family = opts.font === "hand" ? '"Caveat", cursive'
+               : opts.font === "display" ? '"Bricolage Grotesque", sans-serif'
+               : opts.font === "body" ? '"Hanken Grotesk", sans-serif'
+               : '"Space Mono", monospace';
+    ctx.font = (opts.weight ? opts.weight + " " : "") + size + 'px ' + family;
+    ctx.textAlign = opts.align || "left";
+    ctx.textBaseline = opts.baseline || "alphabetic";
+    ctx.fillText(str, x, y);
+    ctx.restore();
+  };
+
+  /* -------------------------------------------------------------- mouth/face */
+  function drawFace(ctx, hx, hy, r, mood, color) {
+    color = color || COLORS.ink;
+    var er = Math.max(1.1, r * 0.15);
+    var edx = r * 0.42, edy = -r * 0.06;
+    ctx.fillStyle = color;
+    ctx.beginPath(); ctx.arc(hx - edx, hy + edy, er, 0, Math.PI * 2); ctx.fill();
+    ctx.beginPath(); ctx.arc(hx + edx, hy + edy, er, 0, Math.PI * 2); ctx.fill();
+
+    ctx.strokeStyle = color;
+    ctx.lineWidth = Math.max(1.1, r * 0.11);
+    ctx.lineCap = "round";
+    var mr = r * 0.42, my = hy + r * 0.30;
+    ctx.beginPath();
+    if (mood === "happy") {
+      ctx.arc(hx, my - r * 0.10, mr, Math.PI * 0.15, Math.PI * 0.85);
+    } else if (mood === "sad") {
+      ctx.arc(hx, my + r * 0.55, mr, Math.PI * 1.18, Math.PI * 1.82);
+    } else if (mood === "angry") {
+      ctx.arc(hx, my + r * 0.55, mr * 0.8, Math.PI * 1.22, Math.PI * 1.78);
+    } else { // neutral
+      ctx.moveTo(hx - mr * 0.7, my); ctx.lineTo(hx + mr * 0.7, my);
+    }
+    ctx.stroke();
+  }
+  PP.drawFace = drawFace;
+
+  /* ---------------------------------------------------------------- figure
+     A little hand-drawn person centred at (cx, cy), total height H. */
+  PP.figure = function (rc, ctx, cx, cy, H, opts) {
+    opts = opts || {};
+    var fill = opts.color || COLORS.gold;
+    var stroke = opts.stroke || COLORS.ink;
+    var seed = opts.seed || 1;
+    var fillStyle = opts.fillStyle || "solid";
+    var headR = H * 0.17;
+    var hy = cy - H * 0.30, hx = cx;
+    var nw = H * 0.13, ny = cy - H * 0.07;
+    var bw = H * 0.30, by = cy + H * 0.36;
+
+    // body (bell / pawn)
+    var d = "M " + (cx - nw) + " " + ny +
+            " C " + (cx - bw) + " " + (ny + (by - ny) * 0.55) + " " + (cx - bw) + " " + by + " " + (cx - bw) + " " + by +
+            " L " + (cx + bw) + " " + by +
+            " C " + (cx + bw) + " " + by + " " + (cx + bw) + " " + (ny + (by - ny) * 0.55) + " " + (cx + nw) + " " + ny +
+            " Z";
+    rc.path(d, { fill: fill, fillStyle: fillStyle, fillWeight: H * 0.03, hachureGap: H * 0.07,
+                 stroke: stroke, strokeWidth: Math.max(1.4, H * 0.022), roughness: opts.roughness != null ? opts.roughness : 1.0, seed: seed });
+    // head
+    rc.circle(hx, hy, headR * 2, { fill: fill, fillStyle: fillStyle, fillWeight: H * 0.03, hachureGap: H * 0.07,
+                 stroke: stroke, strokeWidth: Math.max(1.4, H * 0.022), roughness: opts.roughness != null ? opts.roughness : 1.0, seed: seed + 7 });
+    if (opts.face !== false) drawFace(ctx, hx, hy, headR, opts.mood || "neutral", stroke);
+  };
+
+  /* ----------------------------------------------------------------- token
+     Compact rounded tile with a tiny face — for dense grids. */
+  PP.token = function (rc, ctx, x, y, size, opts) {
+    opts = opts || {};
+    var fill = opts.color || COLORS.gold;
+    var stroke = opts.stroke || COLORS.ink;
+    var seed = opts.seed || 1;
+    var pad = size * 0.08;
+    var s = size - pad * 2;
+    rc.rectangle(x + pad, y + pad, s, s, {
+      fill: fill, fillStyle: "solid", stroke: stroke,
+      strokeWidth: Math.max(1, size * 0.045), roughness: 1.1, seed: seed
+    });
+    if (opts.face !== false && size >= 16) {
+      drawFace(ctx, x + size / 2, y + size * 0.46, size * 0.20, opts.mood || "neutral", stroke);
+    }
+  };
+
+  /* ----------------------------------------------------------------- arrow */
+  PP.arrow = function (rc, x1, y1, x2, y2, opts) {
+    opts = opts || {};
+    var color = opts.color || COLORS.ink;
+    var sw = opts.strokeWidth || 2;
+    rc.line(x1, y1, x2, y2, { stroke: color, strokeWidth: sw, roughness: 1.1, seed: opts.seed || 2 });
+    var ang = Math.atan2(y2 - y1, x2 - x1);
+    var hl = opts.head || 9;
+    rc.line(x2, y2, x2 - hl * Math.cos(ang - 0.45), y2 - hl * Math.sin(ang - 0.45), { stroke: color, strokeWidth: sw, roughness: 1, seed: (opts.seed || 2) + 1 });
+    rc.line(x2, y2, x2 - hl * Math.cos(ang + 0.45), y2 - hl * Math.sin(ang + 0.45), { stroke: color, strokeWidth: sw, roughness: 1, seed: (opts.seed || 2) + 2 });
+  };
+
+  /* ----------------------------------------------------------------- panel */
+  PP.panel = function (rc, x, y, w, h, opts) {
+    opts = opts || {};
+    rc.rectangle(x, y, w, h, {
+      fill: opts.fill, fillStyle: "solid",
+      stroke: opts.stroke || COLORS.ink, strokeWidth: opts.strokeWidth || 2,
+      roughness: 1.0, seed: opts.seed || 3
+    });
+  };
+
+  /* ------------------------------------------------------------- line chart
+     series: [{color, points:[v0,v1,...]}], yMax, with sketchy axes. */
+  PP.lineChart = function (rc, ctx, x, y, w, h, series, opts) {
+    opts = opts || {};
+    var yMax = opts.yMax || 1, yMin = opts.yMin || 0;
+    rc.line(x, y, x, y + h, { stroke: COLORS.inkSoft, strokeWidth: 1.4, roughness: 0.8, seed: 11 });
+    rc.line(x, y + h, x + w, y + h, { stroke: COLORS.inkSoft, strokeWidth: 1.4, roughness: 0.8, seed: 12 });
+    for (var s = 0; s < series.length; s++) {
+      var pts = series[s].points; if (pts.length < 2) continue;
+      var poly = [];
+      for (var i = 0; i < pts.length; i++) {
+        var px = x + (w * i) / (pts.length - 1);
+        var py = y + h - (h * (pts[i] - yMin)) / (yMax - yMin);
+        poly.push([px, Math.max(y, Math.min(y + h, py))]);
+      }
+      rc.linearPath(poly, { stroke: series[s].color, strokeWidth: 2.4, roughness: 0.7, seed: 20 + s });
+    }
+    if (opts.label) PP.text(ctx, opts.label, x, y - 6, { size: 11, color: COLORS.inkSoft });
+  };
+
+  /* ----------------------------------------------------- small utilities */
+  PP.lerp = function (a, b, t) { return a + (b - a) * t; };
+  PP.clamp = function (v, lo, hi) { return v < lo ? lo : v > hi ? hi : v; };
+  PP.shuffle = function (a) {
+    for (var i = a.length - 1; i > 0; i--) { var j = (Math.random() * (i + 1)) | 0; var t = a[i]; a[i] = a[j]; a[j] = t; }
+    return a;
+  };
+  // seeded RNG (mulberry32) for reproducible scenarios
+  PP.rng = function (seed) {
+    var s = seed >>> 0;
+    return function () {
+      s |= 0; s = (s + 0x6D2B79F5) | 0;
+      var t = Math.imul(s ^ (s >>> 15), 1 | s);
+      t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  };
+
+  /* ---------------------------------------------- animation loop manager
+     Each sim registers one ticker; only one runs per active page. */
+  PP.makeLoop = function (stepFn, drawFn, opts) {
+    opts = opts || {};
+    var stepMs = opts.stepMs || 220;
+    var raf = null, last = 0, acc = 0, playing = false;
+    function frame(t) {
+      if (!playing) return;
+      if (!last) last = t;
+      var dt = t - last; last = t; acc += dt;
+      var guard = 0;
+      while (acc >= stepMs && guard < 4) { stepFn(); acc -= stepMs; guard++; }
+      drawFn();
+      raf = global.requestAnimationFrame(frame);
+    }
+    return {
+      play: function () { if (playing) return; playing = true; last = 0; acc = 0; raf = global.requestAnimationFrame(frame); },
+      pause: function () { playing = false; if (raf) global.cancelAnimationFrame(raf); raf = null; },
+      isPlaying: function () { return playing; },
+      setSpeed: function (ms) { stepMs = ms; },
+      step: function () { stepFn(); drawFn(); }
+    };
+  };
+
+})(window);
+
+</script>
+  <!-- js/ui.js -->
+<script>
+/* =========================================================================
+   ui.js — small control-builder helpers used by every simulation's panel.
+   ========================================================================= */
+(function (global) {
+  "use strict";
+  var PP = global.PP || (global.PP = {});
+  var ui = PP.ui = {};
+  var doc = document;
+
+  function el(tag, cls, html) {
+    var n = doc.createElement(tag);
+    if (cls) n.className = cls;
+    if (html != null) n.innerHTML = html;
+    return n;
+  }
+  ui.el = el;
+
+  ui.slider = function (parent, o) {
+    var wrap = el("div", "ctrl");
+    var lab = el("label", "ctrl__label");
+    var id = "s" + Math.random().toString(36).slice(2, 7);
+    var fmt = o.fmt || function (v) { return v; };
+    lab.innerHTML = '<span>' + o.label + '</span><b id="' + id + '">' + fmt(o.value) + '</b>';
+    lab.htmlFor = id + "i";
+    var input = el("input");
+    input.type = "range"; input.id = id + "i";
+    input.min = o.min; input.max = o.max; input.step = o.step != null ? o.step : 1; input.value = o.value;
+    input.setAttribute("aria-label", o.label);
+    var out = lab.querySelector("#" + id);
+    input.addEventListener("input", function () {
+      var v = parseFloat(input.value);
+      out.textContent = fmt(v);
+      if (o.onInput) o.onInput(v);
+    });
+    wrap.appendChild(lab); wrap.appendChild(input);
+    parent.appendChild(wrap);
+    return {
+      get: function () { return parseFloat(input.value); },
+      set: function (v) { input.value = v; out.textContent = fmt(v); }
+    };
+  };
+
+  ui.segmented = function (parent, o) {
+    var wrap = el("div", "ctrl");
+    if (o.label) wrap.appendChild(el("div", "ctrl__label", "<span>" + o.label + "</span>"));
+    var seg = el("div", "seg");
+    seg.setAttribute("role", "group");
+    var cur = o.value;
+    var btns = [];
+    o.options.forEach(function (opt) {
+      var b = el("button", "seg__btn", opt.label);
+      b.type = "button";
+      b.setAttribute("aria-pressed", opt.value === cur ? "true" : "false");
+      b.addEventListener("click", function () {
+        cur = opt.value;
+        btns.forEach(function (x) { x.setAttribute("aria-pressed", x._v === cur ? "true" : "false"); });
+        if (o.onChange) o.onChange(cur);
+      });
+      b._v = opt.value;
+      seg.appendChild(b); btns.push(b);
+    });
+    wrap.appendChild(seg);
+    parent.appendChild(wrap);
+    return {
+      get: function () { return cur; },
+      set: function (v) { cur = v; btns.forEach(function (x) { x.setAttribute("aria-pressed", x._v === cur ? "true" : "false"); }); }
+    };
+  };
+
+  ui.toggle = function (parent, o) {
+    var ctl = ui.segmented(parent, {
+      label: o.label,
+      value: o.value ? "on" : "off",
+      options: [{ value: "off", label: o.offLabel || "Off" }, { value: "on", label: o.onLabel || "On" }],
+      onChange: function (v) { if (o.onChange) o.onChange(v === "on"); }
+    });
+    return { get: function () { return ctl.get() === "on"; }, set: function (b) { ctl.set(b ? "on" : "off"); } };
+  };
+
+  ui.button = function (parent, o) {
+    var b = el("button", "btn" + (o.variant ? " btn--" + o.variant : ""), o.label);
+    b.type = "button";
+    if (o.onClick) b.addEventListener("click", o.onClick);
+    parent.appendChild(b);
+    return b;
+  };
+
+  ui.btnRow = function (parent) {
+    var r = el("div", "btn-row");
+    parent.appendChild(r);
+    return r;
+  };
+
+  // readout: rows = [{key, label, color}], returns updater
+  ui.readout = function (parent, rows) {
+    var box = el("div", "readout");
+    var refs = {};
+    rows.forEach(function (r) {
+      var row = el("div", "readout__row");
+      row.innerHTML = '<span class="readout__k">' + r.label + '</span><span class="readout__v"></span>';
+      box.appendChild(row);
+      refs[r.key] = { v: row.querySelector(".readout__v") };
+      if (r.bar) {
+        var bar = el("div", "readout__bar");
+        var fill = el("div", "readout__fill");
+        fill.style.background = r.color || PP.COLORS.gold;
+        bar.appendChild(fill);
+        box.appendChild(bar);
+        refs[r.key].fill = fill;
+      }
+    });
+    parent.appendChild(box);
+    return function (vals) {
+      for (var k in vals) {
+        if (!refs[k]) continue;
+        if (typeof vals[k] === "object") {
+          if (vals[k].text != null) refs[k].v.textContent = vals[k].text;
+          if (refs[k].fill && vals[k].pct != null) refs[k].fill.style.width = PP.clamp(vals[k].pct, 0, 100) + "%";
+        } else {
+          refs[k].v.textContent = vals[k];
+        }
+      }
+    };
+  };
+
+  ui.h = function (parent, txt) { parent.appendChild(el("div", "sec__kicker", txt)); };
+
+})(window);
+
+</script>
+  <!-- js/data.js -->
+<script>
+/* =========================================================================
+   data.js — all written content + source citations.
+   This is the site's "database": a static, version-controlled data module.
+   (GitHub Pages is static hosting, so there is no server DB; user-created
+    scenarios are saved to localStorage by each simulation.)
+   ========================================================================= */
+(function (global) {
+  "use strict";
+  var PP = global.PP || (global.PP = {});
+
+  PP.FRAMEWORKS = [
+    /* ----------------------------------------------------------- Schelling */
+    {
+      slug: "segregation",
+      title: "The Segregation Engine",
+      theory: "Schelling's Model of Segregation",
+      tag: "Society",
+      accent: "coral",
+      source: "Schelling, 1971",
+      tagline: "Nobody wanted a divided city. Everybody got one anyway.",
+      pitch: "A whole neighbourhood can split itself into sharp racial or social blocks even when not one resident wants segregation. Mild preferences plus a little freedom to move equals stark, self-organising separation.",
+      sim: "segregation",
+      intro: [
+        "<p class='lead'>Here is the uncomfortable magic trick. Take a town where every single person is perfectly happy to live in a mixed neighbourhood — they just don't want to be a tiny minority on their own street. Give them the freedom to move when they feel too outnumbered. Press play.</p>",
+        "<p>Within a few rounds the town sorts itself into clean blocks of one colour. No villain ordered it. No law required it. The economist <strong>Thomas Schelling</strong> showed that <strong>micro-motives</strong> (mild, reasonable individual preferences) can produce <strong>macro-behaviour</strong> (citywide segregation) that nobody intended and nobody likes.</p>",
+        "<p>The punchline for policy: you cannot read a society's intentions off its outcomes. A segregated map is <em>not</em> proof that people are bigots — and, just as importantly, declaring that &ldquo;everyone is tolerant now&rdquo; will not, on its own, undo the pattern. The structure has a life of its own.</p>"
+      ],
+      howto: "Drag the <b>tolerance</b> slider to set how outnumbered a person will tolerate being before they move. Lower it toward zero — people will accept almost any mix — and watch the town <em>still</em> drift apart.",
+      examples: [
+        { title: "Residential 'white flight'", text: "Mid-century American cities tipped from mixed to segregated block by block, faster than survey-measured prejudice could explain. Tipping-point dynamics, not just bigotry.", color: "coral" },
+        { title: "School catchments & 'good schools'", text: "Parents each making a defensible choice about their own child can sort an entire district by income and background.", color: "blue" },
+        { title: "Online communities", text: "Mute, block, and recommendation feeds are 'moves'. Mild discomfort with disagreement can fracture a platform into echo chambers.", color: "violet" }
+      ],
+      takeaway: "Tolerant individuals can build an intolerant pattern. To change the pattern, you often have to change the structure — incentives, defaults, the cost of moving — not just attitudes.",
+      sources: [
+        { cite: "Schelling, T. C. (1971). \u201CDynamic Models of Segregation.\u201D", detail: "Journal of Mathematical Sociology, 1(2), 143\u2013186.", url: "https://www.tandfonline.com/doi/abs/10.1080/0022250X.1971.9989794" },
+        { cite: "Schelling, T. C. (1978). Micromotives and Macrobehavior.", detail: "W. W. Norton & Company.", url: "https://wwnorton.com/books/Micromotives-and-Macrobehavior/" }
+      ]
+    },
+
+    /* ------------------------------------------------------------- Commons */
+    {
+      slug: "commons",
+      title: "The Common Pasture",
+      theory: "The Tragedy of the Commons",
+      tag: "Public Policy",
+      accent: "green",
+      source: "Hardin, 1968 \u00B7 Ostrom, 1990",
+      tagline: "Everyone grazes one more cow. The grass is gone by Tuesday.",
+      pitch: "When a resource is shared and open to all, each user gets the full benefit of taking more while the cost of depletion is split across everyone. Rational individuals can rationally destroy the thing they all depend on.",
+      sim: "commons",
+      intro: [
+        "<p class='lead'>Picture a village green that anyone may graze. If you add one cow, you get one whole cow's worth of value. The damage — slightly less grass for everyone — is shared across the whole village. So you add a cow. And so does everyone, for exactly the same sensible reason. The grass collapses.</p>",
+        "<p>Garrett Hardin called this <strong>the tragedy of the commons</strong>: ruin that arrives not through malice but through arithmetic. It is the secret engine behind overfished seas, depleted aquifers, traffic jams, antibiotic resistance and a warming atmosphere.</p>",
+        "<p>But here is the twist Hardin underplayed and <strong>Elinor Ostrom</strong> won a Nobel Prize for showing: real communities <em>routinely</em> avoid the tragedy without either privatising everything or calling in the state. Given the right rules — clear boundaries, monitoring, graduated penalties, a way to settle disputes — people govern shared resources sustainably for centuries. Switch the governance mode below and watch the grass survive.</p>"
+      ],
+      howto: "Use the <b>governance</b> toggle to switch between open access, a top-down quota, and Ostrom-style self-governance. Then change the number of herders and the regrowth rate, and watch the grass and the herd over time.",
+      examples: [
+        { title: "Collapsing fisheries", text: "The Atlantic cod fishery off Newfoundland was fished to commercial extinction by 1992 \u2014 a textbook open-access collapse.", color: "blue" },
+        { title: "Groundwater depletion", text: "Shared aquifers fall when each farmer pumps for their own crop. The cost lands on the whole basin, later.", color: "green" },
+        { title: "Ostrom's irrigation systems", text: "Spanish huertas and Nepalese irrigation communities have shared water sustainably for generations using locally-made rules.", color: "gold" }
+      ],
+      takeaway: "\u201COpen access\u201D is the problem, not \u201Cthe commons\u201D itself. The fix is rarely just markets or just the state \u2014 it is well-designed rules that the users help write and can actually enforce.",
+      sources: [
+        { cite: "Hardin, G. (1968). \u201CThe Tragedy of the Commons.\u201D", detail: "Science, 162(3859), 1243\u20131248.", url: "https://www.science.org/doi/10.1126/science.162.3859.1243" },
+        { cite: "Ostrom, E. (1990). Governing the Commons.", detail: "Cambridge University Press. (2009 Nobel Memorial Prize in Economic Sciences.)", url: "https://www.cambridge.org/core/books/governing-the-commons/A8BB63BC4A1433A50A3FB92EDBBB97D5" },
+        { cite: "Lloyd, W. F. (1833). Two Lectures on the Checks to Population.", detail: "The original overgrazing illustration Hardin drew on.", url: "" }
+      ]
+    },
+
+    /* ----------------------------------------------------- Prisoner's Dilemma */
+    {
+      slug: "cooperation",
+      title: "The Trust Tournament",
+      theory: "The Evolution of Cooperation (Iterated Prisoner's Dilemma)",
+      tag: "Political Thinking",
+      accent: "blue",
+      source: "Axelrod, 1984",
+      tagline: "Be nice, be provokable, forgive fast. Repeat forever.",
+      pitch: "When the same players meet again and again, cooperation can beat betrayal \u2014 not because people are good, but because a future shadow makes kindness pay. Robert Axelrod ran the tournament. A four-line strategy won.",
+      sim: "cooperation",
+      intro: [
+        "<p class='lead'>In a one-off Prisoner's Dilemma, betrayal is the cold, rational move: whatever the other player does, you do better by defecting. So two rational players both defect, and both end up worse than if they'd cooperated. Depressing.</p>",
+        "<p>Then <strong>Robert Axelrod</strong> asked a better question: what if the players meet <em>over and over</em>? He invited game theorists worldwide to submit strategies and ran a round-robin computer tournament. The winner, submitted by Anatol Rapoport, was almost embarrassingly simple. <strong>Tit-for-Tat</strong>: cooperate on the first move, then copy whatever your opponent did last time.</p>",
+        "<p>From the carnage Axelrod distilled why it won: be <strong>nice</strong> (never defect first), be <strong>provocable</strong> (punish betrayal at once), be <strong>forgiving</strong> (go back to cooperating the moment they do), and be <strong>clear</strong> (don't be so clever nobody can read you). Run the tournament below, then let the winners breed and watch which philosophy takes over the population.</p>"
+      ],
+      howto: "Pick which strategies enter the arena, set the <b>noise</b> (chance a move is misread \u2014 the world is fuzzy), then run the round-robin. Hit <b>Evolve</b> to let high-scoring strategies reproduce generation by generation.",
+      examples: [
+        { title: "Trench warfare truces, WWI", text: "Opposing units settled into 'live and let live' \u2014 don't shell us at dinner, we won't shell you. Repeated interaction grew cooperation under fire.", color: "green" },
+        { title: "Trade & deterrence", text: "Tit-for-tat logic underpins tariff retaliation and arms-control: punish defection, but leave a door open to return to cooperation.", color: "coral" },
+        { title: "Online reputation", text: "Ratings and review systems lengthen the 'shadow of the future', making a seller's one-time scam more costly than honest repeat business.", color: "blue" }
+      ],
+      takeaway: "Cooperation doesn't need saints \u2014 it needs a future. Lengthen the shadow of the future (repeat games, reputations, enforceable deals) and self-interested players find their way to working together.",
+      sources: [
+        { cite: "Axelrod, R. (1984). The Evolution of Cooperation.", detail: "Basic Books.", url: "https://en.wikipedia.org/wiki/The_Evolution_of_Cooperation" },
+        { cite: "Axelrod, R., & Hamilton, W. D. (1981). \u201CThe Evolution of Cooperation.\u201D", detail: "Science, 211(4489), 1390\u20131396.", url: "https://www.science.org/doi/10.1126/science.7466396" }
+      ]
+    },
+
+    /* --------------------------------------------------------- Median Voter */
+    {
+      slug: "median-voter",
+      title: "The Race to the Middle",
+      theory: "The Median Voter Theorem",
+      tag: "Political Thinking",
+      accent: "violet",
+      source: "Hotelling, 1929 \u00B7 Downs, 1957",
+      tagline: "Two rivals, one spectrum, and a magnetic middle.",
+      pitch: "If voters line up on a single left\u2013right spectrum and back the nearest candidate, two vote-maximising candidates are dragged toward the median voter \u2014 which is why rivals so often sound suspiciously alike.",
+      sim: "median-voter",
+      intro: [
+        "<p class='lead'>Imagine voters spread along a single line from left to right, each voting for whichever candidate stands closest to them. You're a candidate. Wherever your rival plants their flag, you can win more votes by edging just slightly toward the centre of the crowd. So can they. You both end up squeezed against the <strong>median voter</strong> \u2014 the person with exactly half the electorate on each side.</p>",
+        "<p>Harold Hotelling spotted this with two ice-cream sellers on a beach; Anthony Downs turned it into a theory of democracy. It explains the eternal complaint that the major parties are &ldquo;all the same&rdquo; \u2014 the maths is pulling them together.</p>",
+        "<p>But the theorem rests on fragile assumptions, and breaking them is where it gets interesting. Make the electorate <strong>polarised</strong> into two camps and the comfortable centre becomes a no-man's-land. Let voters <strong>stay home</strong> when no one excites them, or add a <strong>third candidate</strong>, and the magnetic middle stops being safe. Reshape the electorate below and see where the candidates are forced to stand.</p>"
+      ],
+      howto: "Choose the shape of the electorate (united, divided, or scattered), then press <b>Let them campaign</b> to watch both candidates hunt for votes. Toggle <b>abstention</b> and a <b>third candidate</b> to break the theorem.",
+      examples: [
+        { title: "Catch-all party convergence", text: "Post-war centre-left and centre-right parties across democracies drifted toward similar centrist platforms, just as Downs predicted.", color: "blue" },
+        { title: "Primaries vs. general elections", text: "Candidates lurch to please a partisan base to win the nomination, then sprint back to the centre for the general \u2014 two different medians.", color: "coral" },
+        { title: "Referendums & single issues", text: "On a one-dimensional yes/no question, the median voter is decisive \u2014 which is why campaigns fight ferociously over the undecided middle.", color: "violet" }
+      ],
+      takeaway: "The centre is magnetic \u2014 but only under specific conditions. Polarisation, abstention, multiple dimensions and more than two candidates all weaken the pull, and that's where most real political drama lives.",
+      sources: [
+        { cite: "Hotelling, H. (1929). \u201CStability in Competition.\u201D", detail: "The Economic Journal, 39(153), 41\u201357.", url: "https://www.jstor.org/stable/2224214" },
+        { cite: "Black, D. (1948). \u201COn the Rationale of Group Decision-making.\u201D", detail: "Journal of Political Economy, 56(1), 23\u201334.", url: "https://www.journals.uchicago.edu/doi/10.1086/256633" },
+        { cite: "Downs, A. (1957). An Economic Theory of Democracy.", detail: "Harper & Row.", url: "https://en.wikipedia.org/wiki/An_Economic_Theory_of_Democracy" }
+      ]
+    },
+
+    /* -------------------------------------------------------- Norm cascades */
+    {
+      slug: "norm-cascade",
+      title: "When the Dam Breaks",
+      theory: "Threshold Models & How Social Norms Flip",
+      tag: "Society",
+      accent: "gold",
+      source: "Granovetter, 1978 \u00B7 Kuran, 1995",
+      tagline: "A norm everyone secretly hates can vanish in an afternoon.",
+      pitch: "Each person joins a riot, a protest, or a new fashion only once enough others already have. Tiny differences in those private thresholds decide whether nothing happens \u2014 or the whole crowd tips at once.",
+      sim: "norm-cascade",
+      intro: [
+        "<p class='lead'>Everyone in the square is asking themselves the same question: <em>how many others have to go first before I join?</em> One firebrand needs zero. The next person needs to see one. The next needs ten. Mark Granovetter showed that the <strong>distribution of these thresholds</strong> \u2014 not how radical people are on average \u2014 decides what happens.</p>",
+        "<p>Here's the eerie part. Two crowds can hold <em>identical</em> average opinions and reach opposite fates. Remove a single person whose threshold was &ldquo;1&rdquo; and the chain reaction that would have swept the square never starts. The same logic powers bank runs, viral trends, mass resignations, and revolutions.</p>",
+        "<p>Add to it <strong>Timur Kuran's</strong> insight about <em>preference falsification</em>: under repressive norms, people hide what they really think, so everyone underestimates how many allies they have. The dam looks solid right up until it breaks \u2014 which is why uprisings like 1989 in Eastern Europe blindsided nearly everyone, including the people in them.</p>"
+      ],
+      howto: "Shape the crowd's <b>threshold distribution</b>, then add a few <b>instigators</b> (threshold zero) and press play to watch the cascade spread \u2014 or fizzle. Nudge a single threshold and see a whole outcome flip.",
+      examples: [
+        { title: "The fall of 1989", text: "Eastern European regimes that looked permanent collapsed within weeks once visible protest crossed a hidden tipping point.", color: "coral" },
+        { title: "Bank runs", text: "You withdraw not because the bank is failing, but because you think enough others will. Belief becomes self-fulfilling.", color: "blue" },
+        { title: "Norm change overnight", text: "Smoking indoors, drink-driving, open corruption: behaviours go from normal to shameful fast once the visible balance tips.", color: "green" }
+      ],
+      takeaway: "Big collective shifts aren't driven by the average person but by the shape of the crowd's thresholds \u2014 and by how badly everyone misreads what their neighbours secretly believe.",
+      sources: [
+        { cite: "Granovetter, M. (1978). \u201CThreshold Models of Collective Behavior.\u201D", detail: "American Journal of Sociology, 83(6), 1420\u20131443.", url: "https://www.journals.uchicago.edu/doi/10.1086/226707" },
+        { cite: "Kuran, T. (1995). Private Truths, Public Lies.", detail: "Harvard University Press.", url: "https://www.hup.harvard.edu/books/9780674707580" },
+        { cite: "Kuran, T. (1991). \u201CNow Out of Never.\u201D", detail: "World Politics, 44(1), 7\u201348.", url: "https://www.jstor.org/stable/2010422" }
+      ]
+    }
+  ];
+
+  PP.getFramework = function (slug) {
+    for (var i = 0; i < PP.FRAMEWORKS.length; i++) if (PP.FRAMEWORKS[i].slug === slug) return PP.FRAMEWORKS[i];
+    return null;
+  };
+
+})(window);
+
+</script>
+  <!-- js/sims/segregation.js -->
+<script>
+/* =========================================================================
+   sims/segregation.js — Schelling's Dynamic Models of Segregation (1971)
+   ========================================================================= */
+(function (global) {
+  "use strict";
+  var PP = global.PP, ui = PP.ui, C = PP.COLORS;
+  var EMPTY = -1;
+
+  function neighborsSame(cells, N, idx) {
+    var x = idx % N, y = (idx / N) | 0, same = 0, tot = 0, self = cells[idx];
+    for (var dy = -1; dy <= 1; dy++) for (var dx = -1; dx <= 1; dx++) {
+      if (!dx && !dy) continue;
+      var nx = x + dx, ny = y + dy;
+      if (nx < 0 || ny < 0 || nx >= N || ny >= N) continue;
+      var v = cells[ny * N + nx];
+      if (v === EMPTY) continue;
+      tot++; if (v === self) same++;
+    }
+    return tot === 0 ? -1 : same / tot; // -1 = no occupied neighbours (counts as content)
+  }
+
+  function mount(ctx) {
+    var st = new PP.Stage(ctx.stageCanvas);
+    var side = ctx.sideEl, store = ctx.store;
+
+    var state = {
+      N: store.get("N", 20),
+      tol: store.get("tol", 0.40),
+      empty: store.get("empty", 0.12),
+      cells: null, round: 0
+    };
+
+    function seed() {
+      state.cells = [];
+      var rng = Math.random;
+      for (var i = 0; i < state.N * state.N; i++) {
+        var r = rng();
+        state.cells.push(r < state.empty ? EMPTY : (r < state.empty + (1 - state.empty) / 2 ? 0 : 1));
+      }
+      state.round = 0;
+    }
+
+    function happy(idx) {
+      var f = neighborsSame(state.cells, state.N, idx);
+      return f < 0 ? true : f >= state.tol;
+    }
+
+    function step() {
+      var cells = state.cells, N = state.N, empties = [], unhappy = [];
+      for (var i = 0; i < cells.length; i++) {
+        if (cells[i] === EMPTY) empties.push(i);
+        else if (!happy(i)) unhappy.push(i);
+      }
+      if (!unhappy.length) { loop.pause(); syncPlayBtn(); return; }
+      PP.shuffle(unhappy);
+      for (var u = 0; u < unhappy.length && empties.length; u++) {
+        var from = unhappy[u];
+        var k = (Math.random() * empties.length) | 0;
+        var to = empties[k];
+        cells[to] = cells[from]; cells[from] = EMPTY;
+        empties[k] = from;
+      }
+      state.round++;
+    }
+
+    var geom = {};
+    function layout() {
+      st.fit();
+      var N = state.N;
+      geom.cs = Math.floor(Math.min(st.w, st.h) / N);
+      geom.ox = (st.w - geom.cs * N) / 2;
+      geom.oy = (st.h - geom.cs * N) / 2;
+    }
+
+    function draw() {
+      st.clear();
+      var N = state.N, cs = geom.cs, settled = 0, occ = 0, segSum = 0;
+      for (var i = 0; i < state.cells.length; i++) {
+        var v = state.cells[i]; if (v === EMPTY) continue;
+        occ++;
+        var f = neighborsSame(state.cells, N, i);
+        if (f >= 0) segSum += f;
+        var ok = happy(i); if (ok) settled++;
+        var x = geom.ox + (i % N) * cs, y = geom.oy + ((i / N) | 0) * cs;
+        PP.token(st.rc, st.ctx, x, y, cs,
+          { color: v === 0 ? C.coral : C.blue, seed: i + 1, mood: ok ? "happy" : "sad" });
+      }
+      var pctHappy = occ ? Math.round((settled / occ) * 100) : 0;
+      var seg = occ ? Math.round((segSum / occ) * 100) : 0;
+      update({
+        round: state.round,
+        happy: { text: pctHappy + "%", pct: pctHappy },
+        seg: { text: seg + "%", pct: seg },
+        unhappy: (occ - settled)
+      });
+    }
+
+    var loop = PP.makeLoop(step, draw, { stepMs: 130 });
+
+    /* ---------------- side panel ---------------- */
+    var update = ui.readout(side, [
+      { key: "happy", label: "People content where they live", bar: true, color: C.green },
+      { key: "seg", label: "Segregation (avg. similar neighbours)", bar: true, color: C.coral },
+      { key: "round", label: "Rounds elapsed" },
+      { key: "unhappy", label: "Still looking to move" }
+    ]);
+
+    ui.h(side, "Rules of the town");
+    var tolS = ui.slider(side, {
+      label: "Wants at least \u2014 % similar nearby", min: 0, max: 80, step: 5, value: Math.round(state.tol * 100),
+      fmt: function (v) { return v + "%"; },
+      onInput: function (v) { state.tol = v / 100; store.set("tol", state.tol); draw(); }
+    });
+    var emptyS = ui.slider(side, {
+      label: "Empty homes", min: 5, max: 35, step: 1, value: Math.round(state.empty * 100),
+      fmt: function (v) { return v + "%"; },
+      onInput: function (v) { state.empty = v / 100; store.set("empty", state.empty); seed(); layout(); draw(); }
+    });
+    ui.segmented(side, {
+      label: "Town size",
+      value: state.N,
+      options: [{ value: 14, label: "Small" }, { value: 20, label: "Medium" }, { value: 26, label: "Big" }],
+      onChange: function (v) { state.N = v; store.set("N", v); seed(); layout(); draw(); }
+    });
+
+    var row = ui.btnRow(side);
+    var playBtn = ui.button(row, { label: "\u25B6 Play", variant: "blue", onClick: function () {
+      if (loop.isPlaying()) loop.pause(); else loop.play(); syncPlayBtn();
+    }});
+    ui.button(row, { label: "Step", variant: "ghost", onClick: function () { loop.pause(); syncPlayBtn(); step(); draw(); } });
+    ui.button(row, { label: "Reset", variant: "ghost", onClick: function () { loop.pause(); syncPlayBtn(); seed(); layout(); draw(); } });
+
+    function syncPlayBtn() { playBtn.textContent = loop.isPlaying() ? "\u275A\u275A Pause" : "\u25B6 Play"; }
+
+    side.appendChild(ui.el("p", "hint",
+      "Try this: set the slider to <b>30%</b> \u2014 everyone is happy in a minority \u2014 then press play. The town still splits. That gap between intention and outcome is the whole point."));
+
+    /* ---------------- boot ---------------- */
+    seed(); layout(); draw();
+    tolS.set(Math.round(state.tol * 100)); emptyS.set(Math.round(state.empty * 100));
+    var unsub = PP.onResize(function () { layout(); draw(); });
+
+    return { destroy: function () { loop.pause(); unsub(); } };
+  }
+
+  /* ---------------- thumbnail + comic ---------------- */
+  function thumb(st) {
+    st.clear();
+    var N = 7, cs = Math.min(st.w, st.h) / N, ox = (st.w - cs * N) / 2, oy = (st.h - cs * N) / 2;
+    for (var y = 0; y < N; y++) for (var x = 0; x < N; x++) {
+      var left = x < N / 2;
+      if ((x === 3) && (y % 2)) continue; // a seam of gaps
+      PP.token(st.rc, st.ctx, ox + x * cs, oy + y * cs, cs,
+        { color: left ? C.coral : C.blue, seed: y * N + x + 1, mood: "happy", face: cs > 20 });
+    }
+  }
+
+  var comicCaps = [
+    "\u201CHonestly? I'm happy with neighbours of any kind.\u201D",
+    "\u201C...I'd just rather not be the only one of my kind here.\u201D",
+    "A few moves later: a town nobody actually wanted."
+  ];
+  function comic(st, i) {
+    st.clear();
+    var W = st.w, H = st.h;
+    if (i === 0) {
+      var cols = [C.coral, C.blue, C.coral, C.blue, C.coral];
+      for (var a = 0; a < 5; a++) PP.figure(st.rc, st.ctx, W * (0.15 + a * 0.175), H * 0.62, H * 0.5,
+        { color: cols[a], seed: a + 2, mood: "happy" });
+    } else if (i === 1) {
+      PP.figure(st.rc, st.ctx, W * 0.28, H * 0.62, H * 0.5, { color: C.coral, seed: 9, mood: "sad" });
+      PP.figure(st.rc, st.ctx, W * 0.72, H * 0.62, H * 0.5, { color: C.blue, seed: 12, mood: "happy" });
+      PP.arrow(st.rc, W * 0.40, H * 0.5, W * 0.60, H * 0.5, { color: C.violet, strokeWidth: 2.5 });
+    } else {
+      for (var b = 0; b < 3; b++) PP.figure(st.rc, st.ctx, W * (0.12 + b * 0.14), H * 0.62, H * 0.46, { color: C.coral, seed: b + 20, mood: "happy" });
+      for (var c = 0; c < 3; c++) PP.figure(st.rc, st.ctx, W * (0.58 + c * 0.14), H * 0.62, H * 0.46, { color: C.blue, seed: c + 30, mood: "happy" });
+    }
+  }
+
+  PP.sims.segregation = { mount: mount, thumb: thumb, comic: comic, comicCaps: comicCaps };
+})(window);
+
+</script>
+  <!-- js/sims/commons.js -->
+<script>
+/* =========================================================================
+   sims/commons.js — Hardin's Tragedy of the Commons (1968) + Ostrom (1990)
+   ========================================================================= */
+(function (global) {
+  "use strict";
+  var PP = global.PP, ui = PP.ui, C = PP.COLORS;
+
+  function hexLerp(a, b, t) {
+    function p(h) { return [parseInt(h.slice(1, 3), 16), parseInt(h.slice(3, 5), 16), parseInt(h.slice(5, 7), 16)]; }
+    var x = p(a), y = p(b), o = "#";
+    for (var i = 0; i < 3; i++) { var v = Math.round(x[i] + (y[i] - x[i]) * t); o += ("0" + v.toString(16)).slice(-2); }
+    return o;
+  }
+
+  function cow(rc, ctx, x, y, s, seed) {
+    rc.ellipse(x, y, s * 1.5, s * 0.92, { fill: "#F4EFE2", fillStyle: "solid", stroke: C.ink, strokeWidth: 1.4, roughness: 1.1, seed: seed });
+    rc.ellipse(x - s * 0.78, y - s * 0.08, s * 0.55, s * 0.5, { fill: "#F4EFE2", fillStyle: "solid", stroke: C.ink, strokeWidth: 1.3, roughness: 1.1, seed: seed + 1 });
+    rc.line(x - s * 0.4, y + s * 0.4, x - s * 0.4, y + s * 0.72, { stroke: C.ink, strokeWidth: 1.3, roughness: 1, seed: seed + 2 });
+    rc.line(x + s * 0.4, y + s * 0.4, x + s * 0.4, y + s * 0.72, { stroke: C.ink, strokeWidth: 1.3, roughness: 1, seed: seed + 3 });
+    ctx.fillStyle = C.ink;
+    ctx.beginPath(); ctx.arc(x - s * 0.95, y - s * 0.12, Math.max(0.8, s * 0.06), 0, 7); ctx.fill();
+  }
+
+  function mount(ctx) {
+    var st = new PP.Stage(ctx.stageCanvas);
+    var side = ctx.sideEl, store = ctx.store;
+
+    var state = {
+      mode: store.get("mode", "open"),
+      H: store.get("H", 6),
+      r: store.get("r", 0.30),
+      G: 70, herds: [], round: 0,
+      grassHist: [], herdHist: [], lastProfit: 0
+    };
+
+    function reset() {
+      state.G = 70; state.round = 0; state.grassHist = []; state.herdHist = []; state.lastProfit = 0;
+      state.herds = [];
+      for (var i = 0; i < state.H; i++) state.herds.push(2);
+    }
+
+    function total() { var t = 0; for (var i = 0; i < state.herds.length; i++) t += state.herds[i]; return t; }
+    function quotaCap() { return Math.max(1, Math.round((63 * state.r) / state.H)); }
+
+    function step() {
+      var G = state.G, yieldPer = G / 100, cost = 0.35, profit = yieldPer - cost;
+      state.lastProfit = profit;
+      var order = []; for (var i = 0; i < state.herds.length; i++) order.push(i);
+      PP.shuffle(order);
+      var cap = quotaCap();
+      for (var o = 0; o < order.length; o++) {
+        var k = order[o], h = state.herds[k];
+        if (state.mode === "open") {
+          if (profit > 0.05 && h < 10) state.herds[k]++;
+          else if (profit < -0.02 && h > 0) state.herds[k]--;
+        } else if (state.mode === "quota") {
+          if (profit > 0.05 && h < cap) state.herds[k]++;
+          else if (profit < -0.02 && h > 0) state.herds[k]--;
+        } else { // ostrom
+          if (G > 55 && profit > 0 && h < cap + 1) state.herds[k]++;
+          else if ((G < 45 || profit < 0) && h > 0) state.herds[k]--;
+        }
+      }
+      var T = total();
+      var regrow = state.r * G * (1 - G / 100);
+      var damage = T * 0.5 * (0.4 + 0.6 * (G / 100));
+      state.G = PP.clamp(G + regrow - damage, 0, 100);
+      state.round++;
+      state.grassHist.push(state.G); if (state.grassHist.length > 80) state.grassHist.shift();
+      state.herdHist.push(T); if (state.herdHist.length > 80) state.herdHist.shift();
+    }
+
+    var geom = {};
+    function layout() { st.fit(); geom.skyH = st.h * 0.16; }
+
+    var cowSpots = [];
+    (function () { var rng = PP.rng(99); for (var i = 0; i < 60; i++) cowSpots.push([rng(), rng()]); })();
+
+    function verdict() {
+      var G = state.G;
+      if (G < 8) return ["Collapsed \u2014 the grass is gone", C.coralInk];
+      if (G < 30) return ["Overgrazed", C.coralInk];
+      if (G < 55) return ["Strained but holding", C.gold];
+      return ["Sustainable", C.greenInk];
+    }
+
+    function draw() {
+      var W = st.w, H = st.h, c = st.ctx;
+      st.clear();
+      // sky
+      c.fillStyle = "#EAF1F6"; c.fillRect(0, 0, W, geom.skyH + 6);
+      // sun
+      st.rc.circle(W * 0.86, geom.skyH * 0.6, geom.skyH * 0.9, { fill: C.gold, fillStyle: "solid", stroke: C.ink, strokeWidth: 1.6, roughness: 1.1, seed: 5 });
+      // field colour by grass
+      var lush = state.G / 100;
+      var fieldCol = hexLerp("#A98A4E", "#5Fae5f".replace("ae","A3"), lush); // brown -> green
+      fieldCol = hexLerp("#A98A4E", "#5FA35F", lush);
+      c.fillStyle = fieldCol; c.fillRect(0, geom.skyH, W, H - geom.skyH);
+      // grass tufts
+      var tufts = Math.round(lush * 46);
+      var rng = PP.rng(7);
+      for (var t = 0; t < tufts; t++) {
+        var gx = rng() * W, gy = geom.skyH + 8 + rng() * (H - geom.skyH - 40);
+        var hgt = 5 + rng() * 8 * (0.4 + lush);
+        st.rc.line(gx, gy, gx - 2, gy - hgt, { stroke: C.greenInk, strokeWidth: 1.2, roughness: 1.4, seed: t });
+        st.rc.line(gx, gy, gx + 3, gy - hgt * 0.9, { stroke: C.greenInk, strokeWidth: 1.2, roughness: 1.4, seed: t + 100 });
+      }
+      // cattle
+      var T = total(), shown = Math.min(T, 36), cs = Math.max(10, Math.min(20, W / 26));
+      for (var i = 0; i < shown; i++) {
+        var sp = cowSpots[i];
+        var x = 30 + sp[0] * (W - 60);
+        var y = geom.skyH + 30 + sp[1] * (H - geom.skyH - 80);
+        cow(st.rc, c, x, y, cs, i * 3 + 1);
+      }
+      if (T > shown) PP.text(c, "+" + (T - shown) + " more", W - 14, geom.skyH + 22, { size: 12, align: "right", color: C.ink });
+      // herders on the fence
+      var fy = H - 16, n = state.H, gap = W / (n + 1);
+      for (var hh = 0; hh < n; hh++) {
+        var profit = state.lastProfit;
+        var mood = state.G < 8 ? "sad" : (profit > 0.1 ? "happy" : profit < 0 ? "sad" : "neutral");
+        PP.figure(st.rc, c, gap * (hh + 1), fy, 30, { color: [C.coral, C.blue, C.violet, C.gold, C.green][hh % 5], seed: hh + 40, mood: mood });
+      }
+      // history inset
+      var iw = Math.min(168, W * 0.42), ih = 64, ix = 12, iy = geom.skyH + 8;
+      c.save(); c.globalAlpha = 0.9; c.fillStyle = C.paper;
+      st.rc.rectangle(ix, iy, iw, ih, { fill: C.paper, fillStyle: "solid", stroke: C.ink, strokeWidth: 1.4, roughness: 0.8, seed: 3 });
+      c.restore();
+      PP.lineChart(st.rc, c, ix + 8, iy + 16, iw - 16, ih - 24,
+        [{ color: C.greenInk, points: state.grassHist },
+         { color: C.coral, points: state.herdHist.map(function (v) { return Math.min(100, v * 3); }) }],
+        { yMax: 100, yMin: 0, label: "grass \u00B7 herd over time" });
+
+      var v = verdict();
+      update({
+        grass: { text: Math.round(state.G) + "%", pct: state.G },
+        herd: T,
+        profit: { text: (state.lastProfit >= 0 ? "+" : "") + state.lastProfit.toFixed(2) + " / cow" },
+        verdict: { text: v[0] }
+      });
+      side.querySelector("#verdict").style.color = v[1];
+    }
+
+    var loop = PP.makeLoop(step, draw, { stepMs: 360 });
+
+    /* ---- side ---- */
+    var update = ui.readout(side, [
+      { key: "grass", label: "Grass remaining", bar: true, color: C.green },
+      { key: "herd", label: "Cattle on the common" },
+      { key: "profit", label: "Profit each (this year)" }
+    ]);
+    var vrow = ui.el("div", "readout");
+    vrow.innerHTML = '<div class="readout__row"><span class="readout__k">Verdict</span><span class="readout__v" id="verdict" style="font-family:var(--display)"></span></div>';
+    side.appendChild(vrow);
+
+    ui.h(side, "Who makes the rules?");
+    ui.segmented(side, {
+      value: state.mode,
+      options: [
+        { value: "open", label: "Open access" },
+        { value: "quota", label: "Top-down quota" },
+        { value: "ostrom", label: "Self-governed" }
+      ],
+      onChange: function (v) { state.mode = v; store.set("mode", v); modeNote(); }
+    });
+    var noteEl = ui.el("p", "hint", "");
+    side.appendChild(noteEl);
+    function modeNote() {
+      noteEl.innerHTML = state.mode === "open"
+        ? "<b>Open access:</b> add cows while it pays. Nobody counts the cost to the grass. This is Hardin's tragedy."
+        : state.mode === "quota"
+        ? "<b>Quota:</b> a central authority caps the total herd at a sustainable level. Works \u2014 if the cap is right and enforced."
+        : "<b>Self-governed:</b> herders watch the grass and hold back to keep it healthy. Ostrom's Nobel-winning finding: communities can do this themselves.";
+    }
+    modeNote();
+
+    ui.h(side, "Conditions");
+    ui.slider(side, { label: "Number of herders", min: 2, max: 12, step: 1, value: state.H,
+      onInput: function (v) { state.H = v; store.set("H", v); reset(); layout(); draw(); } });
+    ui.slider(side, { label: "Grass regrowth speed", min: 10, max: 55, step: 1, value: Math.round(state.r * 100),
+      fmt: function (v) { return (v / 100).toFixed(2); },
+      onInput: function (v) { state.r = v / 100; store.set("r", state.r); draw(); } });
+
+    var row = ui.btnRow(side);
+    var playBtn = ui.button(row, { label: "\u25B6 Play", variant: "blue", onClick: function () {
+      if (loop.isPlaying()) loop.pause(); else loop.play(); sync(); } });
+    ui.button(row, { label: "Year +1", variant: "ghost", onClick: function () { loop.pause(); sync(); step(); draw(); } });
+    ui.button(row, { label: "Reset", variant: "ghost", onClick: function () { loop.pause(); sync(); reset(); layout(); draw(); } });
+    function sync() { playBtn.textContent = loop.isPlaying() ? "\u275A\u275A Pause" : "\u25B6 Play"; }
+
+    side.appendChild(ui.el("p", "hint", "Run <b>open access</b> with many herders until the grass crashes \u2014 then switch to <b>self-governed</b> and watch it recover."));
+
+    reset(); layout(); draw();
+    var unsub = PP.onResize(function () { layout(); draw(); });
+    return { destroy: function () { loop.pause(); unsub(); } };
+  }
+
+  /* ---- thumb + comic ---- */
+  function thumb(st) {
+    st.clear();
+    var W = st.w, H = st.h;
+    st.ctx.fillStyle = "#7FB36F"; st.ctx.fillRect(0, H * 0.45, W, H * 0.55);
+    st.ctx.fillStyle = "#EAF1F6"; st.ctx.fillRect(0, 0, W, H * 0.45);
+    cow(st.rc, st.ctx, W * 0.32, H * 0.62, Math.min(20, W / 12), 4);
+    cow(st.rc, st.ctx, W * 0.62, H * 0.7, Math.min(20, W / 12), 9);
+    PP.figure(st.rc, st.ctx, W * 0.84, H * 0.7, H * 0.4, { color: C.coral, seed: 3, mood: "happy" });
+  }
+
+  var comicCaps = [
+    "One more cow? All mine. The cost is everyone's.",
+    "So everyone reasons exactly the same way.",
+    "And the grass that fed them all is gone."
+  ];
+  function comic(st, i) {
+    var W = st.w, H = st.h, c = st.ctx;
+    st.clear();
+    c.fillStyle = "#EAF1F6"; c.fillRect(0, 0, W, H * 0.4);
+    var green = i === 2 ? "#B79A5B" : "#7FB36F";
+    c.fillStyle = green; c.fillRect(0, H * 0.4, W, H * 0.6);
+    if (i === 0) {
+      cow(st.rc, c, W * 0.4, H * 0.62, Math.min(22, W / 9), 4);
+      PP.figure(st.rc, c, W * 0.75, H * 0.66, H * 0.46, { color: C.coral, seed: 2, mood: "happy" });
+      PP.arrow(st.rc, W * 0.62, H * 0.55, W * 0.5, H * 0.58, { color: C.violet, strokeWidth: 2.2 });
+    } else if (i === 1) {
+      for (var k = 0; k < 4; k++) cow(st.rc, c, W * (0.2 + k * 0.2), H * (0.55 + (k % 2) * 0.18), Math.min(16, W / 12), k * 3 + 1);
+      for (var h = 0; h < 3; h++) PP.figure(st.rc, c, W * (0.2 + h * 0.3), H * 0.86, H * 0.3, { color: [C.coral, C.blue, C.violet][h], seed: h + 10, mood: "happy" });
+    } else {
+      for (var t = 0; t < 3; t++) PP.figure(st.rc, c, W * (0.25 + t * 0.27), H * 0.7, H * 0.42, { color: [C.coral, C.blue, C.violet][t], seed: t + 20, mood: "sad" });
+    }
+  }
+
+  PP.sims.commons = { mount: mount, thumb: thumb, comic: comic, comicCaps: comicCaps };
+})(window);
+
+</script>
+  <!-- js/sims/cooperation.js -->
+<script>
+/* =========================================================================
+   sims/cooperation.js — The Evolution of Cooperation (Iterated PD)
+   Axelrod (1984). Round-robin tournament + ecological (replicator) evolution.
+   ========================================================================= */
+(function (global) {
+  "use strict";
+  var PP = global.PP, ui = PP.ui, C = PP.COLORS;
+
+  // Payoff matrix (my move, opp move) -> my points.  T>R>P>S, 2R>T+S.
+  var T = 5, R = 3, P = 1, S = 0;
+  function payoff(me, opp) {
+    if (me === "C") return opp === "C" ? R : S;
+    return opp === "C" ? T : P;
+  }
+
+  // Strategy roster. play(myHist, oppHist, rnd) -> "C" | "D"
+  var STRATS = [
+    { key: "tft",  name: "Tit-for-Tat",  color: C.blue,   on: true,
+      blurb: "Cooperate first, then copy your last move.",
+      play: function (m, o) { return o.length ? o[o.length - 1] : "C"; } },
+    { key: "allc", name: "Always Cooperate", color: C.green, on: true,
+      blurb: "A pure optimist. Always offers a hand.",
+      play: function () { return "C"; } },
+    { key: "alld", name: "Always Defect", color: C.coral, on: true,
+      blurb: "A pure cynic. Always betrays.",
+      play: function () { return "D"; } },
+    { key: "grud", name: "Grudger",       color: C.violet, on: true,
+      blurb: "Nice \u2014 until you cross it once. Then never again.",
+      play: function (m, o) { return o.indexOf("D") >= 0 ? "D" : "C"; } },
+    { key: "gtft", name: "Generous TFT",  color: C.greenInk, on: false,
+      blurb: "Tit-for-Tat, but forgives betrayal ~1 time in 10.",
+      play: function (m, o, rnd) {
+        if (!o.length) return "C";
+        if (o[o.length - 1] === "C") return "C";
+        return rnd() < 0.1 ? "C" : "D";
+      } },
+    { key: "rand", name: "Random",        color: C.gold,   on: false,
+      blurb: "A coin flip every round. Unreadable, unreliable.",
+      play: function (m, o, rnd) { return rnd() < 0.5 ? "C" : "D"; } }
+  ];
+  function byKey(k) { for (var i = 0; i < STRATS.length; i++) if (STRATS[i].key === k) return STRATS[i]; }
+
+  // One match: average per-round score for A against B (and B against A).
+  function match(a, b, rounds, noise, seed) {
+    var rnd = PP.rng(seed);
+    var ha = [], hb = [], sa = 0, sb = 0;
+    for (var i = 0; i < rounds; i++) {
+      var ia = a.play(ha, hb, rnd), ib = b.play(hb, ha, rnd);
+      if (rnd() < noise) ia = ia === "C" ? "D" : "C";
+      if (rnd() < noise) ib = ib === "C" ? "D" : "C";
+      sa += payoff(ia, ib); sb += payoff(ib, ia);
+      ha.push(ia); hb.push(ib);
+    }
+    return [sa / rounds, sb / rounds];
+  }
+
+  function mount(ctx) {
+    var st = new PP.Stage(ctx.stageCanvas);
+    var side = ctx.sideEl, store = ctx.store;
+
+    var saved = store.get("on", null);
+    if (saved) STRATS.forEach(function (s) { s.on = saved.indexOf(s.key) >= 0; });
+
+    var state = {
+      noise: store.get("noise", 0),     // fraction 0..0.25
+      rounds: 64,
+      view: "idle",                      // idle | tournament | evolve
+      ranking: [],                       // [{key,score}]
+      M: null, keys: [],                 // payoff matrix between active strategies
+      pop: {}, hist: {}, gen: 0,         // evolution state
+      demoT: 0
+    };
+
+    function activeKeys() {
+      return STRATS.filter(function (s) { return s.on; }).map(function (s) { return s.key; });
+    }
+
+    // Build per-round payoff matrix M[i][j] = avg score of i vs j.
+    function buildMatrix() {
+      var keys = activeKeys();
+      var M = [];
+      for (var i = 0; i < keys.length; i++) {
+        M[i] = [];
+        for (var j = 0; j < keys.length; j++) {
+          var r = match(byKey(keys[i]), byKey(keys[j]), state.rounds, state.noise, 1000 + i * 31 + j * 7);
+          M[i][j] = r[0];
+        }
+      }
+      state.M = M; state.keys = keys;
+    }
+
+    function runTournament() {
+      buildMatrix();
+      var keys = state.keys, M = state.M, ranking = [];
+      for (var i = 0; i < keys.length; i++) {
+        var tot = 0;
+        for (var j = 0; j < keys.length; j++) tot += M[i][j];   // incl. self-play
+        ranking.push({ key: keys[i], score: tot / keys.length });
+      }
+      ranking.sort(function (a, b) { return b.score - a.score; });
+      state.ranking = ranking;
+      state.view = "tournament";
+    }
+
+    function resetEvolve() {
+      buildMatrix();
+      var keys = state.keys; state.pop = {}; state.hist = {}; state.gen = 0;
+      keys.forEach(function (k) { state.pop[k] = 1 / keys.length; state.hist[k] = [1 / keys.length]; });
+    }
+
+    function evolveStep() {
+      var keys = state.keys, M = state.M;
+      if (!keys.length) return;
+      var fit = [], mean = 0;
+      for (var i = 0; i < keys.length; i++) {
+        var f = 0;
+        for (var j = 0; j < keys.length; j++) f += state.pop[keys[j]] * M[i][j];
+        fit[i] = Math.max(0.0001, f); mean += state.pop[keys[i]] * fit[i];
+      }
+      if (mean <= 0) return;
+      for (var k = 0; k < keys.length; k++) {
+        var np = state.pop[keys[k]] * fit[k] / mean;
+        state.pop[keys[k]] = np;
+        state.hist[keys[k]].push(np);
+        if (state.hist[keys[k]].length > 80) state.hist[keys[k]].shift();
+      }
+      state.gen++;
+    }
+
+    var loop = PP.makeLoop(evolveStep, function () { draw(); }, { stepMs: 460 });
+
+    /* ---------- drawing ---------- */
+    function thoughtBubble(c, x, y, txt, col) {
+      st.rc.circle(x, y, 34, { fill: C.paper, fillStyle: "solid", stroke: C.ink, strokeWidth: 1.6, roughness: 1.1, seed: 5 });
+      PP.text(c, txt, x, y + 7, { size: 20, align: "center", font: "display", weight: "700", color: col });
+    }
+
+    function drawIdle() {
+      var W = st.w, H = st.h, c = st.ctx;
+      st.clear();
+      PP.text(c, "THE ARENA", W / 2, 30, { size: 13, align: "center", font: "display", weight: "700", color: C.inkSoft });
+      // two figures playing a quick looping TFT-vs-ALLD demo
+      var seq = ["C", "C", "D", "D", "C", "D"];
+      var step = Math.floor(state.demoT) % seq.length;
+      var aMove = step === 0 ? "C" : seq[(step - 1) % seq.length];   // TFT copies opp last
+      var bMove = seq[step];
+      var lx = W * 0.32, rx = W * 0.68, fy = H * 0.62, fh = Math.min(150, H * 0.42);
+      PP.figure(st.rc, c, lx, fy, fh, { color: C.blue, seed: 2, mood: aMove === "C" ? "happy" : "angry" });
+      PP.figure(st.rc, c, rx, fy, fh, { color: C.coral, seed: 4, mood: bMove === "C" ? "happy" : "neutral" });
+      thoughtBubble(c, lx, fy - fh * 0.72, aMove, aMove === "C" ? C.greenInk : C.coralInk);
+      thoughtBubble(c, rx, fy - fh * 0.72, bMove, bMove === "C" ? C.greenInk : C.coralInk);
+      PP.text(c, "Tit-for-Tat", lx, fy + fh * 0.62, { size: 12, align: "center", color: C.blueInk });
+      PP.text(c, "Always Defect", rx, fy + fh * 0.62, { size: 12, align: "center", color: C.coralInk });
+      PP.text(c, "Pick the players, then Run the tournament \u2192", W / 2, H - 16, { size: 13, align: "center", font: "hand", color: C.inkSoft });
+    }
+
+    function drawTournament() {
+      var W = st.w, H = st.h, c = st.ctx;
+      st.clear();
+      PP.text(c, "TOURNAMENT \u00B7 average points per round", W / 2, 26, { size: 13, align: "center", font: "display", weight: "700", color: C.inkSoft });
+      var rk = state.ranking, n = rk.length;
+      var top = 48, bottom = H - 24, rowH = (bottom - top) / Math.max(1, n);
+      var maxScore = R; // 3 is the all-cooperate ceiling
+      var barX = 132, barW = W - barX - 54;
+      for (var i = 0; i < n; i++) {
+        var s = byKey(rk[i].key), y = top + rowH * i + rowH * 0.5;
+        PP.figure(st.rc, c, 30, y, Math.min(34, rowH * 0.78), { color: s.color, seed: i + 3, mood: i === 0 ? "happy" : "neutral" });
+        PP.text(c, s.name, 56, y + 4, { size: 12.5, color: C.ink });
+        var w = Math.max(2, barW * PP.clamp(rk[i].score / maxScore, 0, 1));
+        st.rc.rectangle(barX, y - rowH * 0.24, w, rowH * 0.48, { fill: s.color, fillStyle: "solid", stroke: C.ink, strokeWidth: 1.4, roughness: 1.0, seed: i + 20 });
+        PP.text(c, rk[i].score.toFixed(2), barX + w + 8, y + 4, { size: 12, color: C.ink });
+        if (i === 0) PP.text(c, "\u265B winner", barX, y - rowH * 0.30, { size: 12, font: "hand", color: C.gold });
+      }
+    }
+
+    function drawEvolve() {
+      var W = st.w, H = st.h, c = st.ctx;
+      st.clear();
+      PP.text(c, "EVOLUTION \u00B7 generation " + state.gen, W / 2, 24, { size: 13, align: "center", font: "display", weight: "700", color: C.inkSoft });
+      var keys = state.keys;
+      // stacked population bar
+      var bx = 24, bw = W - 48, by = 40, bh = 30, x = bx;
+      for (var i = 0; i < keys.length; i++) {
+        var s = byKey(keys[i]), seg = bw * state.pop[keys[i]];
+        if (seg > 0.5) {
+          c.fillStyle = s.color; c.fillRect(x, by, seg, bh);
+          if (seg > 26) PP.text(c, Math.round(state.pop[keys[i]] * 100) + "%", x + seg / 2, by + bh * 0.66, { size: 11, align: "center", color: "#fff", weight: "700" });
+        }
+        x += seg;
+      }
+      st.rc.rectangle(bx, by, bw, bh, { stroke: C.ink, strokeWidth: 1.6, roughness: 0.8, seed: 9 });
+      // share-over-time line chart
+      var cx = 40, cy = by + bh + 28, cw = W - 80, ch = H - cy - 64;
+      var series = keys.map(function (k) { return { color: byKey(k).color, points: state.hist[k] }; });
+      PP.lineChart(st.rc, c, cx, cy, cw, ch, series, { yMax: 1, yMin: 0, label: "population share over generations" });
+      // legend of figures sized by current share
+      var ly = H - 22, gap = W / (keys.length + 1);
+      for (var j = 0; j < keys.length; j++) {
+        var sj = byKey(keys[j]);
+        var fh = 16 + 26 * state.pop[keys[j]];
+        PP.figure(st.rc, c, gap * (j + 1), ly, fh, { color: sj.color, seed: j + 30, face: false });
+      }
+    }
+
+    function draw() {
+      if (state.view === "tournament") drawTournament();
+      else if (state.view === "evolve") drawEvolve();
+      else drawIdle();
+      var lead = "\u2014";
+      if (state.view === "tournament" && state.ranking.length) lead = byKey(state.ranking[0].key).name;
+      else if (state.view === "evolve" && state.keys.length) {
+        var best = state.keys[0]; for (var i = 1; i < state.keys.length; i++) if (state.pop[state.keys[i]] > state.pop[best]) best = state.keys[i];
+        lead = byKey(best).name + " (" + Math.round(state.pop[best] * 100) + "%)";
+      }
+      update({
+        lead: { text: lead },
+        noise: { text: Math.round(state.noise * 100) + "%" },
+        phase: { text: state.view === "evolve" ? "Generation " + state.gen : state.view === "tournament" ? "Ranked" : "Ready" }
+      });
+    }
+
+    // gentle idle animation
+    var idleRaf = null;
+    function idleTick() {
+      if (state.view !== "idle") { idleRaf = null; return; }
+      state.demoT += 0.04; draw();
+      idleRaf = global.requestAnimationFrame(idleTick);
+    }
+
+    /* ---------- side panel ---------- */
+    var update = ui.readout(side, [
+      { key: "lead", label: "Leading strategy" },
+      { key: "phase", label: "Status" },
+      { key: "noise", label: "Misread chance" }
+    ]);
+
+    ui.h(side, "Players in the arena");
+    var chips = ui.el("div", "");
+    chips.style.cssText = "display:flex;flex-wrap:wrap;gap:6px;margin:2px 0 4px";
+    side.appendChild(chips);
+    STRATS.forEach(function (s) {
+      var b = ui.el("button", "");
+      b.type = "button";
+      b.title = s.blurb;
+      b.style.cssText = "display:inline-flex;align-items:center;gap:6px;border:1.5px solid var(--ink);border-radius:999px;padding:4px 10px;font:600 12px/1 var(--body);cursor:pointer;background:" + (s.on ? s.color : "transparent") + ";color:" + (s.on ? "#fff" : "var(--ink)");
+      b.innerHTML = '<i style="width:9px;height:9px;border-radius:50%;background:' + (s.on ? "#fff" : s.color) + '"></i>' + s.name;
+      b.addEventListener("click", function () {
+        s.on = !s.on;
+        if (activeKeys().length < 2) { s.on = true; return; } // keep at least 2
+        b.style.background = s.on ? s.color : "transparent";
+        b.style.color = s.on ? "#fff" : "var(--ink)";
+        b.querySelector("i").style.background = s.on ? "#fff" : s.color;
+        store.set("on", activeKeys());
+        // refresh whatever view is showing
+        if (state.view === "tournament") runTournament();
+        else if (state.view === "evolve") { loop.pause(); sync(); resetEvolve(); }
+        draw();
+      });
+      chips.appendChild(b);
+    });
+    side.appendChild(ui.el("p", "hint", "Tap to add or remove a strategy. Hover for what each one does."));
+
+    ui.h(side, "Conditions");
+    ui.slider(side, { label: "Chance a move is misread", min: 0, max: 25, step: 1, value: Math.round(state.noise * 100),
+      fmt: function (v) { return v + "%"; },
+      onInput: function (v) {
+        state.noise = v / 100; store.set("noise", state.noise);
+        if (state.view === "tournament") runTournament();
+        else if (state.view === "evolve") { loop.pause(); sync(); resetEvolve(); }
+        draw();
+      } });
+
+    var row = ui.btnRow(side);
+    ui.button(row, { label: "Run tournament", variant: "blue", onClick: function () {
+      loop.pause(); sync(); if (idleRaf) { global.cancelAnimationFrame(idleRaf); idleRaf = null; }
+      runTournament(); draw();
+    } });
+    var evBtn = ui.button(row, { label: "\u25B6 Evolve", variant: "ghost", onClick: function () {
+      if (idleRaf) { global.cancelAnimationFrame(idleRaf); idleRaf = null; }
+      if (state.view !== "evolve") { state.view = "evolve"; resetEvolve(); }
+      if (loop.isPlaying()) loop.pause(); else loop.play();
+      sync(); draw();
+    } });
+    ui.button(row, { label: "Reset", variant: "ghost", onClick: function () {
+      loop.pause(); sync(); state.view = "idle"; state.demoT = 0;
+      if (!idleRaf) idleTick();
+    } });
+    function sync() { evBtn.textContent = loop.isPlaying() ? "\u275A\u275A Pause" : "\u25B6 Evolve"; }
+
+    side.appendChild(ui.el("p", "hint", "Run the tournament with <b>Always Defect</b> in the mix \u2014 then hit <b>Evolve</b>. Watch the cynics feast on the optimists, then starve once only the wary are left."));
+
+    /* ---------- init ---------- */
+    function layout() { st.fit(); }
+    layout(); idleTick();
+    var unsub = PP.onResize(function () { layout(); draw(); });
+    return { destroy: function () { loop.pause(); if (idleRaf) global.cancelAnimationFrame(idleRaf); unsub(); } };
+  }
+
+  /* ---------- thumb + comic ---------- */
+  function thumb(st) {
+    st.clear();
+    var W = st.w, H = st.h;
+    PP.figure(st.rc, st.ctx, W * 0.34, H * 0.62, H * 0.5, { color: C.blue, seed: 2, mood: "happy" });
+    PP.figure(st.rc, st.ctx, W * 0.66, H * 0.62, H * 0.5, { color: C.coral, seed: 5, mood: "neutral" });
+    PP.arrow(st.rc, W * 0.46, H * 0.4, W * 0.54, H * 0.4, { color: C.greenInk, strokeWidth: 2 });
+    PP.arrow(st.rc, W * 0.54, H * 0.5, W * 0.46, H * 0.5, { color: C.greenInk, strokeWidth: 2 });
+  }
+
+  var comicCaps = [
+    "Betray, and you win big \u2014 this once.",
+    "But you'll meet again. And again.",
+    "So copy kindness, punish betrayal: Tit-for-Tat wins."
+  ];
+  function comic(st, i) {
+    var W = st.w, H = st.h, c = st.ctx;
+    st.clear();
+    if (i === 0) {
+      PP.figure(st.rc, c, W * 0.3, H * 0.6, H * 0.5, { color: C.coral, seed: 2, mood: "happy" });
+      PP.figure(st.rc, c, W * 0.7, H * 0.6, H * 0.5, { color: C.blue, seed: 4, mood: "sad" });
+      PP.text(c, "+5", W * 0.3, H * 0.22, { size: 24, align: "center", font: "display", weight: "700", color: C.greenInk });
+      PP.text(c, "0", W * 0.7, H * 0.22, { size: 24, align: "center", font: "display", weight: "700", color: C.coralInk });
+    } else if (i === 1) {
+      for (var k = 0; k < 3; k++) {
+        PP.figure(st.rc, c, W * (0.25 + k * 0.25), H * 0.6, H * 0.4, { color: k % 2 ? C.coral : C.blue, seed: k + 6, mood: "neutral" });
+        if (k < 2) PP.arrow(st.rc, W * (0.32 + k * 0.25), H * 0.6, W * (0.43 + k * 0.25), H * 0.6, { color: C.inkSoft, strokeWidth: 1.6 });
+      }
+      PP.text(c, "round after round\u2026", W / 2, H * 0.2, { size: 18, align: "center", font: "hand", color: C.inkSoft });
+    } else {
+      PP.figure(st.rc, c, W * 0.5, H * 0.62, H * 0.55, { color: C.blue, seed: 3, mood: "happy" });
+      PP.text(c, "\u265B", W * 0.5, H * 0.26, { size: 30, align: "center", color: C.gold });
+      PP.text(c, "Tit-for-Tat", W * 0.5, H * 0.92, { size: 16, align: "center", font: "hand", color: C.blueInk });
+    }
+  }
+
+  PP.sims.cooperation = { mount: mount, thumb: thumb, comic: comic, comicCaps: comicCaps };
+})(window);
+
+</script>
+  <!-- js/sims/median-voter.js -->
+<script>
+/* =========================================================================
+   sims/median-voter.js — The Median Voter Theorem
+   Hotelling (1929) / Black (1948) / Downs (1957).
+   Voters on a 1-D spectrum; candidates hill-climb toward vote-maximising spots.
+   ========================================================================= */
+(function (global) {
+  "use strict";
+  var PP = global.PP, ui = PP.ui, C = PP.COLORS;
+
+  function mount(ctx) {
+    var st = new PP.Stage(ctx.stageCanvas);
+    var side = ctx.sideEl, store = ctx.store;
+
+    var N = 180;
+    var state = {
+      shape: store.get("shape", "united"),
+      abstain: store.get("abstain", false),
+      third: store.get("third", false),
+      alienation: store.get("alien", 0.22),
+      voters: [],
+      cands: [
+        { id: "A", x: 0.28, color: C.blue,   name: "Blue" },
+        { id: "B", x: 0.72, color: C.coral,  name: "Coral" },
+        { id: "T", x: 0.50, color: C.gold,   name: "Gold" }
+      ]
+    };
+
+    function gen() {
+      var rnd = PP.rng(42), v = [];
+      function bell(m, s) { // crude gaussian via averaging
+        var x = 0; for (var i = 0; i < 4; i++) x += rnd(); x = (x / 4 - 0.5) * 2; return PP.clamp(m + x * s, 0.02, 0.98);
+      }
+      for (var i = 0; i < N; i++) {
+        if (state.shape === "united") v.push(bell(0.5, 0.34));
+        else if (state.shape === "divided") v.push(rnd() < 0.5 ? bell(0.27, 0.16) : bell(0.73, 0.16));
+        else v.push(PP.clamp(rnd(), 0.02, 0.98)); // scattered / uniform
+      }
+      v.sort(function (a, b) { return a - b; });
+      state.voters = v;
+    }
+
+    function active() {
+      return state.third ? state.cands : state.cands.slice(0, 2);
+    }
+    function medianPos() { return state.voters[(state.voters.length / 2) | 0]; }
+
+    // vote tally for a hypothetical position of one candidate
+    function tally(overrideId, overrideX) {
+      var cs = active();
+      var counts = {}; cs.forEach(function (c) { counts[c.id] = 0; });
+      var away = 0;
+      for (var i = 0; i < state.voters.length; i++) {
+        var p = state.voters[i], bestId = null, bestD = 1e9;
+        for (var k = 0; k < cs.length; k++) {
+          var cx = cs[k].id === overrideId ? overrideX : cs[k].x;
+          var d = Math.abs(p - cx);
+          if (d < bestD) { bestD = d; bestId = cs[k].id; }
+        }
+        if (state.abstain && bestD > state.alienation) { away++; continue; }
+        counts[bestId]++;
+      }
+      counts._away = away;
+      return counts;
+    }
+    function votesFor(id, x) { return tally(id, x)[id]; }
+
+    function bestRespond(c) {
+      var stepSz = 0.035, best = c.x, bestV = votesFor(c.id, c.x);
+      [-stepSz, stepSz, -stepSz * 2, stepSz * 2].forEach(function (d) {
+        var nx = PP.clamp(c.x + d, 0.02, 0.98), v = votesFor(c.id, nx);
+        if (v > bestV) { bestV = v; best = nx; }
+      });
+      c._target = best;
+    }
+
+    function step() {
+      var cs = active();
+      cs.forEach(bestRespond);
+      cs.forEach(function (c) { c.x += (c._target - c.x) * 0.45; });
+    }
+
+    var loop = PP.makeLoop(step, function () { draw(); }, { stepMs: 220 });
+
+    /* ---------- drawing ---------- */
+    var geom = {};
+    function layout() {
+      st.fit();
+      geom.mL = 36; geom.mR = st.w - 36;
+      geom.lineY = st.h * 0.66;
+      geom.dot = PP.clamp((geom.mR - geom.mL) / N * 1.4, 4, 8);
+    }
+    function X(p) { return geom.mL + p * (geom.mR - geom.mL); }
+
+    function draw() {
+      var W = st.w, H = st.h, c = st.ctx;
+      st.clear();
+      var cs = active();
+      var t = tally(null, null);
+
+      // spectrum line + labels
+      st.rc.line(geom.mL, geom.lineY, geom.mR, geom.lineY, { stroke: C.ink, strokeWidth: 2, roughness: 0.8, seed: 4 });
+      PP.text(c, "LEFT", geom.mL, geom.lineY + 22, { size: 12, font: "display", weight: "700", color: C.inkSoft });
+      PP.text(c, "RIGHT", geom.mR, geom.lineY + 22, { size: 12, align: "right", font: "display", weight: "700", color: C.inkSoft });
+
+      // median marker
+      var mp = medianPos(), mx = X(mp);
+      c.save(); c.setLineDash([4, 4]); c.strokeStyle = C.violet; c.lineWidth = 1.6;
+      c.beginPath(); c.moveTo(mx, geom.lineY - H * 0.5); c.lineTo(mx, geom.lineY + 8); c.stroke(); c.restore();
+      PP.text(c, "median voter", mx, geom.lineY - H * 0.5 - 6, { size: 11, align: "center", font: "hand", color: C.violet });
+
+      // voters as a dot-histogram rising from the line
+      var bins = 70, stack = new Array(bins).fill(0);
+      for (var i = 0; i < state.voters.length; i++) {
+        var p = state.voters[i], bx = X(p), bi = PP.clamp(Math.floor(p * bins), 0, bins - 1);
+        // allegiance
+        var bestId = null, bestD = 1e9;
+        for (var k = 0; k < cs.length; k++) { var d = Math.abs(p - cs[k].x); if (d < bestD) { bestD = d; bestId = cs[k].id; } }
+        var away = state.abstain && bestD > state.alienation;
+        var col = away ? "#C9C3B5" : cs.filter(function (x) { return x.id === bestId; })[0].color;
+        var yy = geom.lineY - 6 - stack[bi] * (geom.dot + 1);
+        stack[bi]++;
+        c.fillStyle = col;
+        c.beginPath(); c.arc(bx, yy, geom.dot / 2, 0, 7); c.fill();
+      }
+
+      // candidates as figures on the line, with tally bars
+      cs.forEach(function (cand, idx) {
+        var cx = X(cand.x);
+        PP.figure(st.rc, c, cx, geom.lineY - 2, Math.min(58, H * 0.2), { color: cand.color, seed: idx + 2,
+          mood: t[cand.id] === Math.max(t.A || 0, t.B || 0, state.third ? (t.T || 0) : 0) ? "happy" : "neutral" });
+        // little flag pole
+        PP.text(c, t[cand.id], cx, geom.lineY + 40, { size: 13, align: "center", font: "display", weight: "700", color: cand.color });
+      });
+
+      // turnout note
+      var turnout = Math.round((1 - (t._away || 0) / state.voters.length) * 100);
+      PP.text(c, "turnout " + turnout + "%", W - 14, 22, { size: 12, align: "right", color: C.inkSoft });
+
+      // readout
+      var cap = state.voters.length;
+      var vals = {
+        a: { text: t.A + " votes", pct: t.A / cap * 100 },
+        b: { text: t.B + " votes", pct: t.B / cap * 100 },
+        gap: { text: Math.round(Math.abs(state.cands[0].x - state.cands[1].x) * 100) + " pts apart" },
+        turn: { text: turnout + "%" }
+      };
+      if (state.third) vals.t3 = { text: t.T + " votes", pct: t.T / cap * 100 };
+      update(vals);
+    }
+
+    /* ---------- side panel ---------- */
+    var update, playBtn;
+    function sync() { if (playBtn) playBtn.textContent = loop.isPlaying() ? "\u275A\u275A Pause" : "\u25B6 Let them campaign"; }
+    function resetPos() { state.cands[0].x = 0.28; state.cands[1].x = 0.72; state.cands[2].x = 0.5; }
+
+    function buildPanel() {
+      side.innerHTML = "";
+      var rows = [
+        { key: "a", label: "Blue candidate", bar: true, color: C.blue },
+        { key: "b", label: "Coral candidate", bar: true, color: C.coral }
+      ];
+      if (state.third) rows.push({ key: "t3", label: "Gold candidate", bar: true, color: C.gold });
+      rows.push({ key: "turn", label: "Turnout" });
+      rows.push({ key: "gap", label: "Distance between rivals" });
+      update = ui.readout(side, rows);
+
+      ui.h(side, "Shape of the electorate");
+      ui.segmented(side, {
+        value: state.shape,
+        options: [
+          { value: "united", label: "United" },
+          { value: "divided", label: "Divided" },
+          { value: "scattered", label: "Scattered" }
+        ],
+        onChange: function (v) { state.shape = v; store.set("shape", v); gen(); resetPos(); draw(); shapeNote(); }
+      });
+      var noteEl = ui.el("p", "hint", ""); side.appendChild(noteEl);
+      function shapeNote() {
+        noteEl.innerHTML = state.shape === "united"
+          ? "<b>United:</b> most voters cluster near the centre \u2014 the classic single-peaked case where the theorem bites hardest."
+          : state.shape === "divided"
+          ? "<b>Divided:</b> two camps, an empty middle. The median sits in no-man's-land and chasing it can cost a candidate their base."
+          : "<b>Scattered:</b> opinion spread evenly. The median is still decisive, but the crowd is harder to please.";
+      }
+      shapeNote();
+
+      ui.h(side, "Break the theorem");
+      ui.toggle(side, { label: "Let voters stay home", value: state.abstain, offLabel: "Everyone votes", onLabel: "Abstention",
+        onChange: function (b) { state.abstain = b; store.set("abstain", b); draw(); } });
+      ui.toggle(side, { label: "Add a third candidate", value: state.third, offLabel: "Two", onLabel: "Three",
+        onChange: function (b) { state.third = b; store.set("third", b); loop.pause(); resetPos(); buildPanel(); sync(); draw(); } });
+
+      var row = ui.btnRow(side);
+      playBtn = ui.button(row, { label: "\u25B6 Let them campaign", variant: "blue", onClick: function () {
+        if (loop.isPlaying()) loop.pause(); else loop.play(); sync(); } });
+      ui.button(row, { label: "Step", variant: "ghost", onClick: function () { loop.pause(); sync(); step(); draw(); } });
+      ui.button(row, { label: "Reset", variant: "ghost", onClick: function () { loop.pause(); sync(); resetPos(); draw(); } });
+      sync();
+
+      side.appendChild(ui.el("p", "hint", "Start <b>United</b> and let them campaign \u2014 watch both rivals get sucked into the middle. Then switch the crowd to <b>Divided</b> or add a <b>third candidate</b> and watch the tidy result fall apart."));
+    }
+
+    /* ---------- init ---------- */
+    gen(); layout(); buildPanel(); draw();
+    var unsub = PP.onResize(function () { layout(); draw(); });
+    return { destroy: function () { loop.pause(); unsub(); } };
+  }
+
+  /* ---------- thumb + comic ---------- */
+  function thumb(st) {
+    st.clear();
+    var W = st.w, H = st.h, c = st.ctx;
+    st.rc.line(W * 0.1, H * 0.7, W * 0.9, H * 0.7, { stroke: C.ink, strokeWidth: 2, roughness: 0.8, seed: 3 });
+    for (var i = 0; i < 9; i++) { c.fillStyle = "#C9C3B5"; c.beginPath(); c.arc(W * (0.18 + i * 0.08), H * (0.5 - (i === 4 ? 0.12 : 0)), 4, 0, 7); c.fill(); }
+    PP.figure(st.rc, c, W * 0.42, H * 0.7, H * 0.36, { color: C.blue, seed: 2, mood: "happy" });
+    PP.figure(st.rc, c, W * 0.58, H * 0.7, H * 0.36, { color: C.coral, seed: 5, mood: "happy" });
+  }
+
+  var comicCaps = [
+    "Two rivals stake out their ground.",
+    "Each edges toward the centre to grab more votes.",
+    "They collide at the median \u2014 and sound identical."
+  ];
+  function comic(st, i) {
+    var W = st.w, H = st.h, c = st.ctx;
+    st.clear();
+    st.rc.line(W * 0.08, H * 0.72, W * 0.92, H * 0.72, { stroke: C.ink, strokeWidth: 2, roughness: 0.8, seed: 3 });
+    var ax = [0.25, 0.4, 0.49][i], bx = [0.75, 0.6, 0.51][i];
+    PP.figure(st.rc, c, W * ax, H * 0.7, H * 0.5, { color: C.blue, seed: 2, mood: "neutral" });
+    PP.figure(st.rc, c, W * bx, H * 0.7, H * 0.5, { color: C.coral, seed: 5, mood: "neutral" });
+    if (i < 2) {
+      PP.arrow(st.rc, W * (ax + 0.06), H * 0.4, W * (ax + 0.16), H * 0.4, { color: C.blueInk, strokeWidth: 2 });
+      PP.arrow(st.rc, W * (bx - 0.06), H * 0.4, W * (bx - 0.16), H * 0.4, { color: C.coralInk, strokeWidth: 2 });
+    } else {
+      PP.text(c, "?!", W * 0.5, H * 0.3, { size: 26, align: "center", font: "display", weight: "700", color: C.violet });
+    }
+  }
+
+  PP.sims["median-voter"] = { mount: mount, thumb: thumb, comic: comic, comicCaps: comicCaps };
+})(window);
+
+</script>
+  <!-- js/sims/norm-cascade.js -->
+<script>
+/* =========================================================================
+   sims/norm-cascade.js — Threshold Models & How Norms Flip
+   Granovetter (1978) threshold cascades + Kuran (1995) preference falsification.
+   ========================================================================= */
+(function (global) {
+  "use strict";
+  var PP = global.PP, ui = PP.ui, C = PP.COLORS;
+
+  function mount(ctx) {
+    var st = new PP.Stage(ctx.stageCanvas);
+    var side = ctx.sideEl, store = ctx.store;
+
+    var N = 84;
+    var state = {
+      shape: store.get("shape", "mixed"),
+      instig: store.get("instig", 2),
+      fear: store.get("fear", 0),          // Kuran: inflates expressed threshold
+      reveal: store.get("reveal", false),
+      thr: [],          // true private thresholds (fraction of crowd)
+      active: [],       // bool
+      round: 0, hist: [], settled: false
+    };
+
+    // Thresholds are INTEGER counts: how many others must already act before
+    // this person joins (Granovetter's 1978 formulation).
+    function generate() {
+      var rnd = PP.rng(2024), thr = [];
+      for (var i = 0; i < N; i++) {
+        var t;
+        if (state.shape === "cautious") t = Math.round((0.45 + 0.5 * rnd()) * N);
+        else if (state.shape === "mixed") t = i;                       // canonical 0..N-1 ramp
+        else t = rnd() < 0.5 ? (1 + Math.floor(rnd() * 6))             // two camps: eager (1-6)
+                             : Math.round((0.70 + 0.25 * rnd()) * N);  //            vs immovable
+        thr.push(t);
+      }
+      // With no instigators, remove the natural spark so the mixed crowd can't self-start.
+      if (state.shape === "mixed" && state.instig === 0) for (var s = 0; s < N; s++) thr[s] += 1;
+      // designate instigators (threshold 0) at stable random positions
+      var order = []; for (var k = 0; k < N; k++) order.push(k);
+      var r2 = PP.rng(7); for (var a = N - 1; a > 0; a--) { var j = (r2() * (a + 1)) | 0; var tmp = order[a]; order[a] = order[j]; order[j] = tmp; }
+      for (var m = 0; m < state.instig && m < N; m++) thr[order[m]] = 0;
+      state.thr = thr;
+      reset();
+    }
+
+    function reset() {
+      state.active = state.thr.map(function (t) { return t <= 0; });  // only threshold-zero start
+      state.round = 0; state.settled = false;
+      state.hist = [frac()];
+    }
+    function activeCount() { var n = 0; for (var i = 0; i < N; i++) if (state.active[i]) n++; return n; }
+    function frac() { return activeCount() / N; }
+    function effThr(i) { return state.thr[i] + Math.round(state.fear * N); }  // fear inflates the count needed
+    function secretlyReady() {
+      var c = activeCount(), n = 0;
+      for (var i = 0; i < N; i++) if (!state.active[i] && state.thr[i] <= c && effThr(i) > c) n++;
+      return n;
+    }
+
+    function step() {
+      if (state.settled) return;
+      var c = activeCount(), changed = false, next = state.active.slice();
+      for (var i = 0; i < N; i++) {
+        if (!state.active[i] && effThr(i) <= c) { next[i] = true; changed = true; }
+      }
+      state.active = next; state.round++;
+      state.hist.push(frac()); if (state.hist.length > 80) state.hist.shift();
+      if (!changed) { state.settled = true; if (loop.isPlaying()) { loop.pause(); sync(); } }
+    }
+
+    var loop = PP.makeLoop(step, function () { draw(); }, { stepMs: 360 });
+
+    /* ---------- drawing ---------- */
+    var geom = {};
+    function layout() {
+      st.fit();
+      var W = st.w, H = st.h - 84; // leave room for chart strip at bottom
+      var cols = Math.max(6, Math.round(Math.sqrt(N * W / Math.max(1, H))));
+      cols = Math.min(cols, N);
+      var rows = Math.ceil(N / cols);
+      var cell = Math.min((W - 24) / cols, (H - 24) / rows);
+      geom.cols = cols; geom.rows = rows; geom.cell = cell;
+      geom.ox = (W - cols * cell) / 2 + 2;
+      geom.oy = 14;
+      geom.chartY = st.h - 64;
+    }
+
+    function verdict() {
+      var f = frac();
+      if (f < 0.2) return ["Fizzled out", C.coralInk];
+      if (f < 0.8) return ["Partial flip", C.gold];
+      return ["Full cascade", C.greenInk];
+    }
+
+    function draw() {
+      var W = st.w, H = st.h, c = st.ctx;
+      st.clear();
+      var f = frac(), cnt = activeCount(), cell = geom.cell, sz = cell * 0.92;
+      for (var i = 0; i < N; i++) {
+        var r = Math.floor(i / geom.cols), col = i % geom.cols;
+        var x = geom.ox + col * cell, y = geom.oy + r * cell;
+        var on = state.active[i];
+        var ready = !on && state.reveal && state.thr[i] <= cnt && effThr(i) > cnt;
+        var fillCol = on ? C.gold : ready ? "#F6E2C2" : "#DAD4C6";
+        var strokeCol = ready ? C.violet : C.ink;
+        PP.token(st.rc, c, x, y, sz, {
+          color: fillCol, stroke: strokeCol,
+          mood: on ? "happy" : ready ? "neutral" : "neutral",
+          seed: i + 3
+        });
+      }
+
+      // bottom chart strip: cascade curve
+      var cx = 14, cy = geom.chartY, cw = W - 28, ch = 50;
+      st.rc.rectangle(cx, cy, cw, ch, { fill: C.paper, fillStyle: "solid", stroke: C.line, strokeWidth: 1.2, roughness: 0.6, seed: 8 });
+      PP.lineChart(st.rc, c, cx + 8, cy + 8, cw - 60, ch - 16,
+        [{ color: C.coral, points: state.hist }], { yMax: 1, yMin: 0 });
+      PP.text(c, Math.round(f * 100) + "% joined", cx + cw - 8, cy + 28, { size: 13, align: "right", font: "display", weight: "700", color: C.coralInk });
+
+      var v = verdict();
+      var vals = {
+        joined: { text: Math.round(f * 100) + "%", pct: f * 100 },
+        rounds: state.round,
+        verdict: { text: v[0] }
+      };
+      if (state.reveal) vals.secret = { text: secretlyReady() + " people" };
+      update(vals);
+      var vEl = side.querySelector("#nc-verdict"); if (vEl) vEl.style.color = v[1];
+    }
+
+    /* ---------- side ---------- */
+    var baseRows = [
+      { key: "joined", label: "Joined the movement", bar: true, color: C.gold },
+      { key: "rounds", label: "Rounds elapsed" }
+    ];
+    var update; // assigned in buildPanel
+    var fearSliderWrap = null;
+
+    function buildPanel() {
+      side.innerHTML = "";
+      var rows = baseRows.slice();
+      if (state.reveal) rows.push({ key: "secret", label: "Secretly ready, too afraid" });
+      update = ui.readout(side, rows);
+      var vrow = ui.el("div", "readout");
+      vrow.innerHTML = '<div class="readout__row"><span class="readout__k">Outcome</span><span class="readout__v" id="nc-verdict" style="font-family:var(--display)"></span></div>';
+      side.appendChild(vrow);
+
+      ui.h(side, "The crowd's thresholds");
+      ui.segmented(side, {
+        value: state.shape,
+        options: [
+          { value: "cautious", label: "Cautious" },
+          { value: "mixed", label: "Mixed" },
+          { value: "twocamps", label: "Two camps" }
+        ],
+        onChange: function (v) { state.shape = v; store.set("shape", v); loop.pause(); sync(); generate(); draw(); shapeNote(); }
+      });
+      var noteEl = ui.el("p", "hint", ""); side.appendChild(noteEl);
+      function shapeNote() {
+        noteEl.innerHTML = state.shape === "cautious"
+          ? "<b>Cautious:</b> almost everyone waits for a big crowd first. The spark rarely catches."
+          : state.shape === "mixed"
+          ? "<b>Mixed:</b> a smooth spread of thresholds \u2014 Granovetter's case where one eager soul can topple the whole square."
+          : "<b>Two camps:</b> some are raring to go, others will never budge. Cascades stall halfway.";
+      }
+      shapeNote();
+
+      ui.h(side, "Conditions");
+      ui.slider(side, { label: "Instigators (threshold zero)", min: 0, max: 10, step: 1, value: state.instig,
+        onInput: function (v) { state.instig = v; store.set("instig", v); loop.pause(); sync(); generate(); draw(); } });
+      ui.slider(side, { label: "Climate of fear", min: 0, max: 50, step: 1, value: Math.round(state.fear * 100),
+        fmt: function (v) { return v + "%"; },
+        onInput: function (v) { state.fear = v / 100; store.set("fear", state.fear); state.settled = false; draw(); } });
+      side.appendChild(ui.el("p", "hint", "<b>Climate of fear</b> is Kuran's preference falsification: people hide what they want, so the dam holds \u2014 until fear drops and it breaks all at once."));
+
+      ui.toggle(side, { label: "Reveal private wishes", value: state.reveal, offLabel: "Hidden", onLabel: "Revealed",
+        onChange: function (b) { state.reveal = b; store.set("reveal", b); buildPanel(); draw(); } });
+
+      var row = ui.btnRow(side);
+      playBtn = ui.button(row, { label: "\u25B6 Light the spark", variant: "blue", onClick: function () {
+        if (loop.isPlaying()) loop.pause(); else { if (state.settled) reset(); loop.play(); } sync(); } });
+      ui.button(row, { label: "Step", variant: "ghost", onClick: function () { loop.pause(); sync(); step(); draw(); } });
+      ui.button(row, { label: "Reset", variant: "ghost", onClick: function () { loop.pause(); sync(); reset(); draw(); } });
+      sync();
+
+      side.appendChild(ui.el("p", "hint", "Try <b>Mixed</b> with <b>2 instigators</b> \u2014 a full cascade. Now drop instigators to <b>1</b>, or raise the <b>climate of fear</b>, and watch the same crowd stay frozen."));
+    }
+    var playBtn;
+    function sync() { if (playBtn) playBtn.textContent = loop.isPlaying() ? "\u275A\u275A Pause" : (state.settled ? "\u21BB Replay" : "\u25B6 Light the spark"); }
+
+    /* ---------- init ---------- */
+    generate(); layout(); buildPanel(); draw();
+    var unsub = PP.onResize(function () { layout(); draw(); });
+    return { destroy: function () { loop.pause(); unsub(); } };
+  }
+
+  /* ---------- thumb + comic ---------- */
+  function thumb(st) {
+    st.clear();
+    var W = st.w, H = st.h, cols = 6, rows = 4;
+    var cell = Math.min(W / (cols + 1), H / (rows + 1));
+    var ox = (W - cols * cell) / 2, oy = (H - rows * cell) / 2;
+    var n = 0;
+    for (var r = 0; r < rows; r++) for (var col = 0; col < cols; col++) {
+      var on = (r * cols + col) < 14;
+      PP.token(st.rc, st.ctx, ox + col * cell, oy + r * cell, cell * 0.9,
+        { color: on ? C.gold : "#DAD4C6", mood: on ? "happy" : "neutral", seed: n++ });
+    }
+  }
+
+  var comicCaps = [
+    "One firebrand acts. Everyone else is watching.",
+    "Each joins once enough others already have.",
+    "The threshold tips \u2014 and the whole square flips at once."
+  ];
+  function comic(st, i) {
+    var W = st.w, H = st.h, c = st.ctx, cols = 6, rows = 4;
+    st.clear();
+    var cell = Math.min(W / (cols + 1), H / (rows + 1));
+    var ox = (W - cols * cell) / 2, oy = (H - rows * cell) / 2;
+    var onCount = [1, 8, 24][i];
+    var n = 0;
+    for (var r = 0; r < rows; r++) for (var col = 0; col < cols; col++) {
+      var on = n < onCount;
+      PP.token(st.rc, c, ox + col * cell, oy + r * cell, cell * 0.9,
+        { color: on ? C.gold : "#DAD4C6", mood: on ? "happy" : "neutral", seed: n });
+      n++;
+    }
+  }
+
+  PP.sims["norm-cascade"] = { mount: mount, thumb: thumb, comic: comic, comicCaps: comicCaps };
+})(window);
+
+</script>
+  <!-- js/app.js -->
+<script>
+/* =========================================================================
+   app.js — router, home page, explorable scaffold, sim lifecycle.
+   ========================================================================= */
+(function (global) {
+  "use strict";
+  var PP = global.PP || (global.PP = {});
+  PP.sims = PP.sims || {};
+
+  var doc = document;
+  var view = doc.getElementById("view");
+  var current = null; // active controller with .destroy()
+
+  /* --------------------------------------------------- resize bus (shared) */
+  var resizeSubs = [];
+  var rT = null;
+  global.addEventListener("resize", function () {
+    if (rT) clearTimeout(rT);
+    rT = setTimeout(function () { resizeSubs.forEach(function (f) { try { f(); } catch (e) {} }); }, 140);
+  });
+  PP.onResize = function (fn) {
+    resizeSubs.push(fn);
+    return function () { var i = resizeSubs.indexOf(fn); if (i >= 0) resizeSubs.splice(i, 1); };
+  };
+
+  /* --------------------------------------------------- localStorage store */
+  PP.makeStore = function (slug) {
+    var ns = "pp:" + slug + ":";
+    return {
+      get: function (k, d) {
+        try { var v = global.localStorage.getItem(ns + k); return v == null ? d : JSON.parse(v); }
+        catch (e) { return d; }
+      },
+      set: function (k, v) {
+        try { global.localStorage.setItem(ns + k, JSON.stringify(v)); } catch (e) {}
+      }
+    };
+  };
+
+  /* --------------------------------------------------------- DOM helpers */
+  function el(tag, cls, html) {
+    var n = doc.createElement(tag);
+    if (cls) n.className = cls;
+    if (html != null) n.innerHTML = html;
+    return n;
+  }
+  function reduceMotion() {
+    return global.matchMedia && global.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  }
+
+  /* ============================================================= HOME ==== */
+  function renderHome() {
+    var wrap = el("div");
+
+    /* ---- hero ---- */
+    var hero = el("section", "hero");
+    hero.innerHTML =
+      '<div class="wrap"><div class="hero__grid">' +
+        '<div>' +
+          '<div class="hero__eyebrow">An explorable field-notebook</div>' +
+          '<h1 class="hero__title">Watch big ideas <span class="scribble">misbehave</span>.</h1>' +
+          '<p class="hero__lede">Famous theories of how societies, markets and politics actually work \u2014 turned into little worlds of hand-drawn people you can poke, tune, and break. Press play and watch the theory happen.</p>' +
+          '<div class="hero__btns">' +
+            '<a class="btn" href="#/f/segregation">Open an experiment</a>' +
+            '<a class="btn btn--ghost" href="#about">How this works</a>' +
+          '</div>' +
+          '<div class="hero__note">five theories &middot; one rule: tinker freely \u2197</div>' +
+        '</div>' +
+        '<div class="hero__stage" aria-hidden="true"><canvas id="heroCanvas"></canvas>' +
+          '<div class="hero__cap">nobody asked for a divided town. they got one anyway.</div>' +
+        '</div>' +
+      '</div></div>';
+    wrap.appendChild(hero);
+
+    /* ---- gallery ---- */
+    var sec = el("section", "sec");
+    sec.id = "experiments";
+    var inner = el("div", "wrap");
+    inner.appendChild(el("div", "sec__head",
+      '<div class="sec__kicker">The experiments</div>' +
+      '<h2 class="sec__title">Pick a world. Run it. Argue with it.</h2>' +
+      '<p class="sec__sub">Each one is a real, citable theory from the social sciences, rebuilt as a simulation you can play with \u2014 with the original sources attached.</p>'));
+    var grid = el("div", "grid-cards");
+    PP.FRAMEWORKS.forEach(function (fw) {
+      var a = el("a", "card");
+      a.href = "#/f/" + fw.slug;
+      a.setAttribute("aria-label", fw.theory + " \u2014 " + fw.pitch);
+      a.innerHTML =
+        '<div class="card__art" style="background:' + tint(fw.accent) + '">' +
+          '<span class="card__tag">' + fw.tag + '</span>' +
+          '<canvas></canvas>' +
+        '</div>' +
+        '<div class="card__body">' +
+          '<div class="card__title">' + fw.theory + '</div>' +
+          '<div class="card__src">' + fw.source + '</div>' +
+          '<div class="card__desc">' + fw.tagline + '</div>' +
+          '<div class="card__go">Run the simulation</div>' +
+        '</div>';
+      grid.appendChild(a);
+      a._fw = fw;
+    });
+    inner.appendChild(grid);
+    sec.appendChild(inner);
+    wrap.appendChild(sec);
+
+    /* ---- about strip ---- */
+    var about = el("section", "sec");
+    about.id = "about";
+    about.innerHTML =
+      '<div class="wrap"><div class="callout callout--gold">' +
+        '<div class="callout__h">What am I looking at?</div>' +
+        '<p>Social scientists often explain the world with <strong>agent-based models</strong>: give a crowd of simple imaginary people a few rules, let them interact, and watch what emerges. The results are frequently surprising \u2014 reasonable individuals producing outcomes none of them wanted. This site stages five of the most famous such ideas as live, tweakable comics.</p>' +
+        '<p style="margin-bottom:0">Every experiment links to its <strong>original paper or book</strong>. The simulations are faithful illustrations of the published models, not data about any specific real place \u2014 use them to build intuition, then go read the source.</p>' +
+      '</div></div>';
+    wrap.appendChild(about);
+
+    view.innerHTML = "";
+    view.appendChild(wrap);
+    doc.title = "The Policy Playground \u2014 explorable theories of how the world works";
+
+    /* mount visuals after layout */
+    var cleanups = [];
+    global.requestAnimationFrame(function () {
+      // hero
+      var hc = doc.getElementById("heroCanvas");
+      if (hc) { var stop = startHero(hc); if (stop) cleanups.push(stop); }
+      // card thumbnails
+      grid.querySelectorAll(".card").forEach(function (card) {
+        var cv = card.querySelector("canvas");
+        var fw = card._fw;
+        try {
+          var st = new PP.Stage(cv);
+          var sim = PP.sims[fw.sim];
+          if (sim && sim.thumb) sim.thumb(st); else genericThumb(st, fw.accent);
+        } catch (e) {}
+      });
+    });
+
+    current = { destroy: function () { cleanups.forEach(function (f) { f(); }); } };
+  }
+
+  function tint(accent) {
+    var map = { coral: "#FCE6EA", blue: "#E2ECF6", green: "#E4F1E6", gold: "#FDF1D6", violet: "#EDE6F4" };
+    return map[accent] || "#F3EFE3";
+  }
+  function accentHex(accent) { return PP.COLORS[accent] || PP.COLORS.gold; }
+
+  function genericThumb(st, accent) {
+    var W = st.w, H = st.h, c = accentHex(accent);
+    st.clear();
+    for (var i = 0; i < 5; i++) {
+      PP.figure(st.rc, st.ctx, W * (0.16 + i * 0.17), H * 0.6, H * 0.5,
+        { color: i % 2 ? c : PP.COLORS.paper, seed: i + 3, mood: "happy" });
+    }
+  }
+
+  /* ----------------------------------------------------- hero animation */
+  function startHero(canvas) {
+    var st = new PP.Stage(canvas);
+    var N = 11, EMPTY = -1;
+    var cells, cellSize, ox, oy;
+    function layout() {
+      st.fit();
+      cellSize = Math.min(st.w, st.h) / (N + 0.6);
+      ox = (st.w - cellSize * N) / 2;
+      oy = (st.h - cellSize * N) / 2;
+    }
+    function seed() {
+      cells = [];
+      for (var i = 0; i < N * N; i++) {
+        var r = Math.random();
+        cells.push(r < 0.12 ? EMPTY : (r < 0.56 ? 0 : 1));
+      }
+    }
+    function neighborsSame(idx) {
+      var x = idx % N, y = (idx / N) | 0, same = 0, tot = 0;
+      for (var dy = -1; dy <= 1; dy++) for (var dx = -1; dx <= 1; dx++) {
+        if (!dx && !dy) continue;
+        var nx = x + dx, ny = y + dy;
+        if (nx < 0 || ny < 0 || nx >= N || ny >= N) continue;
+        var v = cells[ny * N + nx];
+        if (v === EMPTY) continue;
+        tot++; if (v === cells[idx]) same++;
+      }
+      return tot === 0 ? 1 : same / tot;
+    }
+    function step() {
+      var empties = [], unhappy = [];
+      for (var i = 0; i < cells.length; i++) {
+        if (cells[i] === EMPTY) empties.push(i);
+        else if (neighborsSame(i) < 0.4) unhappy.push(i);
+      }
+      PP.shuffle(unhappy);
+      for (var u = 0; u < unhappy.length && empties.length; u++) {
+        var from = unhappy[u];
+        var k = (Math.random() * empties.length) | 0;
+        var to = empties[k];
+        cells[to] = cells[from]; cells[from] = EMPTY;
+        empties[k] = from;
+      }
+    }
+    function draw() {
+      st.clear();
+      for (var i = 0; i < cells.length; i++) {
+        var v = cells[i]; if (v === EMPTY) continue;
+        var x = ox + (i % N) * cellSize, y = oy + ((i / N) | 0) * cellSize;
+        PP.token(st.rc, st.ctx, x, y, cellSize,
+          { color: v === 0 ? PP.COLORS.coral : PP.COLORS.blue, seed: i + 1,
+            mood: neighborsSame(i) < 0.4 ? "sad" : "happy" });
+      }
+    }
+    layout(); seed(); draw();
+    var unsub = PP.onResize(function () { layout(); draw(); });
+    if (reduceMotion()) { for (var k = 0; k < 14; k++) step(); draw(); return unsub; }
+    var loop = PP.makeLoop(function () {
+      step();
+      // reseed gently when settled to keep it alive
+      var anyUnhappy = false;
+      for (var i = 0; i < cells.length; i++) if (cells[i] !== EMPTY && neighborsSame(i) < 0.4) { anyUnhappy = true; break; }
+      if (!anyUnhappy && Math.random() < 0.5) seed();
+    }, draw, { stepMs: 650 });
+    loop.play();
+    return function () { loop.pause(); unsub(); };
+  }
+
+  /* ====================================================== EXPLORABLE ==== */
+  function renderFramework(slug) {
+    var fw = PP.getFramework(slug);
+    if (!fw) { location.hash = "#/"; return; }
+
+    var wrap = el("div", "wrap");
+    var page = el("article", "exp");
+
+    // header
+    var head = el("header", "exp__head");
+    head.innerHTML =
+      '<a class="exp__back" href="#/">All experiments</a>' +
+      '<div class="exp__head" style="border:0;padding:0;margin:14px 0 0">' +
+        '<div class="exp__tag"><span class="tag-dot" style="background:' + accentHex(fw.accent) + '"></span>' + fw.tag + ' &middot; ' + fw.source + '</div>' +
+        '<h1 class="exp__title">' + fw.theory + '</h1>' +
+        '<p class="exp__pitch">' + fw.pitch + '</p>' +
+      '</div>';
+    page.appendChild(head);
+
+    // intro prose
+    var prose = el("div", "prose");
+    prose.innerHTML = fw.intro.join("");
+    page.appendChild(prose);
+
+    // comic strip (if sim provides one)
+    var sim = PP.sims[fw.sim];
+    var comicCanvases = [];
+    if (sim && sim.comic) {
+      var comic = el("div", "comic");
+      var caps = sim.comicCaps || ["", "", ""];
+      for (var p = 0; p < 3; p++) {
+        var panel = el("div", "comic__panel");
+        var cv = el("canvas");
+        panel.appendChild(cv);
+        panel.appendChild(el("div", "comic__cap", caps[p] || ""));
+        comic.appendChild(panel);
+        comicCanvases.push(cv);
+      }
+      page.appendChild(comic);
+    }
+
+    // the lab
+    var lab = el("div", "lab");
+    lab.innerHTML =
+      '<div class="lab__bar"><span class="lab__dot"></span><span class="lab__dot"></span><span class="lab__dot"></span>' +
+        '<span class="lab__name">' + fw.theory.toUpperCase() + ' \u2014 LIVE SIMULATION</span></div>' +
+      '<div class="lab__body">' +
+        '<div class="lab__stage"><canvas></canvas></div>' +
+        '<div class="lab__side"></div>' +
+      '</div>';
+    page.appendChild(lab);
+    var howto = el("p", "hint", "\u270E " + fw.howto);
+    page.appendChild(howto);
+
+    // examples
+    var exSec = el("section", "");
+    exSec.style.marginTop = "30px";
+    exSec.innerHTML = '<h3>Where you\u2019ve already seen this</h3>';
+    var exGrid = el("div", "examples");
+    fw.examples.forEach(function (ex) {
+      var e = el("div", "example");
+      e.style.borderLeftColor = accentHex(ex.color || fw.accent);
+      e.innerHTML = '<div class="example__h">' + ex.title + '</div><div class="example__p">' + ex.text + '</div>';
+      exGrid.appendChild(e);
+    });
+    exSec.appendChild(exGrid);
+    page.appendChild(exSec);
+
+    // takeaway
+    var take = el("div", "callout");
+    take.style.borderColor = accentHex(fw.accent);
+    take.innerHTML = '<div class="callout__h">The one thing to remember</div><p style="margin-bottom:0">' + fw.takeaway + '</p>';
+    page.appendChild(take);
+
+    // sources
+    var srcSec = el("section", "");
+    srcSec.style.marginTop = "26px";
+    srcSec.innerHTML = '<h3>Read the originals</h3>';
+    var ul = el("ul", "sources");
+    fw.sources.forEach(function (s) {
+      var li = el("li");
+      var inner = "<cite>" + s.cite + "</cite> " + s.detail;
+      if (s.url) inner += ' <a href="' + s.url + '" target="_blank" rel="noopener">link \u2197</a>';
+      li.innerHTML = inner;
+      ul.appendChild(li);
+    });
+    srcSec.appendChild(ul);
+    page.appendChild(srcSec);
+
+    // next experiments
+    var nav = el("div", "pillrow");
+    PP.FRAMEWORKS.forEach(function (o) {
+      if (o.slug === fw.slug) return;
+      var pill = el("a", "pill", o.theory);
+      pill.href = "#/f/" + o.slug;
+      nav.appendChild(pill);
+    });
+    var nextWrap = el("div");
+    nextWrap.style.marginTop = "30px";
+    nextWrap.appendChild(el("div", "sec__kicker", "Keep exploring"));
+    nextWrap.appendChild(nav);
+    page.appendChild(nextWrap);
+
+    wrap.appendChild(page);
+    view.innerHTML = "";
+    view.appendChild(wrap);
+    doc.title = fw.theory + " \u2014 The Policy Playground";
+    global.scrollTo(0, 0);
+
+    // mount sim + comic after layout
+    var controller = null;
+    global.requestAnimationFrame(function () {
+      // comic panels
+      comicCanvases.forEach(function (cv, i) {
+        // size the canvas to its panel width with a 4:3 box
+        var w = cv.parentElement.clientWidth;
+        cv.style.height = Math.round(w * 0.72) + "px";
+        try { var stc = new PP.Stage(cv); sim.comic(stc, i); } catch (e) {}
+      });
+      // simulation
+      var stageCanvas = lab.querySelector(".lab__stage canvas");
+      var sideEl = lab.querySelector(".lab__side");
+      try {
+        controller = sim.mount({
+          stageCanvas: stageCanvas,
+          sideEl: sideEl,
+          framework: fw,
+          store: PP.makeStore(fw.slug)
+        });
+      } catch (e) {
+        sideEl.innerHTML = '<p class="hint">This simulation hit a snag loading. Try refreshing the page.</p>';
+        if (global.console) console.error(e);
+      }
+    });
+
+    current = { destroy: function () { if (controller && controller.destroy) controller.destroy(); } };
+  }
+
+  /* ============================================================ ROUTER === */
+  function route() {
+    if (current && current.destroy) { try { current.destroy(); } catch (e) {} }
+    current = null;
+    var h = location.hash.replace(/^#/, "");
+    var m = h.match(/^\/f\/([\w-]+)/);
+    if (m) renderFramework(m[1]);
+    else { renderHome(); if (h && h !== "/" ) { var t = doc.getElementById(h.replace(/^\//, "")); if (t) global.requestAnimationFrame(function(){ t.scrollIntoView(); }); } }
+  }
+
+  global.addEventListener("hashchange", route);
+  global.addEventListener("DOMContentLoaded", route);
+  if (doc.readyState !== "loading") route();
+
+})(window);
+
+</script>
 </body>
 </html>
