@@ -9,7 +9,7 @@
 
   <!-- Open Graph -->
   <meta property="og:title" content="The Policy Playground" />
-  <meta property="og:description" content="Watch famous policy theories misbehave. Nine explorable, hand-drawn simulations with original sources attached." />
+  <meta property="og:description" content="Watch famous policy theories misbehave. Seventeen explorable, hand-drawn simulations with original sources attached." />
   <meta property="og:type" content="website" />
 
   <!-- Fonts -->
@@ -371,7 +371,12 @@ input[type="range"]::-moz-range-thumb {
       (Axelrod 1984), the median voter theorem (Hotelling 1929; Downs 1957), threshold
       models of collective behaviour (Granovetter 1978; Kuran 1995), the four types of
       corruption (Ang 2020), civil-military relations and democratic survival (Wilkinson 2015),
-      the Tinbergen rule (Tinbergen 1952), and wicked problems (Rittel &amp; Webber 1973).</p>
+      the Tinbergen rule (Tinbergen 1952), wicked problems (Rittel &amp; Webber 1973),
+      Condorcet's paradox and Arrow's impossibility theorem (Condorcet 1785; Arrow 1951),
+      gerrymandering by packing and cracking, Braess's paradox (Braess 1968), the Sugarscape
+      model of emergent inequality (Epstein &amp; Axtell 1996), Tiebout sorting (Tiebout 1956),
+      diffusion of innovations (Rogers 1962; Bass 1969), the SIR epidemic model
+      (Kermack &amp; McKendrick 1927), and the cobweb theorem (Kaldor 1934; Ezekiel 1938).</p>
     </div>
   </noscript>
 
@@ -1035,6 +1040,219 @@ var rough=function(){"use strict";function t(t,e,s){if(t&&t.length){const[n,o]=e
       takeaway: "Before reaching for a clean solution, ask whether the problem is even the kind that <em>has</em> one. Treating a wicked problem as tame \u2014 expecting to define it, solve it, and move on \u2014 is itself a classic way to make things worse.",
       sources: [
         { cite: "Rittel, H. W. J., & Webber, M. M. (1973). \u201CDilemmas in a General Theory of Planning.\u201D", detail: "Policy Sciences, 4(2), 155\u2013169.", url: "https://link.springer.com/article/10.1007/BF01405730" }
+      ]
+    },
+    {
+      slug: "voting-rules",
+      title: "The Will of the People?",
+      theory: "Condorcet's Paradox & Arrow's Impossibility",
+      tag: "Political Thinking",
+      accent: "violet",
+      source: "Condorcet, 1785; Arrow, 1951",
+      tagline: "Same voters, same preferences \u2014 change the rule and you change the winner.",
+      pitch: "We talk about \u201Cwhat the voters want\u201D as if it were a single thing waiting to be read off. The Marquis de Condorcet showed in 1785 that it often isn't: majorities can prefer A to B, B to C, and C to A, with no winner at the centre. Kenneth Arrow later proved this is no accident \u2014 no ranked voting rule can satisfy a short list of fairness conditions at once.",
+      sim: "voting-rules",
+      intro: [
+        "<p class='lead'>Democracies love the phrase <em>the will of the people</em>. It suggests that if we just count carefully enough, a single popular choice will emerge. The trouble is that the choice often depends less on what voters want than on the <strong>rule you use to add them up</strong>.</p>",
+        "<p>Give three blocs of voters three honest rankings of candidates A, B and C. Count only first-place votes (<strong>plurality</strong>) and one candidate wins. Hold a <strong>runoff</strong> between the top two and a different one can win. Award points by rank (a <strong>Borda count</strong>) and you may get a third answer. Ask who beats every rival one-on-one (the <strong>Condorcet</strong> test) and sometimes <em>nobody</em> does \u2014 A beats B, B beats C, and C beats A, a perfect majority cycle.</p>",
+        "<p>This is Condorcet's paradox (1785), and Kenneth <strong>Arrow's impossibility theorem</strong> (1951) is its grown-up form: no ranked voting system can always be fair, decisive and consistent all at once. The sim lets you build the electorate and watch four reasonable rules disagree about the very same voters. The takeaway isn't that voting is pointless \u2014 it's that <em>how</em> we vote is a real choice, not a technicality.</p>"
+      ],
+      howto: "Start on the <b>Cycle</b> preset and read all four rules in the panel \u2014 they hand the win to different candidates, and Condorcet finds no winner at all. Then switch to <b>Spoiler</b> and flip the highlighted rule between Plurality and Condorcet, or drag the bloc-size sliders to engineer your own paradox.",
+      examples: [
+        { title: "Plurality and the spoiler", text: "First-past-the-post can hand victory to a candidate most voters rank last, if the opposition splits. It's the engine behind perennial \u201Cspoiler\u201D and \u201Cwasted vote\u201D debates.", color: "coral" },
+        { title: "Ranked-choice reforms", text: "Cities and countries adopting ranked-choice or runoff voting are, in effect, choosing a different row of this table \u2014 and sometimes a different winner from the same ballots.", color: "blue" },
+        { title: "Committees and coalitions", text: "Agenda-setting exploits cycles directly: whoever controls the order of pairwise votes in a committee can often steer the outcome, exactly as Condorcet warned.", color: "violet" }
+      ],
+      takeaway: "There is not always a single \u201Cwill of the people\u201D hiding in the ballots. When preferences cycle, the voting rule doesn't just measure the winner \u2014 it helps choose one. So the design of the rule is itself a political decision.",
+      sources: [
+        { cite: "Condorcet, M. de (1785). Essai sur l'application de l'analyse \u00E0 la probabilit\u00E9 des d\u00E9cisions rendues \u00E0 la pluralit\u00E9 des voix.", detail: "Paris: Imprimerie Royale \u2014 the original statement of the voting paradox.", url: "" },
+        { cite: "Arrow, K. J. (1951). Social Choice and Individual Values.", detail: "New York: Wiley (Cowles Commission Monograph 12). The impossibility theorem.", url: "" }
+      ]
+    },
+    {
+      slug: "gerrymandering",
+      title: "Drawing the Lines",
+      theory: "Gerrymandering: Packing & Cracking",
+      tag: "Political Thinking",
+      accent: "coral",
+      source: "Packing & cracking",
+      tagline: "Don't change a single vote \u2014 just move the district lines.",
+      pitch: "In a districted election the popular vote and the seat count can come apart dramatically, and the gap is something mapmakers can manufacture. Two moves do most of the work: \u201Ccracking\u201D a bloc across many districts so it narrowly loses each, and \u201Cpacking\u201D it into a few it wins by absurd margins \u2014 wasting its votes either way.",
+      sim: "gerrymandering",
+      intro: [
+        "<p class='lead'>Hold the electorate completely fixed \u2014 say 60% blue, 40% red, every voter standing exactly where they are. Now ask a simple question: how many seats should each side get? The honest answer is that <strong>it depends entirely on who draws the boundaries</strong>.</p>",
+        "<p>Slice the grid into columns and the seats roughly track the votes. Slice the same grid into rows and the blue majority is spread thinly enough to win <em>every</em> district \u2014 a clean sweep from identical ballots. That second move is <strong>cracking</strong>: cut a bloc into pieces too small to win anywhere. Its partner is <strong>packing</strong>: jam a bloc into a handful of districts it wins 90\u201310, so all those extra votes are <em>wasted</em> and the rest of the map tilts the other way.</p>",
+        "<p>The arithmetic of wasted votes is the heart of modern gerrymandering law. The sim shows the popular vote and the seat count side by side so you can watch them diverge with nothing but a change of pen. The lesson generalises well beyond redistricting: whenever outcomes are aggregated through boundaries \u2014 districts, committees, jurisdictions \u2014 the boundaries are part of the result.</p>"
+      ],
+      howto: "Keep the blue share at <b>60%</b> and switch the map from <b>By column</b> to <b>By row</b>: the same 60% jumps from three seats out of five to all five. Watch the <em>wasted votes</em> readout, then try <b>Packed</b> and slide the blue share to feel how the seat\u2013vote gap opens and closes.",
+      examples: [
+        { title: "The efficiency gap", text: "Stephanopoulos and McGhee proposed measuring a gerrymander by the difference in each party's wasted votes \u2014 the same quantity this sim tallies \u2014 turning a vague complaint into a number courts can argue over.", color: "coral" },
+        { title: "Majority\u2013minority districts", text: "Packing isn't always cynical: drawing districts to guarantee a minority group representation deliberately concentrates its votes, which is protective in one frame and dilutive in another.", color: "blue" },
+        { title: "Independent commissions", text: "Several places hand map-drawing to non-partisan commissions precisely because whoever holds the pen holds real power over outcomes the voters never chose.", color: "green" }
+      ],
+      takeaway: "Seats are not a neutral readout of votes. Through packing and cracking, a mapmaker can manufacture a comfortable majority from a minority of ballots \u2014 which is why the question of <em>who draws the lines</em> is often more decisive than how people vote.",
+      sources: [
+        { cite: "Stephanopoulos, N. O., & McGhee, E. M. (2015). \u201CPartisan Gerrymandering and the Efficiency Gap.\u201D", detail: "University of Chicago Law Review, 82(2), 831\u2013900 \u2014 formalises wasted votes.", url: "" },
+        { cite: "Gerrymandering \u2014 packing and cracking.", detail: "Standard treatment in political-science texts on redistricting and electoral systems.", url: "" }
+      ]
+    },
+    {
+      slug: "braess",
+      title: "The Phantom Road",
+      theory: "Braess's Paradox",
+      tag: "Public Policy",
+      accent: "blue",
+      source: "Braess, 1968",
+      tagline: "Build a brand-new road, for free, and watch everyone's commute get longer.",
+      pitch: "When every driver picks the route that's best for them, the traffic settles into an equilibrium that need not be best for anyone. Dietrich Braess showed in 1968 that adding a road to such a network can raise everyone's travel time \u2014 and, conversely, that closing a road can speed everyone up.",
+      sim: "braess",
+      intro: [
+        "<p class='lead'>Here is a fact that has embarrassed traffic engineers since 1968: you can add a fast new road to a network, charge nobody to use it, and make <strong>every single driver slower</strong>. It is not a trick of bad design. It falls straight out of self-interested drivers each choosing their own quickest route.</p>",
+        "<p>The setup is a diamond. Two routes run from Start to End, each mixing one congestible link (the more cars, the slower) with one fixed link. Left alone, the traffic splits evenly and everyone gets there in <strong>65 minutes</strong>. Now build a free shortcut connecting the two middle points. Each driver reasons, correctly, that hopping across it lets them use <em>both</em> fast links \u2014 so they all do. The two congestible links now carry the whole crowd, and the commute climbs to <strong>80 minutes</strong> for everybody.</p>",
+        "<p>This is <strong>Braess's paradox</strong>: the equilibrium drivers settle into (a Nash equilibrium) is worse than the one they'd have without the option. The sim lets you open and close the phantom road and read the equilibrium commute each way. Famously, when New York closed 42nd Street in 1990, traffic <em>improved</em> \u2014 a real-world Braess effect. More roads, more capacity, more options: none of them are guaranteed to help once people get to choose.</p>"
+      ],
+      howto: "Leave the cars at <b>4,000</b> and toggle <b>Build the shortcut</b> on. The equilibrium commute rises from 65 to 80 minutes and the banner calls it out. Hit <b>Animate traffic</b> to watch the whole crowd funnel onto the new road, then slide the number of cars to see when the paradox bites.",
+      examples: [
+        { title: "Closing 42nd Street", text: "When New York shut a stretch of 42nd Street for Earth Day in 1990, the feared gridlock didn't appear \u2014 flow actually got better, a textbook Braess result reported in the New York Times.", color: "blue" },
+        { title: "Seoul's buried highway", text: "Tearing out the Cheonggyecheon expressway and restoring the stream beneath it was followed by improved traffic, not the predicted chaos.", color: "green" },
+        { title: "Beyond roads", text: "The same maths appears in electrical grids, data networks and even mechanical springs \u2014 anywhere selfish routing meets shared, congestible capacity.", color: "coral" }
+      ],
+      takeaway: "When users each optimise for themselves, more capacity can make the system worse. Good network policy means designing for the equilibrium people will actually choose \u2014 and occasionally that means removing an option, not adding one.",
+      sources: [
+        { cite: "Braess, D. (1968). \u201C\u00DCber ein Paradoxon aus der Verkehrsplanung.\u201D", detail: "Unternehmensforschung, 12, 258\u2013268. The original paper.", url: "https://doi.org/10.1007/BF01918335" },
+        { cite: "Braess, D., Nagurney, A., & Wakolbinger, T. (2005). \u201COn a Paradox of Traffic Planning.\u201D", detail: "Transportation Science, 39(4), 446\u2013450 \u2014 English translation.", url: "" }
+      ]
+    },
+    {
+      slug: "sugarscape",
+      title: "The Luck of the Landscape",
+      theory: "Sugarscape & Emergent Inequality",
+      tag: "Society",
+      accent: "gold",
+      source: "Epstein & Axtell, 1996",
+      tagline: "Identical rules, equal starts \u2014 and a tiny elite still ends up with almost everything.",
+      pitch: "Joshua Epstein and Robert Axtell built a world of agents who all obey one rule: move to the nearest richest patch, harvest, and burn a little to stay alive. From near-equal beginnings, the wealth distribution reliably collapses into a steep, skewed curve \u2014 inequality emerging with no villain and no unfair rule, just luck of where you started and what you needed.",
+      sim: "sugarscape",
+      intro: [
+        "<p class='lead'>Where does extreme inequality come from? One comfortable story blames it on differences in the rules \u2014 unfair laws, discrimination, rigged markets. Epstein and Axtell's <strong>Sugarscape</strong> (1996) offers an uncomfortable companion: even when the rule is <em>identical for everyone</em>, deep inequality can emerge all by itself.</p>",
+        "<p>The world is a landscape with two sugar mountains. Agents are sprinkled at random, each with a little vision and a metabolism drawn from the same lottery. The rule never varies: look around, walk to the nearest richest patch, eat, pay your metabolic cost. Nobody cheats, nobody is favoured. Yet within a few hundred steps a handful of agents who happened to start near a peak \u2014 or who happened to draw long sight and a thrifty metabolism \u2014 pull away, and the <strong>Gini coefficient</strong> climbs toward levels we'd call grotesque in a real economy.</p>",
+        "<p>This doesn't prove inequality is fair or inevitable \u2014 quite the opposite. It shows that <em>outcome</em> inequality can appear without any inequality of <em>rules</em>, which means pointing at equal rules proves nothing about fairness. The sim adds a policy lever \u2014 a flat tax rebated equally \u2014 so you can watch the emergent skew bend back. Inequality emerges on its own; reducing it takes a deliberate choice.</p>"
+      ],
+      howto: "Press <b>Run</b> with redistribution at 0% and watch the Gini climb and the wealth bars fan out as agents near the peaks get rich. Then push <b>Redistribution</b> up and see the curve flatten. The vision and metabolism sliders set the lottery everyone draws from \u2014 the <em>rule</em> stays the same for all.",
+      examples: [
+        { title: "The Pareto tail", text: "Real wealth distributions have a long upper tail \u2014 a few hold a huge share. Sugarscape generates exactly this shape from rules that contain no inequality at all.", color: "gold" },
+        { title: "\u201CMerit\u201D after the fact", text: "The richest agents look skilled in hindsight, but their edge is mostly starting position and luck of the draw \u2014 a caution against reading success as proof of virtue.", color: "coral" },
+        { title: "Why redistribution is a choice", text: "Because the skew is emergent rather than designed, leaving it alone is itself a decision. The tax lever shows inequality is a dial, not a destiny.", color: "blue" }
+      ],
+      takeaway: "Equal rules do not guarantee equal \u2014 or even tolerable \u2014 outcomes. Inequality can self-organise from luck and location alone, so \u201Ceveryone played by the same rules\u201D settles nothing about fairness, and bending the curve back is an active policy choice.",
+      sources: [
+        { cite: "Epstein, J. M., & Axtell, R. (1996). Growing Artificial Societies: Social Science from the Bottom Up.", detail: "Washington, DC: Brookings Institution Press / MIT Press \u2014 introduces the Sugarscape model.", url: "" }
+      ]
+    },
+    {
+      slug: "tiebout",
+      title: "Voting With Your Feet",
+      theory: "Tiebout Sorting",
+      tag: "Public Finance",
+      accent: "green",
+      source: "Tiebout, 1956",
+      tagline: "Can't get the public services you want? Move to the town that sells them.",
+      pitch: "Charles Tiebout's answer to a famous problem \u2014 how do you get people to reveal what public goods they truly want? \u2014 was disarmingly simple: let them move. If towns offer different tax-and-service bundles and residents can relocate freely, people sort themselves into the community that fits, revealing their preferences through their feet.",
+      sim: "tiebout",
+      intro: [
+        "<p class='lead'>Private markets have a tidy trick for matching supply to demand: if you don't like the price, you don't buy. Public goods seem to lack it \u2014 you can't opt out of your town's school system the way you skip a brand of cereal. Charles <strong>Tiebout</strong> (1956) pointed out that, across many towns, you sort of can. You move.</p>",
+        "<p>Picture a handful of towns, each with its own bundle: low tax and few services here, high tax and lavish services there. Residents differ in what they want. Let them relocate to the town whose bundle best fits, and they sort \u2014 the small-government types cluster in one, the high-service types in another. Each town becomes <strong>homogeneous</strong> in preference, and people report higher satisfaction because they've found their match. Tiebout argued this <em>reveals</em> demand for public goods that no survey could.</p>",
+        "<p>The catch is in the sorting itself. The same mechanism that improves the match also <strong>segregates</strong> communities by preference \u2014 and, since preferences correlate with income, often by wealth. Set the menu to <em>identical</em> and watch satisfaction sag: with nothing to choose between, no one can sort. Set it to <em>varied</em> and satisfaction rises, but so does the homogeneity of each town. Tiebout's elegant efficiency and its social cost are the same motion.</p>"
+      ],
+      howto: "Switch the <b>menu of towns</b> between Identical, Varied and Polarised and press <b>Let them move</b>. Watch the resident colours separate as people relocate to their best match. Compare the <em>satisfaction</em> and <em>sorting</em> meters: a richer menu raises both at once.",
+      examples: [
+        { title: "Suburban fragmentation", text: "Metropolitan areas split into many small municipalities are a real Tiebout world \u2014 residents choosing tax-and-service packages by choosing an address.", color: "green" },
+        { title: "School-district premiums", text: "House prices jump at the boundary of a desirable school district: people are literally paying to relocate into a public-service bundle.", color: "blue" },
+        { title: "Sorting's shadow", text: "Because moving costs money and information, the poorest can't shop freely \u2014 so Tiebout sorting can entrench segregation as much as it reveals preferences.", color: "coral" }
+      ],
+      takeaway: "Mobility lets people reveal what public goods they want by choosing where to live \u2014 an efficient match. But the very same sorting splits communities into homogeneous, often unequal enclaves. The efficiency and the segregation are two faces of one mechanism.",
+      sources: [
+        { cite: "Tiebout, C. M. (1956). \u201CA Pure Theory of Local Expenditures.\u201D", detail: "Journal of Political Economy, 64(5), 416\u2013424.", url: "https://doi.org/10.1086/257839" }
+      ]
+    },
+    {
+      slug: "diffusion",
+      title: "Catching On",
+      theory: "Diffusion of Innovations",
+      tag: "Society",
+      accent: "violet",
+      source: "Rogers, 1962; Bass, 1969",
+      tagline: "Why new ideas crawl, then explode, then stall \u2014 the shape of every adoption curve.",
+      pitch: "From hybrid corn to smartphones to public-health behaviours, new things spread in a characteristic S-curve. Everett Rogers named the players \u2014 innovators, early adopters, the majorities, laggards \u2014 and Frank Bass turned the story into two numbers: how fast people adopt on their own, and how strongly they imitate those who already have.",
+      sim: "diffusion",
+      intro: [
+        "<p class='lead'>New ideas rarely arrive in a straight line. They <strong>crawl</strong> at first, then suddenly <strong>explode</strong>, then <strong>level off</strong> as the last hold-outs come around. That S-shaped curve shows up for hybrid seed corn, colour TVs, contraception, smartphones and hand-washing campaigns alike \u2014 which is the whole point of studying it.</p>",
+        "<p>Everett <strong>Rogers</strong> (1962) sorted adopters into a famous sequence: a sliver of <em>innovators</em>, then <em>early adopters</em>, the <em>early</em> and <em>late majorities</em>, and finally the <em>laggards</em>. Frank <strong>Bass</strong> (1969) made it quantitative with two forces. The coefficient of <em>innovation</em> (p) is external push \u2014 advertising, mandates, broadcast \u2014 nudging people independently of their neighbours. The coefficient of <em>imitation</em> (q) is word of mouth: the more people who've already adopted, the more the rest feel the pull.</p>",
+        "<p>In the sim you set both dials and launch. Crank word of mouth to near zero and adoption is a dull, flattening climb \u2014 advertising alone never catches fire. Turn it up and the curve snaps into a steep S, because each new adopter recruits the next. The bell-shaped <em>rate</em> curve peaks at the inflection, exactly where Rogers' early and late majorities meet. Whether you're selling a product or spreading a vaccine, the design question is the same: how much do you spend on push versus engineering the contagion?</p>"
+      ],
+      howto: "Drag <b>word of mouth (q)</b> down near zero and <b>Launch</b>: adoption limps along on advertising alone. Now raise it and relaunch to get the classic S-curve. The blue line is cumulative adoption; the coral line is new adopters per step \u2014 watch where its peak lands.",
+      examples: [
+        { title: "Hybrid corn", text: "Rogers' canonical case: Iowa farmers adopted hybrid seed corn in a textbook S-curve over the 1930s\u201340s, slow at first then sweeping through the county.", color: "gold" },
+        { title: "Crossing the chasm", text: "Marketers obsess over the gap between early adopters and the early majority \u2014 the stretch of the curve where many products quietly die.", color: "violet" },
+        { title: "Public-health campaigns", text: "Getting a behaviour past its tipping fraction \u2014 vaccines, bed nets, hand-washing \u2014 is a diffusion problem: seed enough adopters and imitation does the rest.", color: "blue" }
+      ],
+      takeaway: "Adoption is driven by two distinct forces \u2014 outside push and inside imitation \u2014 and word of mouth is what turns a slow climb into an explosion. To spread something, you don't just advertise; you engineer the contagion.",
+      sources: [
+        { cite: "Rogers, E. M. (1962). Diffusion of Innovations.", detail: "New York: Free Press.", url: "" },
+        { cite: "Bass, F. M. (1969). \u201CA New Product Growth for Model Consumer Durables.\u201D", detail: "Management Science, 15(5), 215\u2013227.", url: "https://doi.org/10.1287/mnsc.15.5.215" }
+      ]
+    },
+    {
+      slug: "epidemic",
+      title: "Flatten the Curve",
+      theory: "The SIR Epidemic Model",
+      tag: "Public Policy",
+      accent: "coral",
+      source: "Kermack & McKendrick, 1927",
+      tagline: "One number decides whether an outbreak fizzles, peaks, or never starts.",
+      pitch: "Kermack and McKendrick's 1927 model splits a population into Susceptible, Infected and Recovered and tracks the flow between them. A single ratio, R0, governs the drama: below one the outbreak dies, above one it grows \u2014 and small changes in it swing the peak enormously. Distancing flattens that peak; vaccinating past 1\u22121/R0 stops the outbreak before it begins.",
+      sim: "epidemic",
+      intro: [
+        "<p class='lead'>Long before 2020 made it dinner-table vocabulary, the shape of an epidemic was pinned down by a 1927 paper. Kermack and McKendrick split everyone into three boxes \u2014 <strong>S</strong>usceptible, <strong>I</strong>nfected, <strong>R</strong>ecovered \u2014 and wrote down how people flow from one to the next. Almost everything we say about outbreaks lives inside that simple machine.</p>",
+        "<p>Two dials drive it: how readily the infection transmits, and how quickly people recover. Their ratio is the reproduction number, <strong>R\u2080</strong> \u2014 the average number of fresh cases each case spawns in a fully susceptible crowd. Below one, the chain peters out. Above one, it grows, and the <em>height</em> of the infection peak rises steeply as R\u2080 climbs. \u201CFlattening the curve\u201D means cutting contacts to push the peak down and spread the same cases over more time, so hospitals aren't swamped all at once.</p>",
+        "<p>The model also hands you the herd-immunity threshold for free: once the immune share passes <strong>1\u22121/R\u2080</strong>, each case fails to replace itself and the outbreak can't take off. Vaccinate above that line in the sim and the curve simply never lifts. Slide the contact rate and watch the peak flatten and shift. It is a deliberately simple model \u2014 a tool for intuition, not a forecast of any particular disease \u2014 but the policy logic it makes visible is the real thing.</p>"
+      ],
+      howto: "Press <b>Run outbreak</b> and watch the coral I-curve spike. Now drag the <b>contact rate</b> down and run again \u2014 same disease, lower flatter peak. Then push <b>vaccination</b> up: once it passes the herd-immunity threshold shown in the panel, the outbreak never gets going.",
+      examples: [
+        { title: "Flattening the curve", text: "The defining image of 2020: distancing didn't change how many could eventually be infected so much as <em>when</em>, keeping the peak under hospital capacity.", color: "coral" },
+        { title: "Herd immunity by vaccine", text: "Measles has a high R\u2080, so it needs a very high vaccinated share to stay below threshold \u2014 which is why small dips in coverage bring outbreaks back.", color: "green" },
+        { title: "R\u2080 is not destiny", text: "R\u2080 bundles biology and behaviour together. Policy can't change a virus, but by cutting contacts it changes the effective reproduction number \u2014 and the whole curve.", color: "blue" }
+      ],
+      takeaway: "Epidemics turn on one ratio of transmission to recovery. Because behaviour is baked into that ratio, policy genuinely moves the curve \u2014 flattening the peak buys time, and crossing the herd-immunity threshold stops an outbreak before it starts.",
+      sources: [
+        { cite: "Kermack, W. O., & McKendrick, A. G. (1927). \u201CA Contribution to the Mathematical Theory of Epidemics.\u201D", detail: "Proceedings of the Royal Society of London A, 115(772), 700\u2013721.", url: "https://doi.org/10.1098/rspa.1927.0118" }
+      ]
+    },
+    {
+      slug: "cobweb",
+      title: "The Hog Cycle",
+      theory: "The Cobweb Theorem",
+      tag: "Public Finance",
+      accent: "blue",
+      source: "Kaldor, 1934; Ezekiel, 1938",
+      tagline: "No shock, no shortage \u2014 yet prices swing up and down forever, all on their own.",
+      pitch: "When producers must commit output before they know the price \u2014 planting a crop, breeding livestock \u2014 they naturally plan from last season's price. That one-period lag is enough to make a perfectly ordinary market oscillate, even with no outside shocks. Whether the swings settle, repeat, or explode depends only on the relative steepness of supply and demand.",
+      sim: "cobweb",
+      intro: [
+        "<p class='lead'>Why do the prices of pork, corn, onions and even university graduates seem to lurch between glut and shortage on a regular beat \u2014 with no war, weather or crisis to blame? The <strong>cobweb theorem</strong> says the cycle can be generated entirely inside the market, by a single innocent feature: a <strong>production lag</strong>.</p>",
+        "<p>Consumers respond to price instantly, but farmers can't. A pig farmer decides how many to breed based on <em>this</em> year's high price; by the time the hogs reach market, everyone else has done the same and the glut crashes the price; so next year they all breed too few, and the shortage sends prices soaring again. Plot it on a supply-and-demand diagram and the path spirals like a <strong>cobweb</strong> \u2014 hence the name Nicholas Kaldor coined in 1934, and the model Mordecai Ezekiel laid out in full in 1938.</p>",
+        "<p>The beautiful part is the knife-edge. Compare the slopes: if supply is <strong>flatter</strong> than demand the spiral winds inward and prices settle; if the slopes <strong>match</strong> you get an endless steady cycle; if producers <strong>over-react</strong> (steeper supply) the swings <strong>grow</strong> until something breaks. The sim lets you drag those two slopes and watch the same market converge, cycle, or fly apart \u2014 with not a single external shock added once it's running.</p>"
+      ],
+      howto: "Set the slopes with the <b>demand</b> and <b>producer reaction</b> sliders, then press <b>Run seasons</b>. Watch the cobweb trace on the price\u2013quantity plane and the price-over-time strip beside it. Keep the slope ratio under 1 to see it settle; push it past 1 to watch the swings explode.",
+      examples: [
+        { title: "The corn\u2013hog cycle", text: "The model's namesake: US hog prices cycled for decades because breeding decisions lagged the price signal by roughly a year.", color: "blue" },
+        { title: "Skilled-labour booms", text: "Engineering and law enrolments surge when salaries are high, flooding the market years later when graduates arrive \u2014 a slow-motion cobweb in human capital.", color: "violet" },
+        { title: "Why expectations matter", text: "Coase and Fowler objected that producers aren't naive \u2014 if they forecast smartly, the cycle dampens. The cobweb is really a lesson about expectations under lags.", color: "coral" }
+      ],
+      takeaway: "Boom-and-bust doesn't require an outside shock. A simple production lag plus backward-looking expectations can make a market oscillate on its own \u2014 and whether it settles or spirals depends entirely on the slopes of supply and demand.",
+      sources: [
+        { cite: "Kaldor, N. (1934). \u201CA Classificatory Note on the Determinateness of Equilibrium.\u201D", detail: "Review of Economic Studies, 1(2), 122\u2013136 \u2014 coins the term \u201Ccobweb theorem.\u201D", url: "" },
+        { cite: "Ezekiel, M. (1938). \u201CThe Cobweb Theorem.\u201D", detail: "Quarterly Journal of Economics, 52(2), 255\u2013280 \u2014 the canonical statement.", url: "https://doi.org/10.2307/1881734" }
       ]
     }
   ];
@@ -3229,6 +3447,1537 @@ var rough=function(){"use strict";function t(t,e,s){if(t&&t.length){const[n,o]=e
 })(window);
 
 </script>
+  <!-- js/sims/voting-rules.js -->
+<script>
+/* =========================================================================
+   sims/voting-rules.js — "The Will of the People?"
+   Condorcet's paradox (1785) and Arrow's impossibility (1951): the very same
+   set of voter preferences can crown a different winner under each voting
+   rule, and majority preferences can cycle (A beats B beats C beats A) so that
+   no "people's choice" exists at all.
+   ========================================================================= */
+(function (global) {
+  "use strict";
+  var PP = global.PP, ui = PP.ui, C = PP.COLORS;
+  var CAND = ["A", "B", "C"];
+  var CCOL = [C.coral, C.blue, C.green];
+
+  var PRESETS = {
+    cycle:   [{ rank: [0, 1, 2], size: 35 }, { rank: [1, 2, 0], size: 33 }, { rank: [2, 0, 1], size: 32 }],
+    spoiler: [{ rank: [0, 2, 1], size: 42 }, { rank: [1, 2, 0], size: 33 }, { rank: [2, 1, 0], size: 25 }],
+    clear:   [{ rank: [1, 0, 2], size: 48 }, { rank: [1, 2, 0], size: 27 }, { rank: [0, 1, 2], size: 25 }]
+  };
+
+  function mount(ctx) {
+    var st = new PP.Stage(ctx.stageCanvas);
+    var side = ctx.sideEl, store = ctx.store;
+
+    var state = {
+      preset: store.get("preset", "cycle"),
+      rule: store.get("rule", "plurality"),
+      blocs: store.get("blocs", null) || clone(PRESETS.cycle)
+    };
+    function clone(b) { return b.map(function (x) { return { rank: x.rank.slice(), size: x.size }; }); }
+
+    /* ---------- tallies ---------- */
+    function plurality() {
+      var t = [0, 0, 0];
+      state.blocs.forEach(function (b) { t[b.rank[0]] += b.size; });
+      return t;
+    }
+    function borda() {
+      var t = [0, 0, 0];
+      state.blocs.forEach(function (b) { for (var p = 0; p < 3; p++) t[b.rank[p]] += (2 - p) * b.size; });
+      return t;
+    }
+    function prefers(x, y) { // total voters ranking x above y
+      var n = 0;
+      state.blocs.forEach(function (b) { if (b.rank.indexOf(x) < b.rank.indexOf(y)) n += b.size; });
+      return n;
+    }
+    function beats(x, y) { var a = prefers(x, y), b = prefers(y, x); return a > b ? 1 : a < b ? -1 : 0; }
+    function condorcet() {
+      for (var x = 0; x < 3; x++) {
+        var win = true;
+        for (var y = 0; y < 3; y++) if (x !== y && beats(x, y) <= 0) { win = false; break; }
+        if (win) return x;
+      }
+      return -1; // cycle / none
+    }
+    function argmax(t) { var bi = 0; for (var i = 1; i < 3; i++) if (t[i] > t[bi]) bi = i; return (t.filter(function (v) { return v === t[bi]; }).length > 1) ? -2 : bi; }
+    function runoff() {
+      var p = plurality(), order = [0, 1, 2].sort(function (a, b) { return p[b] - p[a]; });
+      var x = order[0], y = order[1];
+      return beats(x, y) >= 0 ? x : y;
+    }
+    function winnerFor(rule) {
+      if (rule === "plurality") return argmax(plurality());
+      if (rule === "borda") return argmax(borda());
+      if (rule === "runoff") return runoff();
+      return condorcet();
+    }
+    function nm(w) { return w === -1 ? "none (cycle)" : w === -2 ? "tie" : CAND[w]; }
+
+    /* ---------- drawing ---------- */
+    var geom = {};
+    function layout() { st.fit(); geom.triCx = st.w * 0.5; geom.triCy = st.h * 0.60; geom.triR = Math.min(st.w, st.h) * 0.26; }
+
+    function draw() {
+      var W = st.w, H = st.h, c = st.ctx;
+      st.clear();
+
+      // bloc chips along the top
+      var n = state.blocs.length, total = state.blocs.reduce(function (s, b) { return s + b.size; }, 0) || 1;
+      var bw = (W - 28) / n;
+      state.blocs.forEach(function (b, i) {
+        var x = 14 + i * bw, y = 10;
+        PP.panel(st.rc, x + 4, y, bw - 8, 60, { fill: C.paper, stroke: C.line, strokeWidth: 1.2, seed: i + 2 });
+        PP.text(c, b.size + " voters", x + bw / 2, y + 18, { size: 12, align: "center", font: "display", weight: "800", color: C.ink });
+        var rk = b.rank.map(function (r) { return CAND[r]; }).join(" \u203A ");
+        PP.text(c, rk, x + bw / 2, y + 38, { size: 13, align: "center", font: "mono", color: C.inkSoft });
+        // colored pips for the ranking
+        for (var p = 0; p < 3; p++) st.rc.circle(x + bw / 2 - 16 + p * 16, y + 52, 9, { fill: CCOL[b.rank[p]], fillStyle: "solid", stroke: C.ink, strokeWidth: 1.2, roughness: 0.8, seed: i * 3 + p });
+      });
+
+      // pairwise tournament triangle
+      var cx = geom.triCx, cy = geom.triCy, R = geom.triR;
+      var pos = [[cx, cy - R], [cx - R * 0.92, cy + R * 0.6], [cx + R * 0.92, cy + R * 0.6]];
+      // arrows: winner -> loser for each pair
+      var pairs = [[0, 1], [1, 2], [0, 2]];
+      pairs.forEach(function (pr, idx) {
+        var r = beats(pr[0], pr[1]);
+        if (r === 0) return;
+        var wnr = r > 0 ? pr[0] : pr[1], lsr = r > 0 ? pr[1] : pr[0];
+        var a = pos[wnr], b = pos[lsr];
+        var dx = b[0] - a[0], dy = b[1] - a[1], L = Math.hypot(dx, dy) || 1;
+        var ux = dx / L, uy = dy / L, pad = 34;
+        PP.arrow(st.rc, a[0] + ux * pad, a[1] + uy * pad, b[0] - ux * pad, b[1] - uy * pad,
+          { color: C.inkSoft, strokeWidth: 2.4, head: 11, seed: 20 + idx });
+        var mid = [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2];
+        PP.text(c, prefers(wnr, lsr) + "\u2013" + prefers(lsr, wnr), mid[0], mid[1] - 4, { size: 10, align: "center", font: "mono", color: C.inkSoft });
+      });
+      // candidate nodes
+      var cw = winnerFor(state.rule);
+      for (var i = 0; i < 3; i++) {
+        var isWin = (cw === i);
+        st.rc.circle(pos[i][0], pos[i][1], isWin ? 56 : 46, { fill: CCOL[i], fillStyle: "solid", stroke: C.ink, strokeWidth: isWin ? 3 : 2, roughness: 1, seed: i + 30 });
+        PP.text(c, CAND[i], pos[i][0], pos[i][1] + 7, { size: isWin ? 26 : 22, align: "center", baseline: "middle", font: "display", weight: "800", color: "#fff" });
+        if (isWin) PP.text(c, "\u2605", pos[i][0], pos[i][1] - (isWin ? 40 : 34), { size: 18, align: "center", color: C.gold });
+      }
+
+      var cond = condorcet();
+      PP.text(c, cond === -1 ? "Majorities cycle \u2014 no Condorcet winner" : "Condorcet winner: " + CAND[cond],
+        cx, H - 12, { size: 12.5, align: "center", font: "display", weight: "700", color: cond === -1 ? C.coralInk : C.greenInk });
+
+      update({
+        plurality: { text: nm(winnerFor("plurality")) },
+        runoff: { text: nm(winnerFor("runoff")) },
+        borda: { text: nm(winnerFor("borda")) },
+        condorcet: { text: nm(winnerFor("condorcet")) }
+      });
+      // emphasise selected rule row
+      ["plurality", "runoff", "borda", "condorcet"].forEach(function (k) {
+        var elx = side.querySelector("#vr-" + k);
+        if (elx) elx.style.color = (k === state.rule) ? CCOL[cw >= 0 ? cw : 0] : "";
+      });
+    }
+
+    /* ---------- side ---------- */
+    var update, sliders = [];
+    function buildPanel() {
+      side.innerHTML = "";
+      var box = ui.el("div", "readout");
+      [["plurality", "Plurality (most 1st places)"], ["runoff", "Two-round runoff"], ["borda", "Borda count (ranked points)"], ["condorcet", "Condorcet (beats all 1-on-1)"]].forEach(function (r) {
+        var row = ui.el("div", "readout__row");
+        row.innerHTML = '<span class="readout__k">' + r[1] + '</span><span class="readout__v" id="vr-' + r[0] + '" style="font-family:var(--display);font-weight:700"></span>';
+        box.appendChild(row);
+      });
+      side.appendChild(box);
+      update = function (vals) { for (var k in vals) { var e = side.querySelector("#vr-" + k); if (e) e.textContent = vals[k].text != null ? vals[k].text : vals[k]; } };
+
+      ui.h(side, "Highlight a rule");
+      ui.segmented(side, {
+        value: state.rule,
+        options: [{ value: "plurality", label: "Plurality" }, { value: "runoff", label: "Runoff" }, { value: "borda", label: "Borda" }, { value: "condorcet", label: "Condorcet" }],
+        onChange: function (v) { state.rule = v; store.set("rule", v); draw(); }
+      });
+
+      ui.h(side, "The electorate");
+      ui.segmented(side, {
+        value: state.preset,
+        options: [{ value: "cycle", label: "Cycle" }, { value: "spoiler", label: "Spoiler" }, { value: "clear", label: "Clear" }, { value: "custom", label: "Custom" }],
+        onChange: function (v) { if (v !== "custom") { state.blocs = clone(PRESETS[v]); store.set("blocs", state.blocs); } state.preset = v; store.set("preset", v); buildPanel(); draw(); }
+      });
+
+      sliders = [];
+      state.blocs.forEach(function (b, i) {
+        var rk = b.rank.map(function (r) { return CAND[r]; }).join("\u203A");
+        sliders.push(ui.slider(side, { label: "Bloc " + rk + " size", min: 0, max: 100, step: 1, value: b.size,
+          onInput: function (v) { b.size = v; state.preset = "custom"; store.set("preset", "custom"); store.set("blocs", state.blocs); draw(); } }));
+      });
+
+      side.appendChild(ui.el("p", "hint", "Start on <b>Cycle</b>: A beats B, B beats C, and C beats A \u2014 there is no single winner the majority agrees on. On <b>Spoiler</b>, flip between Plurality and Condorcet and watch the winner change with nothing but the rule."));
+    }
+
+    layout(); buildPanel(); draw();
+    var unsub = PP.onResize(function () { layout(); draw(); });
+    return { destroy: function () { unsub(); } };
+  }
+
+  /* ---------- thumb + comic ---------- */
+  function triangle(st, winner, cyclic) {
+    var W = st.w, H = st.h, c = st.ctx, cx = W / 2, cy = H * 0.52, R = Math.min(W, H) * 0.3;
+    st.clear();
+    var pos = [[cx, cy - R], [cx - R * 0.92, cy + R * 0.6], [cx + R * 0.92, cy + R * 0.6]];
+    var arr = cyclic ? [[0, 1], [1, 2], [2, 0]] : [[0, 1], [0, 2], [1, 2]];
+    arr.forEach(function (pr, idx) {
+      var a = pos[pr[0]], b = pos[pr[1]], dx = b[0] - a[0], dy = b[1] - a[1], L = Math.hypot(dx, dy) || 1;
+      PP.arrow(st.rc, a[0] + dx / L * 26, a[1] + dy / L * 26, b[0] - dx / L * 26, b[1] - dy / L * 26, { color: C.inkSoft, strokeWidth: 2, head: 9, seed: idx + 5 });
+    });
+    for (var i = 0; i < 3; i++) {
+      var isW = i === winner;
+      st.rc.circle(pos[i][0], pos[i][1], isW ? 40 : 34, { fill: CCOL[i], fillStyle: "solid", stroke: C.ink, strokeWidth: isW ? 3 : 2, roughness: 1, seed: i + 1 });
+      PP.text(c, CAND[i], pos[i][0], pos[i][1] + 6, { size: 18, align: "center", baseline: "middle", font: "display", weight: "800", color: "#fff" });
+    }
+  }
+  function thumb(st) { triangle(st, -1, true); }
+  var comicCaps = [
+    "Three candidates, one electorate, ranked preferences.",
+    "A beats B, B beats C \u2014 so C must lose, surely?",
+    "\u2026but C beats A. The majority's will runs in circles."
+  ];
+  function comic(st, i) {
+    if (i === 0) triangle(st, -1, false);
+    else if (i === 1) { triangle(st, 0, false); }
+    else triangle(st, -1, true);
+  }
+
+  PP.sims["voting-rules"] = { mount: mount, thumb: thumb, comic: comic, comicCaps: comicCaps };
+})(window);
+
+</script>
+  <!-- js/sims/gerrymandering.js -->
+<script>
+/* =========================================================================
+   sims/gerrymandering.js — "Drawing the Lines"
+   The same voters, the same vote totals, wildly different seat counts \u2014
+   purely from where the district lines fall. Demonstrates "cracking" (slice a
+   bloc across many districts so it wins none) and the wasted-vote logic behind
+   "packing", the two basic moves of a gerrymander.
+   ========================================================================= */
+(function (global) {
+  "use strict";
+  var PP = global.PP, ui = PP.ui, C = PP.COLORS;
+  var N = 5; // 5x5 grid, 5 districts of 5
+
+  function mount(ctx) {
+    var st = new PP.Stage(ctx.stageCanvas);
+    var side = ctx.sideEl, store = ctx.store;
+
+    var state = {
+      blueShare: store.get("blueShare", 60), // % of the 25 cells that are blue
+      map: store.get("map", "columns"),      // columns | rows | packed
+      grid: []                               // 1 = blue, 0 = red, row-major
+    };
+
+    function buildGrid() {
+      // stripe blue from the left: leftmost columns blue by share, so column
+      // districts come out near-proportional and row districts crack the blue bloc.
+      var nBlue = Math.round(state.blueShare / 100 * N * N);
+      var g = [];
+      // fill column-major so blue occupies whole left columns first
+      var order = [];
+      for (var col = 0; col < N; col++) for (var row = 0; row < N; row++) order.push(row * N + col);
+      var cells = []; for (var z = 0; z < N * N; z++) cells.push(0);
+      for (var i = 0; i < nBlue; i++) cells[order[i]] = 1;
+      state.grid = cells;
+    }
+
+    function districtOf(idx, map) {
+      var r = Math.floor(idx / N), c = idx % N;
+      if (map === "columns") return c;
+      if (map === "rows") return r;
+      // packed: concentrate blue into the lowest-index districts (safe seats),
+      // spreading reds — illustrates wasted votes via lopsided margins.
+      var sorted = state.grid.map(function (v, i) { return { v: v, i: i }; })
+        .sort(function (a, b) { return b.v - a.v || a.i - b.i; });
+      var pos = 0; for (var q = 0; q < sorted.length; q++) if (sorted[q].i === idx) { pos = q; break; }
+      return Math.floor(pos / N);
+    }
+
+    function tally(map) {
+      var dist = []; for (var d = 0; d < N; d++) dist.push({ blue: 0, red: 0 });
+      for (var i = 0; i < N * N; i++) { var d = districtOf(i, map); if (state.grid[i]) dist[d].blue++; else dist[d].red++; }
+      var seatsB = 0, seatsR = 0, wastedB = 0, wastedR = 0;
+      dist.forEach(function (q) {
+        var need = Math.floor((q.blue + q.red) / 2) + 1;
+        if (q.blue > q.red) { seatsB++; wastedB += q.blue - need; wastedR += q.red; }
+        else { seatsR++; wastedR += q.red - need; wastedB += q.blue; }
+      });
+      return { dist: dist, seatsB: seatsB, seatsR: seatsR, wastedB: wastedB, wastedR: wastedR };
+    }
+
+    /* ---------- drawing ---------- */
+    var geom = {};
+    function layout() {
+      st.fit();
+      var avail = Math.min(st.w - 28, st.h * 0.66);
+      geom.cell = avail / N;
+      geom.gx = (st.w - geom.cell * N) / 2;
+      geom.gy = 16;
+      geom.barY = geom.gy + geom.cell * N + 18;
+    }
+
+    function draw() {
+      var W = st.w, c = st.ctx, cell = geom.cell, gx = geom.gx, gy = geom.gy;
+      st.clear();
+      var res = tally(state.map);
+      // cells
+      for (var i = 0; i < N * N; i++) {
+        var r = Math.floor(i / N), col = i % N, x = gx + col * cell, y = gy + r * cell;
+        var blue = state.grid[i];
+        st.rc.rectangle(x + 1, y + 1, cell - 2, cell - 2, { fill: blue ? "#CFE0F2" : "#FBD9DF", fillStyle: "solid", stroke: C.line, strokeWidth: 1, roughness: 0.7, seed: i + 2 });
+        PP.token(st.rc, c, x + cell * 0.18, y + cell * 0.16, cell * 0.64, { color: blue ? C.blue : C.coral, seed: i + 5, face: false });
+      }
+      // district borders: draw thick edges between cells of different districts
+      c.save(); c.strokeStyle = C.ink; c.lineWidth = 3.2; c.lineCap = "round";
+      for (var i2 = 0; i2 < N * N; i2++) {
+        var r2 = Math.floor(i2 / N), c2 = i2 % N, d = districtOf(i2, state.map);
+        var x2 = gx + c2 * cell, y2 = gy + r2 * cell;
+        if (c2 === N - 1 || districtOf(i2 + 1, state.map) !== d) { c.beginPath(); c.moveTo(x2 + cell, y2); c.lineTo(x2 + cell, y2 + cell); c.stroke(); }
+        if (c2 === 0 || districtOf(i2 - 1, state.map) !== d) { c.beginPath(); c.moveTo(x2, y2); c.lineTo(x2, y2 + cell); c.stroke(); }
+        if (r2 === N - 1 || districtOf(i2 + N, state.map) !== d) { c.beginPath(); c.moveTo(x2, y2 + cell); c.lineTo(x2 + cell, y2 + cell); c.stroke(); }
+        if (r2 === 0 || districtOf(i2 - N, state.map) !== d) { c.beginPath(); c.moveTo(x2, y2); c.lineTo(x2 + cell, y2); c.stroke(); }
+      }
+      c.restore();
+
+      // popular vote vs seats bars
+      var nBlue = state.grid.reduce(function (s, v) { return s + v; }, 0), tot = N * N;
+      var by = geom.barY, bw = W - 28, bx = 14;
+      drawBar(c, bx, by, bw, 16, nBlue / tot, "Popular vote", Math.round(nBlue / tot * 100) + "% blue");
+      drawBar(c, bx, by + 30, bw, 16, res.seatsB / N, "Seats won", res.seatsB + " blue \u2013 " + res.seatsR + " red");
+
+      update({
+        vote: { text: Math.round(nBlue / tot * 100) + "% / " + Math.round((tot - nBlue) / tot * 100) + "%" },
+        seats: { text: res.seatsB + " blue \u2013 " + res.seatsR + " red" },
+        wasted: { text: res.wastedB + " blue, " + res.wastedR + " red" },
+        verdict: { text: state.map === "columns" ? "Roughly proportional" : state.map === "rows" ? "Cracked: blue swept" : "Packed: safe seats" }
+      });
+    }
+    function drawBar(c, x, y, w, h, frac, label, valtext) {
+      PP.text(c, label, x, y - 3, { size: 10, font: "mono", color: C.inkSoft });
+      st.rc.rectangle(x, y, w, h, { stroke: C.line, strokeWidth: 1, roughness: 0.5, seed: 70 });
+      c.fillStyle = "#CFE0F2"; c.fillRect(x + 1, y + 1, (w - 2) * PP.clamp(frac, 0, 1), h - 2);
+      c.fillStyle = "#FBD9DF"; c.fillRect(x + 1 + (w - 2) * PP.clamp(frac, 0, 1), y + 1, (w - 2) * (1 - PP.clamp(frac, 0, 1)), h - 2);
+      PP.text(c, valtext, x + w, y - 3, { size: 10, align: "right", font: "mono", weight: "700", color: C.ink });
+    }
+
+    /* ---------- side ---------- */
+    var update;
+    function buildPanel() {
+      side.innerHTML = "";
+      update = ui.readout(side, [
+        { key: "vote", label: "Popular vote (blue / red)" },
+        { key: "seats", label: "Seats won" },
+        { key: "wasted", label: "Wasted votes" },
+        { key: "verdict", label: "What just happened" }
+      ]);
+
+      ui.h(side, "How the lines are drawn");
+      ui.segmented(side, {
+        value: state.map,
+        options: [{ value: "columns", label: "By column" }, { value: "rows", label: "By row" }, { value: "packed", label: "Packed" }],
+        onChange: function (v) { state.map = v; store.set("map", v); draw(); }
+      });
+      side.appendChild(ui.el("p", "hint", "The voters never move. <b>By column</b> tracks the popular vote. <b>By row</b> slices the blue bloc into every district so it wins them all \u2014 that's <em>cracking</em>. <b>Packed</b> stuffs blue into a few lopsided safe seats, wasting its votes."));
+
+      ui.h(side, "The electorate");
+      ui.slider(side, { label: "Blue share", min: 20, max: 80, step: 4, value: state.blueShare, fmt: function (v) { return v + "%"; },
+        onInput: function (v) { state.blueShare = v; store.set("blueShare", v); buildGrid(); draw(); } });
+
+      side.appendChild(ui.el("p", "hint", "Keep blue at <b>60%</b> and switch <b>By column</b> \u2192 <b>By row</b>: the same 60% goes from 3 seats out of 5 to all 5, just by re-drawing."));
+    }
+
+    buildGrid(); layout(); buildPanel(); draw();
+    var unsub = PP.onResize(function () { layout(); draw(); });
+    return { destroy: function () { unsub(); } };
+  }
+
+  /* ---------- thumb + comic ---------- */
+  function miniGrid(st, map) {
+    var W = st.w, H = st.h, c = st.ctx;
+    st.clear();
+    var cell = Math.min(W, H) * 0.82 / N, gx = (W - cell * N) / 2, gy = (H - cell * N) / 2;
+    // blue = left 3 columns
+    for (var i = 0; i < N * N; i++) {
+      var r = Math.floor(i / N), col = i % N, blue = col < 3;
+      st.rc.rectangle(gx + col * cell + 1, gy + r * cell + 1, cell - 2, cell - 2,
+        { fill: blue ? "#CFE0F2" : "#FBD9DF", fillStyle: "solid", stroke: C.line, strokeWidth: 0.8, roughness: 0.6, seed: i + 1 });
+    }
+    c.save(); c.strokeStyle = C.ink; c.lineWidth = 2.6;
+    for (var k = 1; k < N; k++) {
+      c.beginPath();
+      if (map === "rows") { c.moveTo(gx, gy + k * cell); c.lineTo(gx + N * cell, gy + k * cell); }
+      else { c.moveTo(gx + k * cell, gy); c.lineTo(gx + k * cell, gy + N * cell); }
+      c.stroke();
+    }
+    c.strokeRect(gx, gy, N * cell, N * cell); c.restore();
+  }
+  function thumb(st) { miniGrid(st, "rows"); }
+  var comicCaps = [
+    "Sixty percent blue, forty percent red. Fixed.",
+    "Cut into columns: three blue seats, two red \u2014 fair enough.",
+    "Re-cut into rows: blue wins all five. Same votes."
+  ];
+  function comic(st, i) {
+    if (i === 0) { miniGrid(st, "none"); }
+    else if (i === 1) miniGrid(st, "columns");
+    else miniGrid(st, "rows");
+  }
+
+  PP.sims["gerrymandering"] = { mount: mount, thumb: thumb, comic: comic, comicCaps: comicCaps };
+})(window);
+
+</script>
+  <!-- js/sims/braess.js -->
+<script>
+/* =========================================================================
+   sims/braess.js — "The Phantom Road"
+   Braess's paradox (1968): adding a new road to a network can make every
+   driver's commute LONGER, because self-interested route choices settle into
+   a worse equilibrium. Close the road and everyone speeds up.
+   ========================================================================= */
+(function (global) {
+  "use strict";
+  var PP = global.PP, ui = PP.ui, C = PP.COLORS;
+
+  function mount(ctx) {
+    var st = new PP.Stage(ctx.stageCanvas);
+    var side = ctx.sideEl, store = ctx.store;
+
+    var state = {
+      cars: store.get("cars", 4000),    // total drivers
+      shortcut: store.get("shortcut", false),
+      t: 0
+    };
+
+    // travel times (minutes). Congestible links scale with their load /100;
+    // fixed links are constant. Classic Braess diamond: S->A (cong), A->T (45),
+    // S->B (45), B->T (cong), and optional A->B (~0).
+    function equilibrium() {
+      var Nn = state.cars;
+      if (!state.shortcut) {
+        // symmetric split: half up (S-A-T), half down (S-B-T)
+        var up = Nn / 2, down = Nn / 2;
+        var costUp = up / 100 + 45;          // S-A congestible + A-T fixed
+        var costDown = 45 + down / 100;      // S-B fixed + B-T congestible
+        return { sAT: up, sBT: down, sABT: 0, time: (costUp + costDown) / 2, costUp: costUp, costDown: costDown };
+      }
+      // with the free shortcut A->B, the dominant route is S-A-B-T for everyone
+      var t = Nn / 100 + 0 + Nn / 100;       // S-A (load Nn) + A-B (0) + B-T (load Nn)
+      return { sAT: 0, sBT: 0, sABT: Nn, time: t, costUp: t, costDown: t };
+    }
+
+    function noShortcutTime() { var u = state.cars / 2; return (u / 100 + 45 + 45 + u / 100) / 2; }
+
+    var loop = PP.makeLoop(function () { state.t = (state.t + 1) % 1000; }, function () { draw(); }, { stepMs: 40 });
+
+    /* ---------- drawing ---------- */
+    var geom = {};
+    function layout() {
+      st.fit();
+      var W = st.w, H = st.h;
+      geom.S = [W * 0.12, H * 0.45];
+      geom.A = [W * 0.5, H * 0.20];
+      geom.B = [W * 0.5, H * 0.70];
+      geom.T = [W * 0.88, H * 0.45];
+    }
+
+    function edge(a, b, label, dash, color) {
+      var c = st.ctx;
+      if (dash) { c.save(); c.setLineDash([7, 7]); c.strokeStyle = color || C.line; c.lineWidth = 2; c.beginPath(); c.moveTo(a[0], a[1]); c.lineTo(b[0], b[1]); c.stroke(); c.restore(); }
+      else st.rc.line(a[0], a[1], b[0], b[1], { stroke: color || C.inkSoft, strokeWidth: 3, roughness: 0.8, seed: 6 });
+      var mid = [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2];
+      PP.text(c, label, mid[0], mid[1] - 6, { size: 10.5, align: "center", font: "mono", color: C.inkSoft, baseline: "bottom" });
+    }
+    function dot(a, b, frac, color) {
+      var x = PP.lerp(a[0], b[0], frac), y = PP.lerp(a[1], b[1], frac);
+      st.rc.circle(x, y, 7, { fill: color, fillStyle: "solid", stroke: C.ink, strokeWidth: 1, roughness: 0.6, seed: ((frac * 97) | 0) + 1 });
+    }
+    function flowDots(a, b, count, color) {
+      if (count <= 0) return;
+      var n = Math.min(7, Math.max(1, Math.round(count / state.cars * 7)));
+      for (var i = 0; i < n; i++) { var f = ((state.t / 60) + i / n) % 1; dot(a, b, f, color); }
+    }
+
+    function draw() {
+      var W = st.w, H = st.h, c = st.ctx;
+      st.clear();
+      var eq = equilibrium(), S = geom.S, A = geom.A, B = geom.B, T = geom.T;
+      var Nn = state.cars;
+      // edges with live load
+      edge(S, A, "load " + Math.round(eq.sAT + eq.sABT) + " \u2192 " + ((eq.sAT + eq.sABT) / 100).toFixed(0) + " min");
+      edge(A, T, "45 min (fixed)");
+      edge(S, B, "45 min (fixed)");
+      edge(B, T, "load " + Math.round(eq.sBT + eq.sABT) + " \u2192 " + ((eq.sBT + eq.sABT) / 100).toFixed(0) + " min");
+      edge(A, B, state.shortcut ? "shortcut: 0 min" : "(no road)", !state.shortcut, state.shortcut ? C.coral : C.line);
+
+      // flowing cars
+      flowDots(S, A, eq.sAT + eq.sABT, C.blue);
+      flowDots(A, T, eq.sAT, C.blue);
+      flowDots(S, B, eq.sBT, C.green);
+      flowDots(B, T, eq.sBT + eq.sABT, C.green);
+      if (state.shortcut) flowDots(A, B, eq.sABT, C.coral);
+
+      // nodes
+      [["S", S], ["A", A], ["B", B], ["T", T]].forEach(function (nd, i) {
+        st.rc.circle(nd[1][0], nd[1][1], 30, { fill: C.paper, fillStyle: "solid", stroke: C.ink, strokeWidth: 2.2, roughness: 1, seed: i + 10 });
+        PP.text(c, nd[0], nd[1][0], nd[1][1] + 6, { size: 17, align: "center", baseline: "middle", font: "display", weight: "800", color: C.ink });
+      });
+      PP.text(c, "START", S[0], S[1] + 44, { size: 9, align: "center", font: "mono", color: C.inkSoft });
+      PP.text(c, "END", T[0], T[1] + 44, { size: 9, align: "center", font: "mono", color: C.inkSoft });
+
+      var base = noShortcutTime(), worse = eq.time > base + 0.01;
+      update({
+        time: { text: eq.time.toFixed(0) + " min" },
+        baseline: { text: base.toFixed(0) + " min" },
+        delta: { text: (eq.time - base >= 0 ? "+" : "") + (eq.time - base).toFixed(0) + " min" },
+        road: { text: state.shortcut ? "Open" : "Closed" }
+      });
+      var d = side.querySelector("#br-delta"); if (d) d.style.color = worse ? C.coralInk : C.greenInk;
+      // banner
+      if (state.shortcut) PP.text(c, worse ? "\u2191 Everyone is SLOWER with the new road" : "", W / 2, H - 10, { size: 13, align: "center", font: "display", weight: "800", color: C.coralInk });
+    }
+
+    /* ---------- side ---------- */
+    var update;
+    function buildPanel() {
+      side.innerHTML = "";
+      update = ui.readout(side, [
+        { key: "time", label: "Everyone's commute (equilibrium)" },
+        { key: "baseline", label: "Commute with road closed" }
+      ]);
+      var drow = ui.el("div", "readout");
+      drow.innerHTML = '<div class="readout__row"><span class="readout__k">Change from the new road</span><span class="readout__v" id="br-delta" style="font-family:var(--display);font-weight:800"></span></div>'
+        + '<div class="readout__row"><span class="readout__k">Shortcut road</span><span class="readout__v" id="br-road"></span></div>';
+      side.appendChild(drow);
+
+      ui.h(side, "The intervention");
+      ui.toggle(side, { label: "Build the shortcut A\u2192B", value: state.shortcut, offLabel: "Closed", onLabel: "Open",
+        onChange: function (b) { state.shortcut = b; store.set("shortcut", b); draw(); var rd = side.querySelector("#br-road"); if (rd) rd.textContent = b ? "Open" : "Closed"; } });
+      side.appendChild(ui.el("p", "hint", "The shortcut is <b>free</b> \u2014 zero travel time. Common sense says a free new road can only help. Open it and read the commute."));
+
+      ui.h(side, "Traffic");
+      ui.slider(side, { label: "Cars on the road", min: 1000, max: 6000, step: 500, value: state.cars,
+        onInput: function (v) { state.cars = v; store.set("cars", v); draw(); } });
+
+      var row = ui.btnRow(side);
+      animBtn = ui.button(row, { label: "\u25B6 Animate traffic", variant: "blue", onClick: function () { if (loop.isPlaying()) loop.pause(); else loop.play(); animBtn.textContent = loop.isPlaying() ? "\u275A\u275A Pause" : "\u25B6 Animate traffic"; } });
+
+      side.appendChild(ui.el("p", "hint", "With the road open, every driver individually does better taking S\u2192A\u2192B\u2192T \u2014 so they all do, and the two congestible links get the <em>whole</em> crowd. Closing the road forces the split that makes everyone faster."));
+    }
+    var animBtn;
+
+    layout(); buildPanel(); draw();
+    if (!(global.matchMedia && global.matchMedia("(prefers-reduced-motion: reduce)").matches)) { loop.play(); }
+    var unsub = PP.onResize(function () { layout(); draw(); });
+    return { destroy: function () { loop.pause(); unsub(); } };
+  }
+
+  /* ---------- thumb + comic ---------- */
+  function net(st, shortcut, slow) {
+    var W = st.w, H = st.h, c = st.ctx;
+    st.clear();
+    var S = [W * 0.14, H * 0.5], A = [W * 0.5, H * 0.22], B = [W * 0.5, H * 0.78], T = [W * 0.86, H * 0.5];
+    [[S, A], [A, T], [S, B], [B, T]].forEach(function (e, i) { st.rc.line(e[0][0], e[0][1], e[1][0], e[1][1], { stroke: C.inkSoft, strokeWidth: 2.4, roughness: 0.8, seed: i + 2 }); });
+    if (shortcut) { c.save(); c.strokeStyle = C.coral; c.lineWidth = 3; c.beginPath(); c.moveTo(A[0], A[1]); c.lineTo(B[0], B[1]); c.stroke(); c.restore(); }
+    [["S", S], ["A", A], ["B", B], ["T", T]].forEach(function (nd, i) {
+      st.rc.circle(nd[1][0], nd[1][1], 26, { fill: C.paper, fillStyle: "solid", stroke: C.ink, strokeWidth: 2, roughness: 1, seed: i + 9 });
+      PP.text(c, nd[0], nd[1][0], nd[1][1] + 5, { size: 14, align: "center", baseline: "middle", font: "display", weight: "800", color: C.ink });
+    });
+    if (slow) PP.text(c, "\u2191 slower!", W / 2, H * 0.94, { size: H * 0.1, align: "center", font: "display", weight: "800", color: C.coralInk });
+  }
+  function thumb(st) { net(st, true, false); }
+  var comicCaps = [
+    "Two routes share the load. Everyone gets there in 65 minutes.",
+    "Build a free shortcut between them \u2014 surely that helps?",
+    "Now all the traffic piles onto it: 80 minutes for everyone."
+  ];
+  function comic(st, i) {
+    if (i === 0) net(st, false, false);
+    else if (i === 1) net(st, true, false);
+    else net(st, true, true);
+  }
+
+  PP.sims["braess"] = { mount: mount, thumb: thumb, comic: comic, comicCaps: comicCaps };
+})(window);
+
+</script>
+  <!-- js/sims/sugarscape.js -->
+<script>
+/* =========================================================================
+   sims/sugarscape.js — "The Luck of the Landscape"
+   Epstein & Axtell, Growing Artificial Societies (1996). Agents that all
+   follow the SAME simple rule \u2014 move to the nearest richest patch, harvest,
+   pay your metabolism \u2014 nonetheless pile up into a steeply unequal wealth
+   distribution. Inequality emerges from luck of location, not from merit.
+   A redistribution lever shows how policy can bend the curve back.
+   ========================================================================= */
+(function (global) {
+  "use strict";
+  var PP = global.PP, ui = PP.ui, C = PP.COLORS;
+  var GW = 22, GH = 14, NCELL = GW * GH;
+
+  function mount(ctx) {
+    var st = new PP.Stage(ctx.stageCanvas);
+    var side = ctx.sideEl, store = ctx.store;
+
+    var state = {
+      visionMax: store.get("visionMax", 4),
+      metabMax: store.get("metabMax", 3),
+      regrow: store.get("regrow", 1),
+      redis: store.get("redis", 0),     // redistribution % (flat tax + equal rebate)
+      nAgents: 70,
+      cap: [], sugar: [], occ: [], agents: [], gini: 0, hist: []
+    };
+
+    function peak(i, cx, cy, amp, sd) {
+      var x = i % GW, y = (i / GW) | 0;
+      var d2 = (x - cx) * (x - cx) + (y - cy) * (y - cy);
+      return amp * Math.exp(-d2 / (2 * sd * sd));
+    }
+    function buildLand() {
+      state.cap = []; state.sugar = [];
+      for (var i = 0; i < NCELL; i++) {
+        var v = peak(i, GW * 0.28, GH * 0.32, 4, 4.2) + peak(i, GW * 0.72, GH * 0.68, 4, 4.2);
+        var cap = Math.max(0, Math.min(4, Math.round(v)));
+        state.cap.push(cap); state.sugar.push(cap);
+      }
+    }
+    function reset() {
+      buildLand();
+      state.occ = []; for (var i = 0; i < NCELL; i++) state.occ.push(-1);
+      state.agents = [];
+      var rnd = PP.rng(1234);
+      for (var a = 0; a < state.nAgents; a++) spawn(a, rnd);
+      state.hist = [];
+      computeGini();
+    }
+    function spawn(id, rnd) {
+      rnd = rnd || Math.random;
+      var p;
+      do { p = (Math.random() * NCELL) | 0; } while (state.occ[p] >= 0);
+      var ag = state.agents[id] || {};
+      ag.pos = p;
+      ag.vision = 1 + ((rnd() * state.visionMax) | 0);
+      ag.metab = 1 + ((rnd() * state.metabMax) | 0);
+      ag.wealth = 2 + (rnd() * 6);
+      state.agents[id] = ag;
+      state.occ[p] = id;
+    }
+
+    function bestMove(ag) {
+      var x = ag.pos % GW, y = (ag.pos / GW) | 0, best = ag.pos, bestSugar = state.sugar[ag.pos], bestDist = 0;
+      var dirs = [[1, 0], [-1, 0], [0, 1], [0, -1]];
+      for (var d = 0; d < 4; d++) {
+        for (var step = 1; step <= ag.vision; step++) {
+          var nx = (x + dirs[d][0] * step + GW) % GW, ny = (y + dirs[d][1] * step + GH) % GH;
+          var idx = ny * GW + nx;
+          if (state.occ[idx] >= 0) continue;
+          if (state.sugar[idx] > bestSugar || (state.sugar[idx] === bestSugar && step < bestDist)) {
+            bestSugar = state.sugar[idx]; best = idx; bestDist = step;
+          }
+        }
+      }
+      return best;
+    }
+
+    function step() {
+      var order = []; for (var i = 0; i < state.agents.length; i++) order.push(i);
+      PP.shuffle(order);
+      for (var k = 0; k < order.length; k++) {
+        var id = order[k], ag = state.agents[id];
+        var dest = bestMove(ag);
+        if (dest !== ag.pos) { state.occ[ag.pos] = -1; ag.pos = dest; state.occ[dest] = id; }
+        ag.wealth += state.sugar[ag.pos]; state.sugar[ag.pos] = 0;
+        ag.wealth -= ag.metab;
+        if (ag.wealth <= 0) { state.occ[ag.pos] = -1; spawn(id); }
+      }
+      // regrow sugar
+      for (var c = 0; c < NCELL; c++) state.sugar[c] = Math.min(state.cap[c], state.sugar[c] + state.regrow);
+      // redistribution: flat tax on wealth + equal rebate
+      if (state.redis > 0) {
+        var tau = state.redis / 100, pool = 0;
+        for (var a2 = 0; a2 < state.agents.length; a2++) { var tx = state.agents[a2].wealth * tau; state.agents[a2].wealth -= tx; pool += tx; }
+        var rebate = pool / state.agents.length;
+        for (var a3 = 0; a3 < state.agents.length; a3++) state.agents[a3].wealth += rebate;
+      }
+      computeGini();
+      state.hist.push(state.gini); if (state.hist.length > 80) state.hist.shift();
+    }
+
+    function computeGini() {
+      var w = state.agents.map(function (a) { return Math.max(0, a.wealth); }).sort(function (a, b) { return a - b; });
+      var n = w.length, sum = 0, cum = 0;
+      for (var i = 0; i < n; i++) sum += w[i];
+      if (sum <= 0) { state.gini = 0; return; }
+      for (var j = 0; j < n; j++) cum += (j + 1) * w[j];
+      state.gini = (2 * cum) / (n * sum) - (n + 1) / n;
+      state.sortedW = w;
+    }
+
+    var loop = PP.makeLoop(step, function () { draw(); }, { stepMs: 130 });
+
+    /* ---------- drawing ---------- */
+    var geom = {};
+    function layout() {
+      st.fit();
+      var W = st.w, H = st.h;
+      geom.gridH = H * 0.60;
+      geom.cell = Math.min((W - 20) / GW, geom.gridH / GH);
+      geom.gx = (W - geom.cell * GW) / 2;
+      geom.gy = 8;
+      geom.chartY = geom.gy + geom.cell * GH + 14;
+    }
+
+    var SUGAR_TINT = ["#FBFAF4", "#FBF1D6", "#F8E4AE", "#F3D078", "#EFB94B"];
+    function wealthColor(w) { return w < 5 ? "#C9C3B4" : w < 15 ? C.blue : w < 30 ? C.gold : C.coral; }
+
+    function draw() {
+      var W = st.w, c = st.ctx, cell = geom.cell, gx = geom.gx, gy = geom.gy;
+      st.clear();
+      for (var i = 0; i < NCELL; i++) {
+        var x = gx + (i % GW) * cell, y = gy + ((i / GW) | 0) * cell;
+        c.fillStyle = SUGAR_TINT[state.sugar[i]] || SUGAR_TINT[0];
+        c.fillRect(x, y, cell + 0.5, cell + 0.5);
+      }
+      // agents
+      for (var a = 0; a < state.agents.length; a++) {
+        var ag = state.agents[a], x2 = gx + (ag.pos % GW) * cell, y2 = gy + ((ag.pos / GW) | 0) * cell;
+        st.rc.circle(x2 + cell / 2, y2 + cell / 2, cell * 0.66, { fill: wealthColor(ag.wealth), fillStyle: "solid", stroke: C.ink, strokeWidth: 1, roughness: 0.7, seed: a + 1 });
+      }
+
+      // wealth distribution (sorted bars) + gini
+      var cy = geom.chartY, ch = st.h - cy - 10, cx = 14, cw = W - 28;
+      st.rc.rectangle(cx, cy, cw, ch, { fill: C.paper, fillStyle: "solid", stroke: C.line, strokeWidth: 1, roughness: 0.5, seed: 9 });
+      var w = state.sortedW || [], n = w.length, maxW = 1;
+      for (var m = 0; m < n; m++) maxW = Math.max(maxW, w[m]);
+      var bw = (cw - 12) / n;
+      for (var b = 0; b < n; b++) {
+        var bh = (ch - 16) * (w[b] / maxW);
+        c.fillStyle = wealthColor(w[b]);
+        c.fillRect(cx + 6 + b * bw, cy + ch - 6 - bh, Math.max(1, bw - 1), bh);
+      }
+      PP.text(c, "poorest \u2192 richest", cx + 6, cy + 12, { size: 9.5, font: "mono", color: C.inkSoft });
+      PP.text(c, "Gini " + state.gini.toFixed(2), cx + cw - 8, cy + 14, { size: 13, align: "right", font: "display", weight: "800", color: state.gini > 0.4 ? C.coralInk : C.greenInk });
+
+      update({
+        gini: { text: state.gini.toFixed(2), pct: state.gini * 100 },
+        richest: { text: Math.round((state.sortedW && state.sortedW[n - 1]) || 0).toString() },
+        poorest: { text: Math.round((state.sortedW && state.sortedW[0]) || 0).toString() }
+      });
+    }
+
+    /* ---------- side ---------- */
+    var update;
+    function buildPanel() {
+      side.innerHTML = "";
+      update = ui.readout(side, [
+        { key: "gini", label: "Gini coefficient (0 = equal)", bar: true, color: C.coral },
+        { key: "richest", label: "Richest agent's hoard" },
+        { key: "poorest", label: "Poorest agent's hoard" }
+      ]);
+
+      ui.h(side, "Everyone follows the same rule");
+      ui.slider(side, { label: "Max vision", min: 1, max: 6, step: 1, value: state.visionMax,
+        onInput: function (v) { state.visionMax = v; store.set("visionMax", v); } });
+      ui.slider(side, { label: "Max metabolism", min: 1, max: 5, step: 1, value: state.metabMax,
+        onInput: function (v) { state.metabMax = v; store.set("metabMax", v); } });
+      ui.slider(side, { label: "Sugar regrowth", min: 1, max: 4, step: 1, value: state.regrow,
+        onInput: function (v) { state.regrow = v; store.set("regrow", v); } });
+      side.appendChild(ui.el("p", "hint", "Vision and metabolism are handed out at random, but the <em>rule</em> is identical for all. The skew you see isn't unfairness written into the rule \u2014 it emerges on its own."));
+
+      ui.h(side, "Policy lever");
+      ui.slider(side, { label: "Redistribution", min: 0, max: 60, step: 5, value: state.redis, fmt: function (v) { return v + "%"; },
+        onInput: function (v) { state.redis = v; store.set("redis", v); } });
+      side.appendChild(ui.el("p", "hint", "A flat tax on wealth, rebated equally each step. Push it up and watch the Gini fall \u2014 the emergent inequality is not a law of nature."));
+
+      var row = ui.btnRow(side);
+      playBtn = ui.button(row, { label: "\u25B6 Run", variant: "blue", onClick: function () { if (loop.isPlaying()) loop.pause(); else loop.play(); sync(); } });
+      ui.button(row, { label: "Step", variant: "ghost", onClick: function () { loop.pause(); sync(); step(); draw(); } });
+      ui.button(row, { label: "Reset", variant: "ghost", onClick: function () { loop.pause(); sync(); reset(); draw(); } });
+      sync();
+      side.appendChild(ui.el("p", "hint", "Run it from a near-equal start with redistribution at 0% and watch a handful of agents near the sugar peaks pull away from everyone else."));
+    }
+    var playBtn;
+    function sync() { if (playBtn) playBtn.textContent = loop.isPlaying() ? "\u275A\u275A Pause" : "\u25B6 Run"; }
+
+    reset(); layout(); buildPanel(); draw();
+    var unsub = PP.onResize(function () { layout(); draw(); });
+    return { destroy: function () { loop.pause(); unsub(); } };
+  }
+
+  /* ---------- thumb + comic ---------- */
+  var TINT = ["#FBFAF4", "#FBF1D6", "#F8E4AE", "#F3D078", "#EFB94B"];
+  function scene(st, skew) {
+    var W = st.w, H = st.h, c = st.ctx;
+    st.clear();
+    var gw = 11, gh = 7, cell = Math.min(W / gw, (H * 0.7) / gh), gx = (W - cell * gw) / 2, gy = 6;
+    for (var i = 0; i < gw * gh; i++) {
+      var x = i % gw, y = (i / gw) | 0;
+      var d = Math.min(Math.hypot(x - 3, y - 2), Math.hypot(x - 8, y - 5));
+      var s = Math.max(0, 4 - Math.round(d * 1.1));
+      c.fillStyle = TINT[s] || TINT[0]; c.fillRect(gx + x * cell, gy + y * cell, cell + 0.5, cell + 0.5);
+    }
+    var rng = PP.rng(7);
+    for (var a = 0; a < 16; a++) {
+      var rich = skew ? a < 3 : a < 8;
+      var px = gx + (rng() * gw | 0) * cell + cell / 2, py = gy + (rng() * gh | 0) * cell + cell / 2;
+      st.rc.circle(px, py, cell * 0.5, { fill: rich ? C.coral : "#C9C3B4", fillStyle: "solid", stroke: C.ink, strokeWidth: 1, roughness: 0.7, seed: a + 1 });
+    }
+    PP.text(c, skew ? "Gini 0.55" : "Gini 0.10", W / 2, H * 0.93, { size: H * 0.1, align: "center", font: "display", weight: "800", color: skew ? C.coralInk : C.greenInk });
+  }
+  function thumb(st) { scene(st, true); }
+  var comicCaps = [
+    "Identical agents scatter onto an uneven landscape.",
+    "Each just walks to the nearest richest patch and harvests.",
+    "A lucky few by the peaks balloon; the rest stay poor."
+  ];
+  function comic(st, i) { scene(st, i === 2); }
+
+  PP.sims["sugarscape"] = { mount: mount, thumb: thumb, comic: comic, comicCaps: comicCaps };
+})(window);
+
+</script>
+  <!-- js/sims/tiebout.js -->
+<script>
+/* =========================================================================
+   sims/tiebout.js — "Voting With Your Feet"
+   Tiebout (1956), "A Pure Theory of Local Expenditures." When towns offer
+   different tax-and-service bundles and residents can move freely, people sort
+   themselves into the community that fits their preferences. The result is a
+   good match \u2014 and sharply sorted, homogeneous towns. With no real choice on
+   the menu, no one can sort, and average satisfaction falls.
+   ========================================================================= */
+(function (global) {
+  "use strict";
+  var PP = global.PP, ui = PP.ui, C = PP.COLORS;
+  var NT = 4, NR = 60;
+  var TCOL = [C.blue, C.green, C.gold, C.coral];
+
+  function mount(ctx) {
+    var st = new PP.Stage(ctx.stageCanvas);
+    var side = ctx.sideEl, store = ctx.store;
+
+    var state = {
+      menu: store.get("menu", "varied"),     // identical | varied | polarized
+      spread: store.get("spread", 60),       // how spread out resident prefs are
+      towns: [], residents: [], settled: false
+    };
+
+    function townLevels() {
+      if (state.menu === "identical") return [0.5, 0.5, 0.5, 0.5];
+      if (state.menu === "polarized") return [0.1, 0.15, 0.85, 0.9];
+      return [0.18, 0.42, 0.62, 0.86];
+    }
+    function reset() {
+      var levels = townLevels();
+      state.towns = levels.map(function (L, i) { return { level: L, pop: 0 }; });
+      var rnd = PP.rng(2025), s = state.spread / 100;
+      state.residents = [];
+      for (var i = 0; i < NR; i++) {
+        // preference centred at 0.5, spread by slider
+        var p = PP.clamp(0.5 + (rnd() - 0.5) * 2 * s, 0, 1);
+        state.residents.push({ pref: p, town: (Math.random() * NT) | 0, x: 0, y: 0, tx: 0, ty: 0 });
+      }
+      assignSeats();
+      state.settled = false;
+    }
+
+    function bestTown(pref) {
+      var bi = 0, bu = -1e9;
+      for (var t = 0; t < NT; t++) {
+        var congestion = 0.12 * (state.towns[t].pop / NR);
+        var u = 1 - Math.abs(pref - state.towns[t].level) - congestion;
+        if (u > bu) { bu = u; bi = t; }
+      }
+      return bi;
+    }
+
+    function step() {
+      // recount populations
+      for (var t = 0; t < NT; t++) state.towns[t].pop = 0;
+      state.residents.forEach(function (r) { state.towns[r.town].pop++; });
+      var moved = 0;
+      state.residents.forEach(function (r) {
+        var b = bestTown(r.pref);
+        if (b !== r.town) {
+          state.towns[r.town].pop--; r.town = b; state.towns[b].pop++; moved++;
+        }
+      });
+      assignSeats();
+      if (moved === 0) { state.settled = true; if (loop.isPlaying()) { loop.pause(); sync(); } }
+    }
+
+    var loop = PP.makeLoop(step, function () { draw(); }, { stepMs: 360 });
+
+    /* ---------- metrics ---------- */
+    function satisfaction() {
+      var s = 0; state.residents.forEach(function (r) { s += 1 - Math.abs(r.pref - state.towns[r.town].level); });
+      return s / NR;
+    }
+    function sortingIndex() {
+      // 1 - avg within-town stddev of prefs (normalised) -> higher = more sorted
+      var sumStd = 0, counted = 0;
+      for (var t = 0; t < NT; t++) {
+        var ps = state.residents.filter(function (r) { return r.town === t; }).map(function (r) { return r.pref; });
+        if (ps.length < 2) { continue; }
+        var m = ps.reduce(function (a, b) { return a + b; }, 0) / ps.length;
+        var v = ps.reduce(function (a, b) { return a + (b - m) * (b - m); }, 0) / ps.length;
+        sumStd += Math.sqrt(v); counted++;
+      }
+      var avgStd = counted ? sumStd / counted : 0;
+      return PP.clamp(1 - avgStd / 0.5, 0, 1);
+    }
+
+    /* ---------- layout ---------- */
+    var geom = {};
+    function layout() {
+      st.fit();
+      var W = st.w, H = st.h;
+      geom.townW = (W - 20) / NT;
+      geom.townTop = 34; geom.townH = H * 0.72;
+      assignSeats();
+    }
+    function assignSeats() {
+      if (!geom.townW) return;
+      var perRow = Math.max(3, Math.floor((geom.townW - 16) / 18));
+      var counts = [0, 0, 0, 0];
+      state.residents.forEach(function (r) {
+        var idx = counts[r.town]++;
+        var col = idx % perRow, row = (idx / perRow) | 0;
+        r.tx = 10 + r.town * geom.townW + 10 + col * 17;
+        r.ty = geom.townTop + geom.townH - 22 - row * 17;
+        if (r.x === 0 && r.y === 0) { r.x = r.tx; r.y = r.ty; }
+      });
+    }
+
+    function draw() {
+      var W = st.w, H = st.h, c = st.ctx;
+      st.clear();
+      for (var t = 0; t < NT; t++) {
+        var x = 10 + t * geom.townW, w = geom.townW - 8;
+        // town box + a "service level" fill from the bottom
+        PP.panel(st.rc, x, geom.townTop, w, geom.townH, { fill: C.paper, stroke: C.line, strokeWidth: 1.2, seed: t + 2 });
+        var lvlH = geom.townH * state.towns[t].level;
+        c.save(); c.globalAlpha = 0.16; c.fillStyle = TCOL[t]; c.fillRect(x + 2, geom.townTop + geom.townH - lvlH, w - 4, lvlH - 2); c.restore();
+        PP.text(c, "Town " + (t + 1), x + w / 2, geom.townTop - 18, { size: 12, align: "center", font: "display", weight: "800", color: TCOL[t] });
+        var lv = state.towns[t].level;
+        var desc = lv < 0.33 ? "low tax / few services" : lv < 0.66 ? "mid tax / services" : "high tax / lots of services";
+        PP.text(c, desc, x + w / 2, geom.townTop - 5, { size: 8.5, align: "center", font: "mono", color: C.inkSoft });
+        PP.text(c, state.towns[t].pop + " residents", x + w / 2, geom.townTop + geom.townH + 14, { size: 10, align: "center", font: "mono", color: C.inkSoft });
+      }
+      // residents (colour = their preferred service level, so sorting shows as colour clustering)
+      state.residents.forEach(function (r, i) {
+        r.x += (r.tx - r.x) * 0.25; r.y += (r.ty - r.y) * 0.25;
+        var prefCol = r.pref < 0.33 ? C.blue : r.pref < 0.66 ? C.green : C.coral;
+        var happy = 1 - Math.abs(r.pref - state.towns[r.town].level);
+        PP.token(st.rc, c, r.x, r.y, 15, { color: prefCol, mood: happy > 0.8 ? "happy" : happy > 0.55 ? "neutral" : "sad", seed: i + 1 });
+      });
+
+      update({
+        sat: { text: Math.round(satisfaction() * 100) + "%", pct: satisfaction() * 100 },
+        sort: { text: Math.round(sortingIndex() * 100) + "%", pct: sortingIndex() * 100 },
+        status: { text: state.settled ? "Settled" : "Moving\u2026" }
+      });
+    }
+
+    /* ---------- side ---------- */
+    var update;
+    function buildPanel() {
+      side.innerHTML = "";
+      update = ui.readout(side, [
+        { key: "sat", label: "Average satisfaction", bar: true, color: C.green },
+        { key: "sort", label: "Sorting (town homogeneity)", bar: true, color: C.gold },
+        { key: "status", label: "Status" }
+      ]);
+
+      ui.h(side, "The menu of towns");
+      ui.segmented(side, {
+        value: state.menu,
+        options: [{ value: "identical", label: "Identical" }, { value: "varied", label: "Varied" }, { value: "polarized", label: "Polarised" }],
+        onChange: function (v) { state.menu = v; store.set("menu", v); loop.pause(); sync(); reset(); draw(); }
+      });
+      side.appendChild(ui.el("p", "hint", "With <b>identical</b> towns there's nothing to sort into \u2014 people are stuck near the average. A <b>varied</b> menu lets everyone find a closer match."));
+
+      ui.h(side, "The residents");
+      ui.slider(side, { label: "Preference spread", min: 10, max: 100, step: 10, value: state.spread, fmt: function (v) { return v + "%"; },
+        onInput: function (v) { state.spread = v; store.set("spread", v); loop.pause(); sync(); reset(); draw(); } });
+
+      var row = ui.btnRow(side);
+      playBtn = ui.button(row, { label: "\u25B6 Let them move", variant: "blue", onClick: function () { if (loop.isPlaying()) loop.pause(); else { if (state.settled) reset(); loop.play(); } sync(); } });
+      ui.button(row, { label: "Step", variant: "ghost", onClick: function () { loop.pause(); sync(); step(); draw(); } });
+      ui.button(row, { label: "Reset", variant: "ghost", onClick: function () { loop.pause(); sync(); reset(); draw(); } });
+      sync();
+      side.appendChild(ui.el("p", "hint", "Watch the colours separate as people relocate to the town that fits them. Better matching, but also more segregated-by-preference towns \u2014 Tiebout's efficiency and its social cost in one move."));
+    }
+    var playBtn;
+    function sync() { if (playBtn) playBtn.textContent = loop.isPlaying() ? "\u275A\u275A Pause" : (state.settled ? "\u21BB Replay" : "\u25B6 Let them move"); }
+
+    reset(); layout(); buildPanel(); draw();
+    var unsub = PP.onResize(function () { layout(); draw(); });
+    return { destroy: function () { loop.pause(); unsub(); } };
+  }
+
+  /* ---------- thumb + comic ---------- */
+  function scene(st, sorted) {
+    var W = st.w, H = st.h, c = st.ctx;
+    st.clear();
+    var tw = W / 4, rng = PP.rng(3);
+    var cols = [C.blue, C.green, C.coral];
+    for (var t = 0; t < 4; t++) {
+      PP.panel(st.rc, 6 + t * tw, H * 0.16, tw - 10, H * 0.66, { fill: C.paper, stroke: C.line, strokeWidth: 1, seed: t + 2 });
+      for (var k = 0; k < 4; k++) {
+        var col = sorted ? cols[Math.min(2, t * 3 / 4 | 0)] : cols[(rng() * 3) | 0];
+        PP.token(st.rc, c, 12 + t * tw + (k % 2) * 18, H * 0.5 + ((k / 2) | 0) * 18, 15, { color: col, mood: sorted ? "happy" : "neutral", seed: t * 7 + k });
+      }
+    }
+  }
+  function thumb(st) { scene(st, true); }
+  var comicCaps = [
+    "Four towns, four different tax-and-service deals.",
+    "Residents shop around for the bundle they prefer.",
+    "Everyone settles into their match \u2014 sorted into like with like."
+  ];
+  function comic(st, i) { scene(st, i === 2); }
+
+  PP.sims["tiebout"] = { mount: mount, thumb: thumb, comic: comic, comicCaps: comicCaps };
+})(window);
+
+</script>
+  <!-- js/sims/diffusion.js -->
+<script>
+/* =========================================================================
+   sims/diffusion.js — "Catching On"
+   Rogers (1962) Diffusion of Innovations + Bass (1969) model. New ideas spread
+   through two forces: external "innovation" p (advertising, broadcast) and
+   internal "imitation" q (word of mouth from those who've already adopted).
+   Word of mouth is what bends adoption into the famous S-curve.
+   ========================================================================= */
+(function (global) {
+  "use strict";
+  var PP = global.PP, ui = PP.ui, C = PP.COLORS;
+  var GRID = 120; // tokens
+
+  function mount(ctx) {
+    var st = new PP.Stage(ctx.stageCanvas);
+    var side = ctx.sideEl, store = ctx.store;
+
+    var state = {
+      p: store.get("p", 0.015),   // coefficient of innovation
+      q: store.get("q", 0.38),    // coefficient of imitation
+      adopted: [], t: 0, cum: [], rate: [], done: false
+    };
+
+    function reset() {
+      state.adopted = []; for (var i = 0; i < GRID; i++) state.adopted.push(false);
+      state.t = 0; state.cum = [0]; state.rate = [0]; state.done = false;
+    }
+    function fracAdopted() { var n = 0; for (var i = 0; i < GRID; i++) if (state.adopted[i]) n++; return n / GRID; }
+
+    function step() {
+      if (state.done) return;
+      var F = fracAdopted();
+      var prob = state.p + state.q * F;       // Bass hazard for a non-adopter this period
+      var before = F * GRID, newly = 0;
+      for (var i = 0; i < GRID; i++) if (!state.adopted[i] && Math.random() < prob) { state.adopted[i] = true; newly++; }
+      state.t++;
+      var nowF = fracAdopted();
+      state.cum.push(nowF); state.rate.push(newly / GRID);
+      if (state.cum.length > 90) { state.cum.shift(); state.rate.shift(); }
+      if (nowF >= 0.999 || state.t > 200) { state.done = true; if (loop.isPlaying()) { loop.pause(); sync(); } }
+    }
+
+    var loop = PP.makeLoop(step, function () { draw(); }, { stepMs: 240 });
+
+    function phase() {
+      var f = fracAdopted();
+      if (f < 0.025) return "Innovators";
+      if (f < 0.16) return "Early adopters";
+      if (f < 0.50) return "Early majority";
+      if (f < 0.84) return "Late majority";
+      return "Laggards";
+    }
+
+    /* ---------- drawing ---------- */
+    var geom = {};
+    function layout() {
+      st.fit();
+      var W = st.w, H = st.h;
+      geom.cols = Math.round(Math.sqrt(GRID * W / Math.max(1, H * 0.52)));
+      geom.cols = Math.max(8, Math.min(GRID, geom.cols));
+      geom.rows = Math.ceil(GRID / geom.cols);
+      geom.cell = Math.min((W - 20) / geom.cols, (H * 0.50) / geom.rows);
+      geom.gx = (W - geom.cols * geom.cell) / 2;
+      geom.gy = 8;
+      geom.chartY = geom.gy + geom.rows * geom.cell + 14;
+    }
+
+    function draw() {
+      var W = st.w, c = st.ctx, cell = geom.cell;
+      st.clear();
+      for (var i = 0; i < GRID; i++) {
+        var x = geom.gx + (i % geom.cols) * cell, y = geom.gy + ((i / geom.cols) | 0) * cell;
+        PP.token(st.rc, c, x, y, cell * 0.92, { color: state.adopted[i] ? C.gold : "#DAD4C6", mood: state.adopted[i] ? "happy" : "neutral", seed: i + 1 });
+      }
+      // chart: cumulative S-curve (blue) + adoption rate (coral)
+      var cy = geom.chartY, ch = st.h - cy - 10, cx = 14, cw = W - 28;
+      st.rc.rectangle(cx, cy, cw, ch, { fill: C.paper, fillStyle: "solid", stroke: C.line, strokeWidth: 1, roughness: 0.5, seed: 9 });
+      var maxRate = 0.001; for (var r = 0; r < state.rate.length; r++) maxRate = Math.max(maxRate, state.rate[r]);
+      var rateNorm = state.rate.map(function (v) { return v / maxRate; });
+      PP.lineChart(st.rc, c, cx + 8, cy + 10, cw - 16, ch - 22, [{ color: C.blue, points: state.cum }], { yMax: 1, yMin: 0 });
+      PP.lineChart(st.rc, c, cx + 8, cy + 10, cw - 16, ch - 22, [{ color: C.coral, points: rateNorm }], { yMax: 1, yMin: 0 });
+      PP.text(c, "cumulative", cx + 10, cy + 14, { size: 9.5, font: "mono", color: C.blueInk, weight: "700" });
+      PP.text(c, "new adopters/step", cx + 78, cy + 14, { size: 9.5, font: "mono", color: C.coralInk, weight: "700" });
+
+      update({
+        adopted: { text: Math.round(fracAdopted() * 100) + "%", pct: fracAdopted() * 100 },
+        phase: { text: phase() },
+        step: { text: state.t.toString() }
+      });
+    }
+
+    /* ---------- side ---------- */
+    var update;
+    function buildPanel() {
+      side.innerHTML = "";
+      update = ui.readout(side, [
+        { key: "adopted", label: "Adopted", bar: true, color: C.gold },
+        { key: "phase", label: "Rogers phase" },
+        { key: "step", label: "Time steps" }
+      ]);
+
+      ui.h(side, "What drives adoption");
+      ui.slider(side, { label: "Advertising push (innovation p)", min: 0, max: 60, step: 1, value: Math.round(state.p * 1000), fmt: function (v) { return (v / 10).toFixed(1) + "%"; },
+        onInput: function (v) { state.p = v / 1000; store.set("p", state.p); } });
+      ui.slider(side, { label: "Word of mouth (imitation q)", min: 0, max: 70, step: 1, value: Math.round(state.q * 100), fmt: function (v) { return v + "%"; },
+        onInput: function (v) { state.q = v / 100; store.set("q", state.q); } });
+      side.appendChild(ui.el("p", "hint", "Turn <b>word of mouth</b> down to near zero: adoption is a dull, flattening climb driven only by advertising. Turn it up and you get the classic <b>S-curve</b> \u2014 a slow start, an explosive middle, then saturation."));
+
+      var row = ui.btnRow(side);
+      playBtn = ui.button(row, { label: "\u25B6 Launch", variant: "blue", onClick: function () { if (loop.isPlaying()) loop.pause(); else { if (state.done) reset(); loop.play(); } sync(); } });
+      ui.button(row, { label: "Step", variant: "ghost", onClick: function () { loop.pause(); sync(); step(); draw(); } });
+      ui.button(row, { label: "Reset", variant: "ghost", onClick: function () { loop.pause(); sync(); reset(); draw(); } });
+      sync();
+      side.appendChild(ui.el("p", "hint", "The coral curve \u2014 new adopters each step \u2014 rises to a peak and falls. That peak is the inflection of the S-curve, and where Rogers' \u201Cearly\u201D and \u201Clate\u201D majorities meet."));
+    }
+    var playBtn;
+    function sync() { if (playBtn) playBtn.textContent = loop.isPlaying() ? "\u275A\u275A Pause" : (state.done ? "\u21BB Relaunch" : "\u25B6 Launch"); }
+
+    reset(); layout(); buildPanel(); draw();
+    var unsub = PP.onResize(function () { layout(); draw(); });
+    return { destroy: function () { loop.pause(); unsub(); } };
+  }
+
+  /* ---------- thumb + comic ---------- */
+  function grid(st, frac) {
+    var W = st.w, H = st.h, c = st.ctx, cols = 7, rows = 4;
+    st.clear();
+    var cell = Math.min((W - 10) / cols, (H * 0.6) / rows), gx = (W - cols * cell) / 2, gy = 6, n = cols * rows;
+    for (var i = 0; i < n; i++) {
+      var on = i < Math.round(frac * n);
+      PP.token(st.rc, c, gx + (i % cols) * cell, gy + ((i / cols) | 0) * cell, cell * 0.9, { color: on ? C.gold : "#DAD4C6", mood: on ? "happy" : "neutral", seed: i + 1 });
+    }
+    // tiny s-curve
+    var pts = [];
+    for (var k = 0; k <= 20; k++) { var x = k / 20; pts.push(1 / (1 + Math.exp(-12 * (x - 0.5)))); }
+    PP.lineChart(st.rc, c, gx, H * 0.72, cols * cell, H * 0.22, [{ color: C.blue, points: pts }], { yMax: 1, yMin: 0 });
+  }
+  function thumb(st) { grid(st, 0.45); }
+  var comicCaps = [
+    "A handful of innovators try the new thing first.",
+    "Word of mouth kicks in and adoption explodes.",
+    "The market saturates; only the laggards are left."
+  ];
+  function comic(st, i) { grid(st, [0.08, 0.5, 0.95][i]); }
+
+  PP.sims["diffusion"] = { mount: mount, thumb: thumb, comic: comic, comicCaps: comicCaps };
+})(window);
+
+</script>
+  <!-- js/sims/epidemic.js -->
+<script>
+/* =========================================================================
+   sims/epidemic.js — "Flatten the Curve"
+   The SIR model (Kermack & McKendrick, 1927). A population splits into
+   Susceptible, Infected and Recovered. One number, R0 = transmission /
+   recovery, governs everything: above 1 an epidemic grows, and the peak's
+   height depends sharply on it. Distancing flattens the peak; vaccinating past
+   the herd-immunity threshold (1 - 1/R0) stops the outbreak before it starts.
+   ========================================================================= */
+(function (global) {
+  "use strict";
+  var PP = global.PP, ui = PP.ui, C = PP.COLORS;
+  var NTOK = 120;
+
+  function mount(ctx) {
+    var st = new PP.Stage(ctx.stageCanvas);
+    var side = ctx.sideEl, store = ctx.store;
+
+    var state = {
+      contacts: store.get("contacts", 40),  // drives beta (0..100)
+      duration: store.get("duration", 6),   // infectious days -> gamma = 1/duration
+      vax: store.get("vax", 0),              // vaccinated fraction (%)
+      S: 0, I: 0, R: 0, t: 0,
+      Shist: [], Ihist: [], Rhist: [], peakI: 0, done: false
+    };
+
+    function beta() { return 0.08 + (state.contacts / 100) * 0.55; }
+    function gamma() { return 1 / state.duration; }
+    function R0() { return beta() / gamma(); }
+    function herd() { var r = R0(); return r > 1 ? 1 - 1 / r : 0; }
+
+    function reset() {
+      var v = state.vax / 100;
+      state.I = 0.01; state.R = v; state.S = Math.max(0, 1 - state.I - v);
+      state.t = 0; state.Shist = [state.S]; state.Ihist = [state.I]; state.Rhist = [state.R];
+      state.peakI = state.I; state.done = false;
+    }
+
+    function step() {
+      if (state.done) return;
+      var b = beta(), g = gamma(), dt = 0.5;
+      var newInf = b * state.S * state.I * dt;
+      var newRec = g * state.I * dt;
+      state.S -= newInf; state.I += newInf - newRec; state.R += newRec;
+      state.S = PP.clamp(state.S, 0, 1); state.I = PP.clamp(state.I, 0, 1); state.R = PP.clamp(state.R, 0, 1);
+      state.t++;
+      state.peakI = Math.max(state.peakI, state.I);
+      state.Shist.push(state.S); state.Ihist.push(state.I); state.Rhist.push(state.R);
+      if (state.Shist.length > 120) { state.Shist.shift(); state.Ihist.shift(); state.Rhist.shift(); }
+      if ((state.I < 0.0008 && state.t > 6) || state.t > 240) { state.done = true; if (loop.isPlaying()) { loop.pause(); sync(); } }
+    }
+
+    var loop = PP.makeLoop(step, function () { draw(); }, { stepMs: 80 });
+
+    /* ---------- drawing ---------- */
+    var geom = {};
+    function layout() {
+      st.fit();
+      var W = st.w, H = st.h;
+      geom.cols = Math.round(Math.sqrt(NTOK * W / Math.max(1, H * 0.42)));
+      geom.cols = Math.max(10, Math.min(NTOK, geom.cols));
+      geom.rows = Math.ceil(NTOK / geom.cols);
+      geom.cell = Math.min((W - 20) / geom.cols, (H * 0.40) / geom.rows);
+      geom.gx = (W - geom.cols * geom.cell) / 2;
+      geom.gy = 8;
+      geom.chartY = geom.gy + geom.rows * geom.cell + 14;
+    }
+
+    function draw() {
+      var W = st.w, c = st.ctx, cell = geom.cell;
+      st.clear();
+      // token field sampled to current S/I/R split (stable assignment by index)
+      var nI = Math.round(state.I * NTOK), nR = Math.round(state.R * NTOK);
+      for (var i = 0; i < NTOK; i++) {
+        var x = geom.gx + (i % geom.cols) * cell, y = geom.gy + ((i / geom.cols) | 0) * cell;
+        var col, mood;
+        if (i < nI) { col = C.coral; mood = "sad"; }
+        else if (i < nI + nR) { col = C.green; mood = "happy"; }
+        else { col = C.blue; mood = "neutral"; }
+        PP.token(st.rc, c, x, y, cell * 0.92, { color: col, mood: mood, seed: i + 1 });
+      }
+      // SIR curves
+      var cy = geom.chartY, ch = st.h - cy - 10, cx = 14, cw = W - 28;
+      st.rc.rectangle(cx, cy, cw, ch, { fill: C.paper, fillStyle: "solid", stroke: C.line, strokeWidth: 1, roughness: 0.5, seed: 9 });
+      PP.lineChart(st.rc, c, cx + 8, cy + 10, cw - 16, ch - 22, [
+        { color: C.blue, points: state.Shist },
+        { color: C.coral, points: state.Ihist },
+        { color: C.green, points: state.Rhist }
+      ], { yMax: 1, yMin: 0 });
+      PP.text(c, "S", cx + 10, cy + 14, { size: 10, font: "mono", color: C.blueInk, weight: "700" });
+      PP.text(c, "I", cx + 26, cy + 14, { size: 10, font: "mono", color: C.coralInk, weight: "700" });
+      PP.text(c, "R", cx + 40, cy + 14, { size: 10, font: "mono", color: C.greenInk, weight: "700" });
+
+      var r0 = R0();
+      update({
+        r0: { text: r0.toFixed(2) },
+        peak: { text: Math.round(state.peakI * 100) + "%", pct: state.peakI * 100 },
+        herd: { text: Math.round(herd() * 100) + "% vaccinated" },
+        total: { text: Math.round(state.R * 100) + "%" }
+      });
+      var e = side.querySelector("#ep-r0"); if (e) e.style.color = r0 > 1 ? C.coralInk : C.greenInk;
+      // safe if vaccinated above herd threshold
+      if (state.vax / 100 >= herd() && herd() > 0) PP.text(c, "\u2713 herd immunity \u2014 no outbreak", W / 2, cy - 2, { size: 11, align: "center", font: "display", weight: "700", color: C.greenInk });
+    }
+
+    /* ---------- side ---------- */
+    var update;
+    function buildPanel() {
+      side.innerHTML = "";
+      update = ui.readout(side, [
+        { key: "peak", label: "Peak infected at once", bar: true, color: C.coral },
+        { key: "herd", label: "Herd-immunity threshold" },
+        { key: "total", label: "Total ever infected" }
+      ]);
+      var rrow = ui.el("div", "readout");
+      rrow.innerHTML = '<div class="readout__row"><span class="readout__k">R\u2080 (reproduction number)</span><span class="readout__v" id="ep-r0" style="font-family:var(--display);font-weight:800"></span></div>';
+      side.appendChild(rrow);
+
+      ui.h(side, "Levers");
+      ui.slider(side, { label: "Contact rate (distancing \u2190 \u2192 normal)", min: 0, max: 100, step: 5, value: state.contacts, fmt: function (v) { return v + "%"; },
+        onInput: function (v) { state.contacts = v; store.set("contacts", v); reset(); draw(); } });
+      ui.slider(side, { label: "Infectious days", min: 2, max: 14, step: 1, value: state.duration,
+        onInput: function (v) { state.duration = v; store.set("duration", v); reset(); draw(); } });
+      ui.slider(side, { label: "Vaccinated before outbreak", min: 0, max: 90, step: 5, value: state.vax, fmt: function (v) { return v + "%"; },
+        onInput: function (v) { state.vax = v; store.set("vax", v); reset(); draw(); } });
+      side.appendChild(ui.el("p", "hint", "Lower the <b>contact rate</b> and the coral peak flattens \u2014 same total, but spread over time so it doesn't overwhelm capacity. Raise <b>vaccination</b> past the threshold and the outbreak never takes off."));
+
+      var row = ui.btnRow(side);
+      playBtn = ui.button(row, { label: "\u25B6 Run outbreak", variant: "blue", onClick: function () { if (loop.isPlaying()) loop.pause(); else { if (state.done) reset(); loop.play(); } sync(); } });
+      ui.button(row, { label: "Step", variant: "ghost", onClick: function () { loop.pause(); sync(); step(); draw(); } });
+      ui.button(row, { label: "Reset", variant: "ghost", onClick: function () { loop.pause(); sync(); reset(); draw(); } });
+      sync();
+      side.appendChild(ui.el("p", "hint", "This is an illustrative SIR model for building intuition, not a forecast of any specific disease."));
+    }
+    var playBtn;
+    function sync() { if (playBtn) playBtn.textContent = loop.isPlaying() ? "\u275A\u275A Pause" : (state.done ? "\u21BB Replay" : "\u25B6 Run outbreak"); }
+
+    reset(); layout(); buildPanel(); draw();
+    var unsub = PP.onResize(function () { layout(); draw(); });
+    return { destroy: function () { loop.pause(); unsub(); } };
+  }
+
+  /* ---------- thumb + comic ---------- */
+  function curve(st, peakFrac, flat) {
+    var W = st.w, H = st.h, c = st.ctx;
+    st.clear();
+    var pts = [], n = 40;
+    for (var k = 0; k <= n; k++) {
+      var x = k / n, mu = 0.5, sd = flat ? 0.26 : 0.13;
+      pts.push(peakFrac * Math.exp(-(x - mu) * (x - mu) / (2 * sd * sd)));
+    }
+    PP.lineChart(st.rc, c, W * 0.1, H * 0.16, W * 0.8, H * 0.62, [{ color: C.coral, points: pts }], { yMax: 1, yMin: 0 });
+    PP.text(c, flat ? "flattened" : "sharp peak", W / 2, H * 0.93, { size: H * 0.1, align: "center", font: "display", weight: "800", color: flat ? C.greenInk : C.coralInk });
+  }
+  function thumb(st) { curve(st, 0.85, false); }
+  var comicCaps = [
+    "Left alone, the infection curve spikes hard and fast.",
+    "Cut contacts and the same outbreak spreads out \u2014 flattened.",
+    "Vaccinate past the threshold and the curve never lifts off."
+  ];
+  function comic(st, i) {
+    if (i === 0) curve(st, 0.9, false);
+    else if (i === 1) curve(st, 0.4, true);
+    else {
+      var W = st.w, H = st.h, c = st.ctx; st.clear();
+      var pts = []; for (var k = 0; k <= 40; k++) pts.push(0.02);
+      PP.lineChart(st.rc, c, W * 0.1, H * 0.16, W * 0.8, H * 0.62, [{ color: C.green, points: pts }], { yMax: 1, yMin: 0 });
+      PP.text(c, "no outbreak", W / 2, H * 0.93, { size: H * 0.1, align: "center", font: "display", weight: "800", color: C.greenInk });
+    }
+  }
+
+  PP.sims["epidemic"] = { mount: mount, thumb: thumb, comic: comic, comicCaps: comicCaps };
+})(window);
+
+</script>
+  <!-- js/sims/cobweb.js -->
+<script>
+/* =========================================================================
+   sims/cobweb.js — "The Hog Cycle"
+   The cobweb theorem (Kaldor, 1934; Ezekiel, 1938). When producers set this
+   season's output from last season's price, a market with no outside shocks
+   can still swing in boom-and-bust cycles. Whether prices settle, oscillate
+   forever, or spiral out depends only on the slopes of supply and demand.
+   ========================================================================= */
+(function (global) {
+  "use strict";
+  var PP = global.PP, ui = PP.ui, C = PP.COLORS;
+
+  function mount(ctx) {
+    var st = new PP.Stage(ctx.stageCanvas);
+    var side = ctx.sideEl, store = ctx.store;
+
+    // Demand:  P = a - b*Q       (consumers react instantly to price)
+    // Supply:  Q = c + d*P_{-1}  (producers plan from LAST period's price)
+    // Equilibrium slope ratio = b*d : <1 converge, =1 cycle, >1 explode.
+    var a = 100, c = 10;
+    var state = {
+      b: store.get("b", 5),   // demand steepness (x10 -> /10)
+      d: store.get("d", 6),   // producer responsiveness (x10 -> /10)
+      seq: [], t: 0, p0: 0
+    };
+    function bb() { return state.b / 10; }
+    function dd() { return state.d / 10; }
+    function eqP() { return (a - bb() * c) / (1 + bb() * dd()); }   // steady-state price
+    function eqQ() { return c + dd() * eqP(); }
+
+    function reset() {
+      state.seq = []; state.t = 0;
+      // start displaced from equilibrium so the cobweb is visible
+      var p = eqP() * 0.55;
+      state.p0 = p;
+      state.seq.push({ p: p, q: c + dd() * p });
+    }
+    function step() {
+      var last = state.seq[state.seq.length - 1];
+      var q = c + dd() * last.p;             // producers plan from last price
+      var p = a - bb() * q;                   // market clears at new price
+      p = PP.clamp(p, -40, 200);
+      state.seq.push({ p: p, q: q });
+      state.t++;
+      if (state.seq.length > 40) state.seq.shift();
+    }
+
+    var loop = PP.makeLoop(step, function () { draw(); }, { stepMs: 320 });
+
+    function regime() {
+      var r = bb() * dd();
+      if (r < 0.98) return ["Converging", C.greenInk];
+      if (r <= 1.02) return ["Steady cycle", C.gold];
+      return ["Exploding", C.coralInk];
+    }
+
+    /* ---------- drawing ---------- */
+    var geom = {};
+    function layout() {
+      st.fit();
+      var W = st.w, H = st.h;
+      geom.plotX = 52; geom.plotY = 14;
+      geom.plotW = W * 0.54 - geom.plotX; geom.plotH = H - 56;
+      geom.tsX = W * 0.60; geom.tsW = W - geom.tsX - 16;
+    }
+    // map Q,P to screen within the PQ plot
+    var QMAX = 90, PMAX = 110;
+    function sx(q) { return geom.plotX + geom.plotW * PP.clamp(q / QMAX, 0, 1); }
+    function sy(p) { return geom.plotY + geom.plotH * (1 - PP.clamp(p / PMAX, 0, 1)); }
+
+    function draw() {
+      var W = st.w, H = st.h, c = st.ctx;
+      st.clear();
+
+      // axes
+      st.rc.line(geom.plotX, geom.plotY, geom.plotX, geom.plotY + geom.plotH, { stroke: C.inkSoft, strokeWidth: 1.4, roughness: 0.6, seed: 2 });
+      st.rc.line(geom.plotX, geom.plotY + geom.plotH, geom.plotX + geom.plotW, geom.plotY + geom.plotH, { stroke: C.inkSoft, strokeWidth: 1.4, roughness: 0.6, seed: 3 });
+      PP.text(c, "Price", geom.plotX - 6, geom.plotY + 4, { size: 10, align: "right", font: "mono", color: C.inkSoft });
+      PP.text(c, "Quantity", geom.plotX + geom.plotW, geom.plotY + geom.plotH + 14, { size: 10, align: "right", font: "mono", color: C.inkSoft });
+
+      // demand line P = a - b Q  -> in (Q, P): from (0,a) to (a/b, 0)
+      var dQ0 = 0, dP0 = a, dQ1 = a / bb(), dP1 = 0;
+      st.rc.line(sx(dQ0), sy(dP0), sx(dQ1), sy(dP1), { stroke: C.blue, strokeWidth: 2.2, roughness: 0.5, seed: 4 });
+      PP.text(c, "demand", sx(dQ1) - 4, sy(dP1) - 6, { size: 10, align: "right", font: "mono", color: C.blueInk });
+      // supply line Q = c + d P -> P = (Q - c)/d : from (c,0) to (c+d*PMAX, PMAX)
+      var sQ0 = c, sP0 = 0, sP1 = PMAX, sQ1 = c + dd() * PMAX;
+      st.rc.line(sx(sQ0), sy(sP0), sx(sQ1), sy(sP1), { stroke: C.coral, strokeWidth: 2.2, roughness: 0.5, seed: 5 });
+      PP.text(c, "supply", sx(sQ1) + 2, sy(sP1) + 4, { size: 10, font: "mono", color: C.coralInk });
+
+      // the cobweb path: alternate vertical (to demand) and horizontal (to supply)
+      c.save(); c.strokeStyle = C.ink; c.lineWidth = 1.4;
+      for (var i = 1; i < state.seq.length; i++) {
+        var prev = state.seq[i - 1], cur = state.seq[i];
+        // from (prev.q, prev.p) horizontal to (cur.q via supply? ) -- draw step path:
+        // vertical: (cur.q, prev.p)->(cur.q, cur.p) then horizontal handled next loop
+        c.globalAlpha = 0.35 + 0.65 * (i / state.seq.length);
+        c.beginPath();
+        c.moveTo(sx(prev.q), sy(prev.p));
+        c.lineTo(sx(cur.q), sy(prev.p));   // move along to new quantity (supply response)
+        c.lineTo(sx(cur.q), sy(cur.p));    // price clears on demand
+        c.stroke();
+      }
+      c.globalAlpha = 1; c.restore();
+      // equilibrium dot
+      st.rc.circle(sx(eqQ()), sy(eqP()), 6, { fill: C.gold, fillStyle: "solid", stroke: C.ink, strokeWidth: 1.4, roughness: 0.7, seed: 7 });
+      // current point
+      var lastPt = state.seq[state.seq.length - 1];
+      st.rc.circle(sx(lastPt.q), sy(lastPt.p), 7, { fill: C.ink, fillStyle: "solid", stroke: C.ink, strokeWidth: 1, roughness: 0.6, seed: 8 });
+
+      // price-vs-time strip on the right
+      var tx = geom.tsX, tw = geom.tsW, ty = 20, th = H - 70;
+      st.rc.rectangle(tx, ty, tw, th, { fill: C.paper, fillStyle: "solid", stroke: C.line, strokeWidth: 1, roughness: 0.5, seed: 11 });
+      var prices = state.seq.map(function (s) { return s.p; });
+      PP.lineChart(st.rc, c, tx + 8, ty + 10, tw - 16, th - 20, [{ color: C.coral, points: prices }], { yMax: PMAX, yMin: 0 });
+      PP.text(c, "price over time", tx + 8, ty + 14, { size: 9.5, font: "mono", color: C.inkSoft });
+
+      var reg = regime();
+      update({
+        regime: { text: reg[0] },
+        ratio: { text: (bb() * dd()).toFixed(2) },
+        price: { text: lastPt.p.toFixed(0) },
+        period: { text: state.t.toString() }
+      });
+      var e = side.querySelector("#cw-regime"); if (e) e.style.color = reg[1];
+    }
+
+    /* ---------- side ---------- */
+    var update;
+    function buildPanel() {
+      side.innerHTML = "";
+      update = ui.readout(side, [
+        { key: "ratio", label: "Slope ratio (supply\u00F7demand)" },
+        { key: "price", label: "Current price" },
+        { key: "period", label: "Seasons elapsed" }
+      ]);
+      var rrow = ui.el("div", "readout");
+      rrow.innerHTML = '<div class="readout__row"><span class="readout__k">Regime</span><span class="readout__v" id="cw-regime" style="font-family:var(--display);font-weight:800"></span></div>';
+      side.appendChild(rrow);
+
+      ui.h(side, "The two curves");
+      ui.slider(side, { label: "Demand steepness (b)", min: 3, max: 14, step: 1, value: state.b, fmt: function (v) { return (v / 10).toFixed(1); },
+        onInput: function (v) { state.b = v; store.set("b", v); loop.pause(); sync(); reset(); draw(); } });
+      ui.slider(side, { label: "Producer reaction to price (d)", min: 3, max: 14, step: 1, value: state.d, fmt: function (v) { return (v / 10).toFixed(1); },
+        onInput: function (v) { state.d = v; store.set("d", v); loop.pause(); sync(); reset(); draw(); } });
+      side.appendChild(ui.el("p", "hint", "When supply is <b>flatter</b> than demand (ratio &lt; 1) prices spiral inward to rest. Equal slopes give an endless <b>cycle</b>. Make producers over-react (steeper supply, ratio &gt; 1) and the swings <b>explode</b> \u2014 the textbook hog cycle."));
+
+      var row = ui.btnRow(side);
+      playBtn = ui.button(row, { label: "\u25B6 Run seasons", variant: "blue", onClick: function () { if (loop.isPlaying()) loop.pause(); else loop.play(); sync(); } });
+      ui.button(row, { label: "Step", variant: "ghost", onClick: function () { loop.pause(); sync(); step(); draw(); } });
+      ui.button(row, { label: "Shock & reset", variant: "ghost", onClick: function () { loop.pause(); sync(); reset(); draw(); } });
+      sync();
+      side.appendChild(ui.el("p", "hint", "No outside shocks are added once it's running \u2014 every swing you see is generated purely inside the market by the one-season planting lag."));
+    }
+    var playBtn;
+    function sync() { if (playBtn) playBtn.textContent = loop.isPlaying() ? "\u275A\u275A Pause" : "\u25B6 Run seasons"; }
+
+    reset(); layout(); buildPanel(); draw();
+    var unsub = PP.onResize(function () { layout(); draw(); });
+    return { destroy: function () { loop.pause(); unsub(); } };
+  }
+
+  /* ---------- thumb + comic ---------- */
+  function web(st, kind) {
+    var W = st.w, H = st.h, c = st.ctx;
+    st.clear();
+    var x0 = W * 0.16, y0 = H * 0.84, ww = W * 0.68, hh = H * 0.66;
+    st.rc.line(x0, y0, x0, y0 - hh, { stroke: C.inkSoft, strokeWidth: 1.2, roughness: 0.6, seed: 2 });
+    st.rc.line(x0, y0, x0 + ww, y0, { stroke: C.inkSoft, strokeWidth: 1.2, roughness: 0.6, seed: 3 });
+    st.rc.line(x0, y0 - hh, x0 + ww, y0, { stroke: C.blue, strokeWidth: 2, roughness: 0.5, seed: 4 });   // demand
+    st.rc.line(x0, y0, x0 + ww, y0 - hh, { stroke: C.coral, strokeWidth: 2, roughness: 0.5, seed: 5 });   // supply
+    // spiral
+    c.save(); c.strokeStyle = C.ink; c.lineWidth = 1.3;
+    var px = x0 + ww * (kind === "out" ? 0.5 : 0.2), py = y0 - hh * (kind === "out" ? 0.5 : 0.2);
+    var cxp = x0 + ww * 0.5, cyp = y0 - hh * 0.5;
+    c.beginPath(); c.moveTo(px, py);
+    for (var k = 0; k < 6; k++) {
+      var f = kind === "in" ? Math.pow(0.6, k) : kind === "out" ? Math.pow(1.25, k) : 1;
+      f = Math.min(f, 1.2);
+      var nx = cxp + (px - cxp) * f, ny = cyp + (py - cyp) * (k % 2 ? f : -f) * 0 + (py - cyp);
+      c.lineTo(cxp + (px - cxp) * f, py); c.lineTo(cxp + (px - cxp) * f, cyp + (py - cyp) * f);
+    }
+    c.stroke(); c.restore();
+    st.rc.circle(cxp, cyp, 5, { fill: C.gold, fillStyle: "solid", stroke: C.ink, strokeWidth: 1.2, roughness: 0.6, seed: 6 });
+  }
+  function thumb(st) { web(st, "in"); }
+  var comicCaps = [
+    "Demand and supply cross at a tidy equilibrium price.",
+    "But producers plan from last year's price, so they overshoot.",
+    "Price and output chase each other round in a cobweb."
+  ];
+  function comic(st, i) { web(st, ["none", "in", "out"][i] || "in"); }
+
+  PP.sims["cobweb"] = { mount: mount, thumb: thumb, comic: comic, comicCaps: comicCaps };
+})(window);
+
+</script>
   <!-- js/app.js -->
 <script>
 /* =========================================================================
@@ -3296,7 +5045,7 @@ var rough=function(){"use strict";function t(t,e,s){if(t&&t.length){const[n,o]=e
             '<a class="btn" href="#/f/segregation">Open an experiment</a>' +
             '<a class="btn btn--ghost" href="#about">How this works</a>' +
           '</div>' +
-          '<div class="hero__note">nine theories &middot; one rule: tinker freely \u2197</div>' +
+          '<div class="hero__note">seventeen theories &middot; one rule: tinker freely \u2197</div>' +
         '</div>' +
         '<div class="hero__stage" aria-hidden="true"><canvas id="heroCanvas"></canvas>' +
           '<div class="hero__cap">nobody asked for a divided town. they got one anyway.</div>' +
@@ -3341,7 +5090,7 @@ var rough=function(){"use strict";function t(t,e,s){if(t&&t.length){const[n,o]=e
     about.innerHTML =
       '<div class="wrap"><div class="callout callout--gold">' +
         '<div class="callout__h">What am I looking at?</div>' +
-        '<p>Social scientists often explain the world with <strong>agent-based models</strong>: give a crowd of simple imaginary people a few rules, let them interact, and watch what emerges. The results are frequently surprising \u2014 reasonable individuals producing outcomes none of them wanted. This site stages nine of the most famous such ideas as live, tweakable comics.</p>' +
+        '<p>Social scientists often explain the world with <strong>agent-based models</strong>: give a crowd of simple imaginary people a few rules, let them interact, and watch what emerges. The results are frequently surprising \u2014 reasonable individuals producing outcomes none of them wanted. This site stages seventeen of the most famous such ideas as live, tweakable comics.</p>' +
         '<p style="margin-bottom:0">Every experiment links to its <strong>original paper or book</strong>. The simulations are faithful illustrations of the published models, not data about any specific real place \u2014 use them to build intuition, then go read the source.</p>' +
       '</div></div>';
     wrap.appendChild(about);

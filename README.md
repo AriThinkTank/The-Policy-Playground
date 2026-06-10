@@ -11,7 +11,7 @@ It is a static website — no build step, no backend — designed to drop onto G
 
 ---
 
-## The nine experiments
+## The seventeen experiments
 
 | Experiment | Theory | Original source |
 |---|---|---|
@@ -24,6 +24,14 @@ It is a static website — no build step, no backend — designed to drop onto G
 | **The Coup Clock** | Civil-military relations & why democracies survive (path dependence) | Wilkinson, S. (2015), *Army and Nation*, Harvard University Press; Devji, F. (2013), *Muslim Zion* |
 | **One Lever, One Goal** | The Tinbergen Rule (one instrument per target) | Tinbergen, J. (1952), *On the Theory of Economic Policy*, North-Holland |
 | **The Hydra** | Wicked problems vs tame problems | Rittel, H. W. J. & Webber, M. M. (1973), *Policy Sciences* 4(2): 155–169 |
+| **The Will of the People?** | Condorcet's paradox & Arrow's impossibility | Condorcet (1785), *Essai*; Arrow, K. (1951), *Social Choice and Individual Values* |
+| **Drawing the Lines** | Gerrymandering: packing & cracking | Stephanopoulos, N. & McGhee, E. (2015), *University of Chicago Law Review* 82(2): 831–900 |
+| **The Phantom Road** | Braess's paradox | Braess, D. (1968), *Unternehmensforschung* 12: 258–268 (trans. 2005, *Transportation Science* 39(4): 446–450) |
+| **The Luck of the Landscape** | Sugarscape & emergent inequality | Epstein, J. & Axtell, R. (1996), *Growing Artificial Societies*, Brookings/MIT Press |
+| **Voting With Your Feet** | Tiebout sorting | Tiebout, C. (1956), *Journal of Political Economy* 64(5): 416–424 |
+| **Catching On** | Diffusion of innovations | Rogers, E. (1962), *Diffusion of Innovations*; Bass, F. (1969), *Management Science* 15(5): 215–227 |
+| **Flatten the Curve** | The SIR epidemic model | Kermack, W. O. & McKendrick, A. G. (1927), *Proc. Royal Society A* 115(772): 700–721 |
+| **The Hog Cycle** | The cobweb theorem | Kaldor, N. (1934), *Review of Economic Studies* 1(2): 122–136; Ezekiel, M. (1938), *QJE* 52(2): 255–280 |
 
 Full citations with links live in each experiment's "Sources" section and in `js/data.js`.
 
@@ -106,12 +114,24 @@ policy-playground/
     ├── ui.js               # control builders (sliders, toggles, readouts)
     ├── data.js             # the content "database": theories, examples, sources
     ├── app.js              # hash router, home page, experiment page, localStorage helper
-    └── sims/
+    └── sims/             # one self-registering module per experiment (17)
         ├── segregation.js
         ├── commons.js
         ├── cooperation.js
         ├── median-voter.js
-        └── norm-cascade.js
+        ├── norm-cascade.js
+        ├── corruption.js
+        ├── civil-military.js
+        ├── tinbergen.js
+        ├── wicked-problems.js
+        ├── voting-rules.js
+        ├── gerrymandering.js
+        ├── braess.js
+        ├── sugarscape.js
+        ├── tiebout.js
+        ├── diffusion.js
+        ├── epidemic.js
+        └── cobweb.js
 ```
 
 Each simulation registers itself as `PP.sims["<slug>"]` and exposes a small contract:
